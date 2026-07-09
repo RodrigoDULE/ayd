@@ -1,0 +1,29 @@
+package mx.uam.ayd.proyecto.negocio;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import mx.uam.ayd.proyecto.datos.repositorioProducto;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
+
+@Service
+public class servicioProducto {
+    private final repositorioProducto repoProd;
+
+    public servicioProducto(repositorioProducto repoProd){
+        this.repoProd = repoProd;
+    }
+
+    public List<Producto> obtenerProductosDisponibles(){
+        List<Producto> todoProducto = new ArrayList<Producto>();
+
+        //Creamos un for each para meter cada producto dentro del arreglo
+        for(Producto prod : repoProd.findAll()){
+            todoProducto.add(prod);
+        }
+
+        return todoProducto;
+    }
+}
