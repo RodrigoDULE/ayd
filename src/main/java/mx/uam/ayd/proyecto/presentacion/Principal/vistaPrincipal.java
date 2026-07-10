@@ -56,10 +56,6 @@ public class vistaPrincipal {
             Scene scene = new Scene(loader.load(), 600, 450);
             stage.setScene(scene);
 
-            // Deshabilitamos los botones al inicio del mundo
-            IngresarTienda.setDisable(true);
-            ingresarUsuario.setText("Ingresa Usuario");
-
             Initialized = true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -87,7 +83,7 @@ public class vistaPrincipal {
 
             // Deshabilitamos los botones al inicio del mundo
             IngresarTienda.setDisable(true);
-            ingresarUsuario.setText("Ingresa Usuario");
+            ingresarUsuario.setText("Rodrigo");
             stage.show();
         }else{
             System.out.println("Intentando abrir la ventana principal");
