@@ -23,7 +23,8 @@ public class controladorCatalogoMezicuil {
         this.vistaCatalogo = vistaCatalogo;
     }
 
-    public void inicia(){
+    public void inicia(String idUsuario){
+        System.out.println("EL cliente con sesion activa es: " + idUsuario);
         List<Producto> prod = servicioProducto.obtenerProductosDisponibles();
         vistaCatalogo.muestra(prod);
     }

@@ -106,10 +106,10 @@ public class vistaPrincipal {
 
     // Inicializamos los metodos de los botones de la ventana principal
     @FXML
-    private void visitarTiendaLinea() {
+    private void handleVisitarTiendaLinea() {
         System.out.println("Boton presionado");
         if (control != null) {
-            control.arranca();
+            control.visitaTiendaLinea();
         }
     }
 

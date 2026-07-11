@@ -14,7 +14,7 @@ public class controladorPrincipal {
     private final ServicioCliente servicioCliente;
     private final controladorCatalogoMezicuil controlTiendaLinea;
     private final vistaPrincipal ventanaPrincipal;
-    
+    private Cliente sesionActiva;
     @Autowired
     public controladorPrincipal(controladorCatalogoMezicuil controlTiendaLinea, vistaPrincipal ventanPrincipal, ServicioCliente servicioCliente){
         this.controlTiendaLinea = controlTiendaLinea;
@@ -32,15 +32,13 @@ public class controladorPrincipal {
         ventanaPrincipal.muestra(null);
     }
 
-    public void arranca(){
-        controlTiendaLinea.inicia();
+    public void visitaTiendaLinea(){
+        controlTiendaLinea.inicia(sesionActiva.getNombre());
     }
 
     public void buscaCliente(String Nombre){
         
-        Cliente a = servicioCliente.dameCliente(Nombre);
-
-        String usuario = a.getNombre();
-        ventanaPrincipal.muestra(usuario);
+        sesionActiva = servicioCliente.dameCliente(Nombre);
+        ventanaPrincipal.muestra(sesionActiva.getNombre());
     }
 }
