@@ -4,12 +4,16 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -33,7 +37,7 @@ public class vistaCatalogoMezicuil {
     @FXML
     private TextField buscaProducto;
 
-    @FXML 
+    @FXML
     private RadioButton boxTodo;
 
     @FXML
@@ -77,34 +81,90 @@ public class vistaCatalogoMezicuil {
     }
 
     public void muestra(List<Producto> prod) {
-        System.out.println("Se esta mostrando la ventana del catalogo de Mezicuil");
+
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(() -> muestra(prod));
             return;
         }
 
-        //
-
         inicializarUI();
-        System.out.println("Los elementos dentro del arreglo son los siguientes: ");
+        // Borramos todo lo que este dentro de la ventana
+        contenedorProductos.getChildren().clear();
 
         for (Producto p : prod) {
             VBox tarjeta = new VBox();
-            Label nombre = new Label(p.getNombre());
-            Label precio = new Label("$"+p.getPrecio());
+            Label nombre = new Label(p.getnombre());
+            Label precio = new Label("$" + p.getPrecio());
             ImageView imagen = new ImageView(new Image(getClass().getResourceAsStream(p.getRutaImagen())));
-            //Le damos un tamaño bonito a la imagen
+            // Le damos un tamaño bonito a la imagen
             imagen.setFitHeight(150);
             imagen.setFitWidth(130);
             tarjeta.getChildren().addAll(imagen, nombre, precio);
 
-
-            //Aqui agregamos los productos en el contenedor
+            // Aqui agregamos los productos en el contenedor
             contenedorProductos.getChildren().add(tarjeta);
+            
+            // Le agregamos un escuchador a las tarjetas
+            tarjeta.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent evento) {
+                    System.out.println("Clic en: " + p.getnombre());
+                }
+            });
         }
-
-        boxTodo.setSelected(true);
+            
+        // boxTodo.setSelected(true);
         stage.show();
     }
 
+    // validamos el criterio por el cual el cliente quiere el producto
+    @FXML
+    // Aqui le ponemos ActionEvent para ver que elemento dispara el evento
+    private void handlebuscarCriterio(ActionEvent evento) {
+        // 1. Preguntamos quién fue el componente que disparó este evento
+        Object componenteOrigen = evento.getSource();
+
+        // 2. Como sabemos que fue un RadioButton, lo "casteamos" (convertimos)
+        RadioButton botonPresionado = (RadioButton) componenteOrigen;
+
+        if (controlCatalgo != null) {
+            if ("Todo".equals(botonPresionado.getText())) {
+                System.out.println("Todo presionado");
+                controlCatalgo.validarCriterio("Todo");
+            } else {
+                System.out.println("Boton seleccionado" + botonPresionado.getText());
+                controlCatalgo.validarCriterio(botonPresionado.getText());
+            }
+        } else {
+            System.out.println("Error al inicalizar controlador");
+        }
+
+    }
+
+    @FXML
+    // Aqui le ponemos ActionEvent para ver que elemento dispara el evento
+    private void handlebuscarCriterioBarra() {
+        if(buscaProducto.getText().isEmpty()){
+            mostrarMensaje("Ingresa el nombre de un producto");
+            return;
+        }
+
+        if(controlCatalgo != null){
+            controlCatalgo.validarCriterio(buscaProducto.getText());
+        }
+    }
+
+    //Metodo para mostrar mensajes flotantes
+    private void mostrarMensaje(String mensaje){
+        if (!Platform.isFxApplicationThread()) {
+			Platform.runLater(() -> this.mostrarMensaje(mensaje));
+			return;
+		}
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Información");
+		alert.setHeaderText(null);
+		alert.setContentText(mensaje);
+		alert.showAndWait();
+    }
 }

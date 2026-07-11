@@ -26,4 +26,24 @@ public class servicioProducto {
 
         return todoProducto;
     }
+
+    public List<Producto> obtenerProductoPorCriterio(String criterio){
+        List<Producto> ProdCriterio = new ArrayList<Producto>();
+        
+        for(Producto a: repoProd.findBytipoProd(criterio)){
+            ProdCriterio.add(a);
+        }
+        
+        return ProdCriterio;
+    }
+
+    public List<Producto> obtenerPorBusquedaPersonalizada(String criterio){
+        List<Producto> ProdCriterio = new ArrayList<Producto>();
+        
+        for(Producto a: repoProd.findByNombreContainingIgnoreCase(criterio)){
+            ProdCriterio.add(a);
+        }
+        
+        return ProdCriterio;
+    }
 }

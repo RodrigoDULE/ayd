@@ -20,8 +20,7 @@
             <Font name="Cambria" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="98.0" layoutY="273.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="107.0" text="Inventario" />
-      <Button layoutX="98.0" layoutY="323.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="107.0" text="AgendarEvento" />
+      <Button layoutX="100.0" layoutY="278.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="107.0" text="Evento" />
       <ImageView fitHeight="293.0" fitWidth="240.0" layoutX="323.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/imagenPrincipal.jpg" />

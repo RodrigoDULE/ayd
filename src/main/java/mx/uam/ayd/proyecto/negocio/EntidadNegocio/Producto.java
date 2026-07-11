@@ -11,7 +11,7 @@ public class Producto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idProducto;
 
-    private String Nombre;
+    private String nombre;
     private float Precio;
     private String Descripcion;
     private int CantidadStock;
@@ -21,8 +21,8 @@ public class Producto {
     private String imagen;
     
     public Producto(){}
-    public Producto(String Nombre, float precio, String Descripcion, int CantidadStock, int contenidoMCL, float GradoAlcohol, String tipoProd, String imagen){
-        this.Nombre = Nombre;
+    public Producto(String nombre, float precio, String Descripcion, int CantidadStock, int contenidoMCL, float GradoAlcohol, String tipoProd, String imagen){
+        this.nombre = nombre;
         this.Precio = precio;
         this.Descripcion = Descripcion;
         this.CantidadStock = CantidadStock;
@@ -34,7 +34,7 @@ public class Producto {
 
     //realizamos getters
     public long getidProducto(){return idProducto;}
-    public String getNombre(){return Nombre;}
+    public String getnombre(){return nombre;}
     public float getPrecio(){return Precio;}
     public String getDescripcion(){return Descripcion;}
     public int getcantidadStock(){return CantidadStock;}
@@ -45,7 +45,7 @@ public class Producto {
 
     //realizamos setters
     public void setidProducto(long idProducto){this.idProducto = idProducto;}
-    public void setNombre(String Nombre){this.Nombre = Nombre;}
+    public void setnombre(String nombre){this.nombre = nombre;}
     public void setPrecio(float Precio){this.Precio = Precio;}
     public void setDescripcion(String Descripcion){this.Descripcion = Descripcion;}
     public void setcantidadStock(int CantidadStock){this.CantidadStock = CantidadStock;}
