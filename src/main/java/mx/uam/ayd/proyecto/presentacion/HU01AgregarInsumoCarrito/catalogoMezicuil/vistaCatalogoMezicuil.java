@@ -8,8 +8,13 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 
@@ -28,6 +33,9 @@ public class vistaCatalogoMezicuil {
 
     @FXML 
     private RadioButton boxTodo;
+
+    @FXML
+    private FlowPane contenedorProductos;
 
     // inicializamos un constructor vacio
     public vistaCatalogoMezicuil() {
@@ -73,14 +81,25 @@ public class vistaCatalogoMezicuil {
             return;
         }
 
+        //
+
         inicializarUI();
         System.out.println("Los elementos dentro del arreglo son los siguientes: ");
 
         for (Producto p : prod) {
-            System.out.println(p);
-        }
+            VBox tarjeta = new VBox();
+            Label nombre = new Label(p.getNombre());
+            Label precio = new Label("$"+p.getPrecio());
+            ImageView imagen = new ImageView(new Image(getClass().getResourceAsStream(p.getRutaImagen())));
+            //Le damos un tamaño bonito a la imagen
+            imagen.setFitHeight(150);
+            imagen.setFitWidth(130);
+            tarjeta.getChildren().addAll(imagen, nombre, precio);
 
-        System.out.println();
+
+            //Aqui agregamos los productos en el contenedor
+            contenedorProductos.getChildren().add(tarjeta);
+        }
 
         boxTodo.setSelected(true);
         stage.show();

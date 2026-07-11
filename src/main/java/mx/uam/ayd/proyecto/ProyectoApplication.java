@@ -110,39 +110,39 @@ public class ProyectoApplication {
 		prod.setNombre("Lista de Productos Disponibles");
 		
 		repositorioProd.save(new Producto("Mezcal Espadín Joven", 450.0f, "Mezcal artesanal notas cítricas y ahumado suave",
-				50, 750, 40.0f, "Mezcal Tradicional"));
+				50, 750, 40.0f, "Mezcal Tradicional", "/Imagenes/imagenPrincipal.jpg"));
 		repositorioProd.save(new Producto("Mezcal Reposado con Gusano", 550.0f,
-				"Reposado 6 meses en barrica de roble con gusano de maguey", 30, 750, 38.0f, "Mezcal Tradicional"));
+				"Reposado 6 meses en barrica de roble con gusano de maguey", 30, 750, 38.0f, "Mezcal Tradicional", "/Imagenes/imagenPrincipal.jpg"));
 		repositorioProd.save(new Producto("Mezcal Añejo Reserva", 850.0f, "Añejado por 14 meses, notas de vainilla y madera",
-				20, 750, 40.0f, "Mezcal Premium"));
+				20, 750, 40.0f, "Mezcal Premium", "/Imagenes/imagenPrincipal.jpg"));
 		repositorioProd.save(new Producto("Mezcal Tobalá Silvestre", 1100.0f,
-				"Elaborado con agave silvestre, sabor complejo y floral", 15, 750, 42.0f, "Mezcal Premium"));
+				"Elaborado con agave silvestre, sabor complejo y floral", 15, 750, 42.0f, "Mezcal Premium", "/Imagenes/imagenPrincipal.jpg"));
 		repositorioProd.save(new Producto("Mezcal Tepeztate", 1250.0f, "Agave madurado por 25 años, notas herbales intensas",
-				10, 750, 45.0f, "Mezcal Premium"));
+				10, 750, 45.0f, "Mezcal Premium", "/Imagenes/imagenPrincipal.jpg"));
 		repositorioProd.save(new Producto("Mezcal Artesanal de Pechuga", 1500.0f,
 				"Doble destilación con pechuga de pavo y frutas de temporada", 5, 750, 46.0f,
-				"Mezcal Edición Especial"));
+				"Mezcal Edición Especial", "/Imagenes/imagenPrincipal.jpg"));
 
 		// Cremas de Mezcal (Menor grado de alcohol)
 		repositorioProd.save(new Producto("Crema de Mezcal sabor Café", 250.0f,
-				"Deliciosa crema dulce con toque intenso a café tostado", 40, 750, 15.0f, "Cremas y Licores"));
+				"Deliciosa crema dulce con toque intenso a café tostado", 40, 750, 15.0f, "Cremas y Licores", "/Imagenes/imagenPrincipal.jpg"));
 		repositorioProd.save(new Producto("Crema de Mezcal sabor Piñón", 280.0f,
-				"Crema dulce con auténtico sabor a piñón rosa", 35, 750, 15.0f, "Cremas y Licores"));
+				"Crema dulce con auténtico sabor a piñón rosa", 35, 750, 15.0f, "Cremas y Licores", "/Imagenes/imagenPrincipal.jpg"));
 		repositorioProd.save(new Producto("Crema de Mezcal sabor Fresa", 250.0f,
-				"Licor cremoso ideal para postres o digestivo", 45, 750, 15.0f, "Cremas y Licores"));
+				"Licor cremoso ideal para postres o digestivo", 45, 750, 15.0f, "Cremas y Licores", "/Imagenes/imagenPrincipal.jpg"));
 		repositorioProd.save(new Producto("Licor de Damiana", 350.0f, "Licor herbal tradicional endulzado", 25, 750, 20.0f,
-				"Cremas y Licores"));
+				"Cremas y Licores", "/Imagenes/imagenPrincipal.jpg"));
 
 		// Complementos y Accesorios (0 grado de alcohol)
 		repositorioProd.save(new Producto("Sal de Gusano (100g)", 120.0f, "Sal del mar con chile costeño y gusano tostado",
-				100, 100, 0.0f, "Complementos"));
+				100, 100, 0.0f, "Complementos", "/Imagenes/imagenPrincipal.jpg"));
 		repositorioProd.save(new Producto("Sal de Chapulín (100g)", 150.0f,
-				"Mezcla de chapulín oaxaqueño tostado, sal y chile", 85, 100, 0.0f, "Complementos"));
+				"Mezcla de chapulín oaxaqueño tostado, sal y chile", 85, 100, 0.0f, "Complementos", "/Imagenes/imagenPrincipal.jpg"));
 		repositorioProd.save(new Producto("Set de Vasos Veladora", 180.0f,
-				"Juego de 4 vasos tradicionales de vidrio para mezcal", 40, 0, 0.0f, "Accesorios"));
+				"Juego de 4 vasos tradicionales de vidrio para mezcal", 40, 0, 0.0f, "Accesorios", "/Imagenes/imagenPrincipal.jpg"));
 		repositorioProd.save(new Producto("Jícara Mezcalera Tallada", 90.0f,
-				"Jícara natural tallada a mano con base de carrizo", 60, 0, 0.0f, "Accesorios"));
+				"Jícara natural tallada a mano con base de carrizo", 60, 0, 0.0f, "Accesorios", "/Imagenes/imagenPrincipal.jpg"));
 		repositorioProd.save(new Producto("Cerveza Artesanal con Agave", 85.0f,
-				"Cerveza tipo Pale Ale con un toque de miel de agave", 120, 355, 6.0f, "Cervezas"));
+				"Cerveza tipo Pale Ale con un toque de miel de agave", 120, 355, 6.0f, "Cervezas", "/Imagenes/imagenPrincipal.jpg"));
 	}
 }

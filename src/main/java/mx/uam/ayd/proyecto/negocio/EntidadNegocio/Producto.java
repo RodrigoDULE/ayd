@@ -18,9 +18,10 @@ public class Producto {
     private String tipoProd;
     private int contenidoMCL;
     private float GradoAlcohol;
-
+    private String imagen;
+    
     public Producto(){}
-    public Producto(String Nombre, float precio, String Descripcion, int CantidadStock, int contenidoMCL, float GradoAlcohol, String tipoProd){
+    public Producto(String Nombre, float precio, String Descripcion, int CantidadStock, int contenidoMCL, float GradoAlcohol, String tipoProd, String imagen){
         this.Nombre = Nombre;
         this.Precio = precio;
         this.Descripcion = Descripcion;
@@ -28,6 +29,7 @@ public class Producto {
         this.tipoProd = tipoProd;
         this.contenidoMCL = contenidoMCL;
         this.GradoAlcohol = GradoAlcohol;
+        this.imagen = imagen;
     }
 
     //realizamos getters
@@ -39,6 +41,7 @@ public class Producto {
     public int getcontenidoMCL(){return contenidoMCL;}
     public float getGradoAlcohol(){ return GradoAlcohol;}
     public String getTipoProd(){ return tipoProd;}
+    public String getRutaImagen(){ return imagen;}
 
     //realizamos setters
     public void setidProducto(long idProducto){this.idProducto = idProducto;}
@@ -49,4 +52,5 @@ public class Producto {
     public void setcontenidoMCL(int contenidoMCL){this.contenidoMCL = contenidoMCL;}
     public void setGradoAlcohol(float GradoAlcohol){ this.GradoAlcohol = GradoAlcohol;}
     public void setGradoAlcohol(String tipoProd){ this.tipoProd = tipoProd;}
+    public void setRutaImagen(String rutaImagen){ this.imagen = rutaImagen;}
 }

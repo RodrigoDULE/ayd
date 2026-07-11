@@ -10,7 +10,7 @@ public class carritoCompra {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long idCarrito;
 
     private int cantidadTotalCompra;
     private float totalCalculado;
@@ -21,7 +21,7 @@ public class carritoCompra {
     }
 
     //tiene que llevar metodos para calcular el precio total
-
+    public float getid(){return idCarrito;};
     public int getCantidadTotalCompra(){return cantidadTotalCompra;}
     public float getTotalCalculado(){return totalCalculado;}
 }
