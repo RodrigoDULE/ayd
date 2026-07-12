@@ -39,6 +39,7 @@ public class vistaDetallesProductoAgregarCarrito {
     private Button decrementarDetalles;
     @FXML
     private TextField cantidadTexto;
+    
     private int contador = 1;
     private long idActivo;
     private Producto actual;
@@ -141,5 +142,13 @@ public class vistaDetallesProductoAgregarCarrito {
         //Actualizamos el texto
         cantidadTexto.setText(String.valueOf(contador));
         System.out.println("Numero dentro de contador: " + contador);
+    }
+
+    @FXML
+    private void handleAgregaraCarrito(){
+        if(controlDetalles != null){
+            System.out.println("Boton presionado");
+            controlDetalles.agregarProductoaCarrito(idActivo, actual, contador);
+        }
     }
 }

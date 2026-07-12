@@ -5,4 +5,5 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.carritoCompra;
 
 public interface repositoriocarritoCompra extends CrudRepository<carritoCompra, Long> {
 
+    public carritoCompra findByClienteId(long idUsuario);
 }
