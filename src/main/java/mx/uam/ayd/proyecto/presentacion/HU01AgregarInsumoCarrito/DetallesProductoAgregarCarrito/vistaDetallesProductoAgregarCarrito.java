@@ -3,9 +3,12 @@ package mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.DetallesProduc
 import org.springframework.stereotype.Component;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -27,7 +30,18 @@ public class vistaDetallesProductoAgregarCarrito {
     @FXML
     private Text precioDetalles;
     @FXML
+    private Text piezasDetalles;
+    @FXML
     private TextFlow descripcionProdDetalles;
+    @FXML
+    private Button incrementarDetalles;
+    @FXML
+    private Button decrementarDetalles;
+    @FXML
+    private TextField cantidadTexto;
+    private int contador = 1;
+    private long idActivo;
+    private Producto actual;
 
     private Stage stage;
     private boolean inicializado = false;
@@ -61,7 +75,7 @@ public class vistaDetallesProductoAgregarCarrito {
             // Cargamos el fxml que tiene que ver con esta ventana
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana-detalles-producto.fxml"));
             loader.setController(this); // le estamos diciendo a javafx que esta clase es la que controla el fxml
-            Scene scene = new Scene(loader.load(), 650, 430);
+            Scene scene = new Scene(loader.load(), 600, 410);
             stage.setScene(scene);
 
             inicializado = true;
@@ -71,10 +85,14 @@ public class vistaDetallesProductoAgregarCarrito {
 
     }
 
-    public void muestraDetallesProd(Producto producto) {
-        System.out.println("EL producto en el que se esta trabajando "+producto);
+    public void muestraDetallesProd(long idUsuario, Producto producto) {
+        //le pasamos el idActivo
+        idActivo = idUsuario;
+        actual = producto;
+
+        System.out.println("EL producto en el que se esta trabajando "+actual);
         if (!Platform.isFxApplicationThread()) {
-            Platform.runLater(() -> muestraDetallesProd(producto));
+            Platform.runLater(() -> muestraDetallesProd(idUsuario,actual));
             return;
         }
 
@@ -83,21 +101,45 @@ public class vistaDetallesProductoAgregarCarrito {
         imagenDetalles.getChildren().clear();
         descripcionProdDetalles.getChildren().clear();
         nombreDetalles.getChildren().clear();
-        
+        nombreDetalles.setStyle("-fx-fill: black;"); //genero **IA**
 
         // inicializamos el panel con la informacion del producto
-        nombreDetalles.getChildren().add(new Text(producto.getnombre()));
-        precioDetalles.setText("$" + producto.getPrecio() + " MXN");
-        descripcionProdDetalles.getChildren().add(new Text(producto.getDescripcion()));
+        nombreDetalles.getChildren().add(new Text(actual.getnombre()));
+        precioDetalles.setText("$" + actual.getPrecio() + " MXN");
+        descripcionProdDetalles.getChildren().add(new Text(actual.getDescripcion()));
+        piezasDetalles.setText("Hay " + actual.getcantidadStock() + " disponibles dentro de stock. \nUsuario con id: " + idUsuario);
 
         // Cargamos la ruta de la imagen
-        ImageView imagen = new ImageView(new Image(getClass().getResourceAsStream(producto.getRutaImagen())));
+        ImageView imagen = new ImageView(new Image(getClass().getResourceAsStream(actual.getRutaImagen())));
         imagen.setFitWidth(300);
         imagen.setFitHeight(330);
         imagenDetalles.getChildren().add(imagen);
-
+        cantidadTexto.setText(String.valueOf(contador));
+        cantidadTexto.setDisable(true);
 
         stage.show();
     }
 
+    //validacion de seleccion de cantidad correcta
+    @FXML
+    private void handleIncrementarDecrementar(ActionEvent event){
+        Object obj = event.getSource();
+        Button BotonPres = (Button) obj;
+        
+        //obtener el numero de piezas dentro de stock
+        System.out.println("NUmero disponible "+ actual.getcantidadStock());
+        int limite = actual.getcantidadStock();
+
+        contador = (contador <= 0) ? 1 : (contador >= limite) ? (limite - 1) : contador;
+        
+        if("+".equals(BotonPres.getText())){
+            contador ++;
+        }else{
+            contador --;
+        }
+
+        //Actualizamos el texto
+        cantidadTexto.setText(String.valueOf(contador));
+        System.out.println("Numero dentro de contador: " + contador);
+    }
 }

@@ -21,6 +21,7 @@ public class controladorCatalogoMezicuil {
     private final servicioProducto servicioProducto;
     private final vistaCatalogoMezicuil vistaCatalogo;
     private final vistaDetallesProductoAgregarCarrito vistaDetallesProducto;
+    private long idActivo;
 
     @Autowired
     public controladorCatalogoMezicuil(servicioProducto servicioProducto, vistaCatalogoMezicuil vistaCatalogo, vistaDetallesProductoAgregarCarrito vistaDetallesProducto){
@@ -36,8 +37,8 @@ public class controladorCatalogoMezicuil {
         vistaCatalogo.setControlador(this);
     }
 
-    public void inicia(String idUsuario){
-        System.out.println("EL cliente con sesion activa es: " + idUsuario);
+    public void inicia(long idUsuario){
+        idActivo = idUsuario;
         List<Producto> prod = servicioProducto.obtenerProductosDisponibles();
         vistaCatalogo.muestra(prod);
     }
@@ -68,6 +69,6 @@ public class controladorCatalogoMezicuil {
     //redireccion a los detalles de producto
     public void detallesProductoSeleccionado(Producto p){
         System.out.println("el producto trabajando " + p);
-        vistaDetallesProducto.muestraDetallesProd(p);
+        vistaDetallesProducto.muestraDetallesProd(idActivo, p);
     }
 }

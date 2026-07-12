@@ -2,9 +2,7 @@ package mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.catalogoMezicu
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -24,8 +22,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
-import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.DetallesProductoAgregarCarrito.vistaDetallesProductoAgregarCarrito;
-
 /**
  * vistaCatalogoMezicuil
  */

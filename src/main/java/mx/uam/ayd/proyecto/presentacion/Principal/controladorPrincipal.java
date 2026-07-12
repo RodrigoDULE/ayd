@@ -33,7 +33,7 @@ public class controladorPrincipal {
     }
 
     public void visitaTiendaLinea(){
-        controlTiendaLinea.inicia(sesionActiva.getNombre());
+        controlTiendaLinea.inicia(sesionActiva.getidCliente());
     }
 
     public void buscaCliente(String Nombre){
