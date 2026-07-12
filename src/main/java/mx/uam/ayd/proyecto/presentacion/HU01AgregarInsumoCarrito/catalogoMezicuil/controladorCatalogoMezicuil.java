@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 import mx.uam.ayd.proyecto.negocio.servicioProducto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
+import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.DetallesProductoAgregarCarrito.vistaDetallesProductoAgregarCarrito;
 
 /**
  * controladorCatalogoMezicuil
@@ -19,9 +20,11 @@ public class controladorCatalogoMezicuil {
 
     private final servicioProducto servicioProducto;
     private final vistaCatalogoMezicuil vistaCatalogo;
+    private final vistaDetallesProductoAgregarCarrito vistaDetallesProducto;
 
     @Autowired
-    public controladorCatalogoMezicuil(servicioProducto servicioProducto, vistaCatalogoMezicuil vistaCatalogo){
+    public controladorCatalogoMezicuil(servicioProducto servicioProducto, vistaCatalogoMezicuil vistaCatalogo, vistaDetallesProductoAgregarCarrito vistaDetallesProducto){
+        this.vistaDetallesProducto = vistaDetallesProducto;
         this.servicioProducto = servicioProducto;
         this.vistaCatalogo = vistaCatalogo;
     } 
@@ -61,5 +64,10 @@ public class controladorCatalogoMezicuil {
             vistaCatalogo.muestra(prodCriterio);
         }
     }
-    
+ 
+    //redireccion a los detalles de producto
+    public void detallesProductoSeleccionado(Producto p){
+        System.out.println("el producto trabajando " + p);
+        vistaDetallesProducto.muestraDetallesProd(p);
+    }
 }

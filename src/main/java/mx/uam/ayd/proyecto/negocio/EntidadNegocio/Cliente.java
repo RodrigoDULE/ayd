@@ -31,6 +31,7 @@ public class Cliente {
     //Inicializamos un constructor vacio
     public Cliente(){}
 
+    public long getidCliente(){return id;}
     public String getNombre(){return nombre;}
     public int getEdad(){return edad;}
 }

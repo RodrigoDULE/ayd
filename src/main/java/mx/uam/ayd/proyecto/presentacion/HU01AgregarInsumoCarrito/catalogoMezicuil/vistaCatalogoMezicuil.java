@@ -2,6 +2,7 @@ package mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.catalogoMezicu
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javafx.event.EventHandler;
@@ -23,6 +24,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
+import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.DetallesProductoAgregarCarrito.vistaDetallesProductoAgregarCarrito;
 
 /**
  * vistaCatalogoMezicuil
@@ -42,10 +44,6 @@ public class vistaCatalogoMezicuil {
 
     @FXML
     private FlowPane contenedorProductos;
-
-    // inicializamos un constructor vacio
-    public vistaCatalogoMezicuil() {
-    }
 
     // inicializamos el metodo que permite visualzar la nueva ventana
     private void inicializarUI() {
@@ -108,7 +106,7 @@ public class vistaCatalogoMezicuil {
             tarjeta.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent evento) {
-                    System.out.println("Clic en: " + p.getnombre());
+                    handleProductoSeleccionado(p);
                 }
             });
         }
@@ -166,5 +164,11 @@ public class vistaCatalogoMezicuil {
 		alert.setHeaderText(null);
 		alert.setContentText(mensaje);
 		alert.showAndWait();
+    }
+
+    //metodo para que ponamos acceder a las caracteristicas del producto seleccionado
+    private void handleProductoSeleccionado(Producto p){
+        System.out.println("dentro de handle");
+        controlCatalgo.detallesProductoSeleccionado(p);
     }
 }
