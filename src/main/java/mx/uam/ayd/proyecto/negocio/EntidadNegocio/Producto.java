@@ -1,9 +1,11 @@
 package mx.uam.ayd.proyecto.negocio.EntidadNegocio;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Producto {
@@ -19,6 +21,10 @@ public class Producto {
     private int contenidoMCL;
     private float GradoAlcohol;
     private String imagen;
+    //para guardar la cantidad que el cliente quiere del mismo porducto
+    private int cantidadxproducto;
+
+
     
     public Producto(){}
     public Producto(String nombre, float precio, String Descripcion, int CantidadStock, int contenidoMCL, float GradoAlcohol, String tipoProd, String imagen){
@@ -32,6 +38,10 @@ public class Producto {
         this.imagen = imagen;
     }
 
+    //Quiero sabe a que cliente le pertenece
+    @ManyToOne(targetEntity = Cliente.class, fetch = FetchType.EAGER)
+    private Cliente cliente;
+
     //realizamos getters
     public long getidProducto(){return idProducto;}
     public String getnombre(){return nombre;}
@@ -42,8 +52,16 @@ public class Producto {
     public float getGradoAlcohol(){ return GradoAlcohol;}
     public String getTipoProd(){ return tipoProd;}
     public String getRutaImagen(){ return imagen;}
+    public int getCantidadxProdicto(){return cantidadxproducto;}
+    
+    //Solo es prueba para agregar dueño al producto
+    public Cliente getingresarIdDueño(){return cliente;}
+    public void setingresarIdDueño(Cliente cliente){this.cliente = cliente;}
+    public void setCantidadxProdicto(int cantidad){this.cantidadxproducto = cantidad;}
+
 
     //realizamos setters
+
     public void setidProducto(long idProducto){this.idProducto = idProducto;}
     public void setnombre(String nombre){this.nombre = nombre;}
     public void setPrecio(float Precio){this.Precio = Precio;}

@@ -148,23 +148,24 @@ public class vistaCatalogoMezicuil {
         }
     }
 
-    //Metodo para mostrar mensajes flotantes
-    private void mostrarMensaje(String mensaje){
-        if (!Platform.isFxApplicationThread()) {
-			Platform.runLater(() -> this.mostrarMensaje(mensaje));
-			return;
-		}
-		
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Información");
-		alert.setHeaderText(null);
-		alert.setContentText(mensaje);
-		alert.showAndWait();
-    }
-
+    
     //metodo para que ponamos acceder a las caracteristicas del producto seleccionado
     private void handleProductoSeleccionado(Producto p){
         System.out.println("dentro de handle");
         controlCatalgo.detallesProductoSeleccionado(p);
+    }
+    
+    //Metodo para mostrar mensajes flotantes
+    private void mostrarMensaje(String mensaje){
+        if (!Platform.isFxApplicationThread()) {
+            Platform.runLater(() -> this.mostrarMensaje(mensaje));
+            return;
+        }
+        
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 import mx.uam.ayd.proyecto.negocio.servicioCarritoCompra;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
-import mx.uam.ayd.proyecto.negocio.EntidadNegocio.carritoCompra;
 
 /**
  * controladorDetallesProductoAgregarCarrito
@@ -28,12 +27,17 @@ public class controladorDetallesProductoAgregarCarrito {
         vistaDetalle.setControlador(this);
     }
 
-    public boolean agregarProductoaCarrito(long idUsuario, Producto producto, int cantidad){
-        boolean bandera = agregarCarrito.agregarItem(idUsuario, producto, cantidad);
+    public void agregarProductoaCarrito(long idUsuario, Producto producto, int cantidad){
+        try{
 
-        if(bandera){
-            return true;
+            boolean bandera = agregarCarrito.agregarItem(idUsuario, producto, cantidad);
+            
+            if(bandera){
+                vistaDetalle.mostrarMensaje("Producto agregado correctamente");
+            }
+            
+        }catch(Exception e){
+            vistaDetalle.mostrarMensaje("Error: si quieres modificar la cantidad, hazlo desde la ventana Carrito");
         }
-        return false;
     }
 }

@@ -9,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class carritoCompra {
@@ -23,31 +22,21 @@ public class carritoCompra {
 
     public carritoCompra() {}
 
-    @OneToOne(targetEntity = Cliente.class, fetch = FetchType.EAGER)
-    private Cliente cliente;
-
+    //Solo necesitamos saber que productos estan dentro de carrito
     @OneToMany(targetEntity = Producto.class, fetch = FetchType.EAGER)
     private List<Producto> producto = new ArrayList<>();
 
     // tiene que llevar metodos para calcular el precio total
     
 
-    public float getid() {return idCarrito;}
+    public long getid() {return idCarrito;}
     public List<Producto> getProductos(){return producto;}
-    public Cliente getCliente(){return cliente;}
 
     public int getCantidadTotalCompra() {
-        this.cantidadTotalCompra = this.producto.size();
-
         return cantidadTotalCompra;
     }
 
     public float getTotalCalculado() {
-        totalCalculado = 0;
-        for(Producto p : producto){
-            totalCalculado += p.getPrecio();
-        }
-
         return totalCalculado;
     }
 
@@ -57,19 +46,14 @@ public class carritoCompra {
     }
 
     public void setCantidadTotalCompra(int cantidadTotalCompra) {
-        this.cantidadTotalCompra = cantidadTotalCompra;
+        this.cantidadTotalCompra += cantidadTotalCompra; //para que se vayan sumando a los demas producto que agregamos
     }
 
     public void setTotalCalculado(float totalCalculado) {
         this.totalCalculado = totalCalculado;
     }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
     // Este setter reemplaza la lista completa de productos por una nueva
-    public void setProducto(List<Producto> producto) {
-        this.producto = producto;
+    public void setProducto(Producto producto) {
+        this.producto.add(producto);//solo agrega un producto a la vez
     }
 }

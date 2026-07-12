@@ -2,7 +2,6 @@ package mx.uam.ayd.proyecto.negocio.EntidadNegocio;
 
 import jakarta.persistence.Entity;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +13,7 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long idCliente;
 
     private String nombre;
     private int edad;
@@ -25,13 +24,18 @@ public class Cliente {
     }
 
     //cada cliente le pertenece cero o un carrito, dentro de la tabla de cliente se agregara una coluna especial llamda carrito_id, puede ser nulo o uno, es como una llave foranea
-    @OneToOne(targetEntity = carritoCompra.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(targetEntity = carritoCompra.class, fetch = FetchType.EAGER)
     private carritoCompra carrito;
 
     //Inicializamos un constructor vacio
     public Cliente(){}
 
-    public long getidCliente(){return id;}
+    public long getidCliente(){return idCliente;}
     public String getNombre(){return nombre;}
     public int getEdad(){return edad;}
+    public carritoCompra getCarritoCompra(){return carrito;}
+
+    //agregamos un setter para agregarle un carrito a la posesion del cliente
+    public void setcarritoCompra(carritoCompra carrito){this.carrito = carrito;}
+
 }
