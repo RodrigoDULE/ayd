@@ -8,7 +8,7 @@ flowchart TB
     subgraph main ["mx.uam.ayd.proyecto"]
         ProyectoApplication["ProyectoApplication"]
     end
-    
+    0
     subgraph presentacion ["mx.uam.ayd.proyecto.presentacion"]
         subgraph principal ["principal"]
             VentanaPrincipal["VentanaPrincipal"]
