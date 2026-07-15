@@ -32,11 +32,12 @@
          </font>
       </Text>
       <TextFlow fx:id="descripcionProdDetalles" layoutX="343.0" layoutY="183.0" prefHeight="109.0" prefWidth="229.0" />
-      <Button fx:id="agregarCarritoDetalles" layoutX="481.0" onAction="#handleAgregaraCarrito" layoutY="292.0" mnemonicParsing="false" text="Agregar Carrito" />
+      <Button fx:id="agregarCarritoDetalles" layoutX="481.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleAgregaraCarrito" text="Agregar Carrito" />
       <TextFlow fx:id="nombreDetalles" layoutX="343.0" layoutY="56.0" prefHeight="62.0" prefWidth="229.0" styleClass="-fx-fill: black" textAlignment="CENTER" />
       <TextField fx:id="cantidadTexto" layoutX="375.0" layoutY="292.0" prefHeight="25.0" prefWidth="34.0" />
-      <Button fx:id="incrementarDetalles" onAction="#handleIncrementarDecrementar" layoutX="409.0" layoutY="292.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="34.0" text="+" />
-      <Button fx:id="decrementarDetalles" onAction="#handleIncrementarDecrementar" layoutX="341.0" layoutY="292.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="34.0" text="-" />
+      <Button fx:id="incrementarDetalles" layoutX="409.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleIncrementarDecrementar" prefHeight="25.0" prefWidth="34.0" text="+" />
+      <Button fx:id="decrementarDetalles" layoutX="341.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleIncrementarDecrementar" prefHeight="25.0" prefWidth="34.0" text="-" />
       <Text fx:id="piezasDetalles" fill="#dd0e0e" layoutX="354.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hay 15 piezas disponibles dentro de stock" />
+      <Button fx:id="irCarrito" layoutX="517.0" layoutY="16.0" onAction="#handleIrCarrito" mnemonicParsing="false" text="Ir carrito" />
    </children>
 </Pane>

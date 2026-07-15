@@ -54,8 +54,6 @@ public class servicioCarritoCompra {
             sobrantes = producto.getcantidadStock() - cantidad;
             producto.setcantidadStock(sobrantes);
             //agregamos las unidades que el clietne quiere del producto
-            producto.setCantidadxProdicto(cantidad);
-            //guardamos el carrito con los producto
             repoCarrito.save(nuevo); //dara error si no lo ponemos ya que el id del carrito dentro de usuario es unicamente una refererncia y apuntaria a null
             //guardamos al dueño con la referencia del carrito
             repoCliente.save(dueño);
@@ -78,7 +76,6 @@ public class servicioCarritoCompra {
         sobrantes = producto.getcantidadStock() - cantidad;
         producto.setcantidadStock(sobrantes);
         //agregamos las unidades que el clietne quiere del producto
-        producto.setCantidadxProdicto(cantidad);
         repositorioProd.save(producto);
         //guardamos el carrito y el el cliente con se carrito actualizado
         repoCarrito.save(viejo);

@@ -21,8 +21,6 @@ public class Producto {
     private int contenidoMCL;
     private float GradoAlcohol;
     private String imagen;
-    //para guardar la cantidad que el cliente quiere del mismo porducto
-    private int cantidadxproducto;
 
 
     
@@ -52,12 +50,10 @@ public class Producto {
     public float getGradoAlcohol(){ return GradoAlcohol;}
     public String getTipoProd(){ return tipoProd;}
     public String getRutaImagen(){ return imagen;}
-    public int getCantidadxProdicto(){return cantidadxproducto;}
     
     //Solo es prueba para agregar dueño al producto
     public Cliente getingresarIdDueño(){return cliente;}
     public void setingresarIdDueño(Cliente cliente){this.cliente = cliente;}
-    public void setCantidadxProdicto(int cantidad){this.cantidadxproducto = cantidad;}
 
 
     //realizamos setters

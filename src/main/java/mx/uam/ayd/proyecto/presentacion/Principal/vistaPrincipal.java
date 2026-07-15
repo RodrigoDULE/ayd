@@ -95,7 +95,7 @@ public class vistaPrincipal {
             inicializarUI();
             // Deshabilitamos los botones al inicio del mundo
             IngresarTienda.setDisable(false);
-            ingresarUsuario.setDisable(true);
+            ingresarUsuario.setDisable(false);
             textoPrincipal.setText("Bienvenido, "+NombreUsuario);
             System.out.println(NombreUsuario);
             stage.show();

@@ -89,6 +89,7 @@ public class vistaDetallesProductoAgregarCarrito {
     }
 
     public void muestraDetallesProd(long idUsuario, Producto producto) {
+        contador = 1;
         //le pasamos el idActivo
         idActivo = idUsuario;
         actual = producto;
@@ -154,6 +155,12 @@ public class vistaDetallesProductoAgregarCarrito {
         }
     }
 
+    @FXML 
+    private void handleIrCarrito(){
+        if(controlDetalles != null){
+            controlDetalles.visitaCarritoCompra(idActivo);
+        }
+    }
     //Metodo para mostrar mensajes flotantes
     public void mostrarMensaje(String mensaje){
         if (!Platform.isFxApplicationThread()) {
@@ -167,5 +174,6 @@ public class vistaDetallesProductoAgregarCarrito {
 		alert.setContentText(mensaje);
 		alert.showAndWait();
     }
+
 
 }
