@@ -50,14 +50,16 @@ public class Evento {
 
     }
 
-    //establecemos la cardinalidad con empleado 
+   
+   /*
+     //establecemos la cardinalidad con empleado 
     @ManyToMany(targetEntity=Empleado.class, fetch=FetchType.EAGER)
     private Empleado empleado;
 
     //establecemos la cardinalidad con producto
     @ManyToMany(targetEntity=Producto.class,fetch=FetchType.EAGER)
     private Producto producto;
-
+*/
     //ponemos getters y setters
 
     public long getIdEvento(){
