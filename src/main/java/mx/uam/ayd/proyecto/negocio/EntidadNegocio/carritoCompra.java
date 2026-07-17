@@ -40,6 +40,8 @@ public class carritoCompra {
         return totalCalculado;
     }
 
+    public List<Producto> getProductoenCarrito(){return producto;}
+
     //Creamos setters
     public void setIdCarrito(long idCarrito) {
         this.idCarrito = idCarrito;

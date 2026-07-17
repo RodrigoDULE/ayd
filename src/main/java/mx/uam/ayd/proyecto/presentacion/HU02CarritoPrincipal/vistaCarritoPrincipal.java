@@ -1,25 +1,39 @@
 package mx.uam.ayd.proyecto.presentacion.HU02CarritoPrincipal;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
-import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.DetallesProductoAgregarCarrito.controladorDetallesProductoAgregarCarrito;
 
 @Component
 public class vistaCarritoPrincipal {
     
-    private long idActivo;
-    private Producto actual;
+    //Añadimos todos los atributos que estan dentro del archivo FXM que cambiaran su valor
+    @FXML
+    private Text cantidadTotalcarrito;
+    @FXML
+    private Text costoEnvioCarrito;
+    @FXML
+    private Text costoTotal;
+    @FXML
+    private FlowPane contenedorProductoscarrito;
 
     private Stage stage;
     private boolean inicializado = false;
-    private controladorCarritoPrincipal carritoPrincipal;
+    private controladorCarritoPrincipal controlcarritoPrincipal;
 
     // constructor vacio
     public vistaCarritoPrincipal() {
@@ -27,7 +41,7 @@ public class vistaCarritoPrincipal {
 
     // inicializamos el controlador con un setter
     public void setControlador(controladorCarritoPrincipal carritoPrincipal) {
-        this.carritoPrincipal = carritoPrincipal;
+        this.controlcarritoPrincipal = carritoPrincipal;
     }
 
     // inicializamos UI
@@ -59,16 +73,32 @@ public class vistaCarritoPrincipal {
 
     }
 
-    public void muestraCarrito(long idUsuario) {
-        idActivo = idUsuario;
-
+    public void muestraCarrito(List<Producto> listaProd) {
         System.out.println("Ventana carrito mostrada");
         if (!Platform.isFxApplicationThread()) {
-            Platform.runLater(() -> muestraCarrito(idUsuario));
+            Platform.runLater(() -> muestraCarrito(listaProd));
             return;
         }
-
+        
         inicializarUI();
+        //borramos todo lo que ente dentro de la ventana
+        contenedorProductoscarrito.getChildren().clear();
+
+        for(Producto dentro : listaProd){
+            VBox tarjeta = new VBox();
+            Label nombre = new Label(dentro.getnombre());
+            Button eliminarProd = new Button("Eliminar");
+            Label precioUnitario = new Label("Precio Unitario: \n"+dentro.getPrecio());
+            ImageView imagenProd = new ImageView(new Image(getClass().getResourceAsStream(dentro.getRutaImagen())));
+            imagenProd.setFitHeight(150);
+            imagenProd.setFitWidth(130);
+            tarjeta.getChildren().addAll(imagenProd, nombre, precioUnitario, eliminarProd);
+
+            // Aqui agregamos los productos en el contenedor
+            contenedorProductoscarrito.getChildren().add(tarjeta);
+        }
+
+
 
         stage.show();
     }

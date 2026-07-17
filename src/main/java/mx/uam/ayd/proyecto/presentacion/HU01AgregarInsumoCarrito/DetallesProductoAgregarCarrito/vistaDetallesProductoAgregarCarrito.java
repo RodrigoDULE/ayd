@@ -161,6 +161,7 @@ public class vistaDetallesProductoAgregarCarrito {
             controlDetalles.visitaCarritoCompra(idActivo);
         }
     }
+    
     //Metodo para mostrar mensajes flotantes
     public void mostrarMensaje(String mensaje){
         if (!Platform.isFxApplicationThread()) {
@@ -174,6 +175,5 @@ public class vistaDetallesProductoAgregarCarrito {
 		alert.setContentText(mensaje);
 		alert.showAndWait();
     }
-
 
 }

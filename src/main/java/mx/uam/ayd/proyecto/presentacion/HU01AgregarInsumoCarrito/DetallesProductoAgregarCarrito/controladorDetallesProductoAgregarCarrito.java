@@ -18,9 +18,9 @@ public class controladorDetallesProductoAgregarCarrito {
     private final servicioCarritoCompra agregarCarrito;
     private final vistaDetallesProductoAgregarCarrito vistaDetalle;
 
+
     // conectar con HU02
     private final controladorCarritoPrincipal controlCarrito;
-
     @Autowired
     public controladorDetallesProductoAgregarCarrito(servicioCarritoCompra agregarCarrito,
             vistaDetallesProductoAgregarCarrito vistaDetalles,
@@ -51,6 +51,7 @@ public class controladorDetallesProductoAgregarCarrito {
 
     @FXML
     public void visitaCarritoCompra(long idUsuario){
+        
         controlCarrito.iniciaVentanaCarrito(idUsuario);
     }
 }
