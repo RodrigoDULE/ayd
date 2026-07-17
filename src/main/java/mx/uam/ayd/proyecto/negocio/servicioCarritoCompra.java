@@ -1,5 +1,8 @@
 package mx.uam.ayd.proyecto.negocio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import mx.uam.ayd.proyecto.datos.repositoriocarritoCompra;
@@ -83,5 +86,27 @@ public class servicioCarritoCompra {
         
         return true;
 
+    }
+
+
+    //A partir de aqui comienza la HU02
+    public List<Producto> recuperaProductoEnCarrito(long idUsuario){
+
+        //Recuperamos la referncia del carrito del usuario
+        Cliente clienteActivo = repoCliente.findByIdCliente(idUsuario);
+
+        //recuperamos el carrito        
+        carritoCompra car = clienteActivo.getCarritoCompra();
+        car = repoCarrito.findByIdCarrito(car.getid());
+
+        //Guardamos los productos dentro de una lista
+        List<Producto> productosdentroCarrito = new ArrayList<>();
+
+        for(Producto a: car.getProductoenCarrito()){
+            productosdentroCarrito.add(a);
+            System.out.println("Producto dentro de carrito: " + a);
+        }
+        
+        return productosdentroCarrito;
     }
 }

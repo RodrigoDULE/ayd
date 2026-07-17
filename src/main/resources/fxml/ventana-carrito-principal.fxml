@@ -33,12 +33,12 @@
             <Font name="System Bold Italic" size="12.0" />
          </font>
       </Text>
-      <Text layoutX="504.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad total">
+      <Text fx:id="cantidadTotalcarrito" layoutX="504.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad total">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>
       </Text>
-      <Text fill="#945c08" layoutX="504.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="costo envio">
+      <Text fx:id="costoEnvioCarrito" fill="#945c08" layoutX="504.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="costo envio">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>
@@ -50,14 +50,14 @@
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Text>
-      <Text fill="#005110" layoutX="475.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio Total">
+      <Text fx:id="costoTotal" fill="#005110" layoutX="475.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio Total">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Text>
       <ScrollPane layoutX="15.0" layoutY="72.0" prefHeight="314.0" prefWidth="330.0">
          <content>
-            <FlowPane prefHeight="120.0" prefWidth="329.0" />
+            <FlowPane fx:id="contenedorProductoscarrito" prefHeight="120.0" prefWidth="329.0" />
          </content></ScrollPane>
    </children>
 </Pane>
