@@ -62,8 +62,9 @@ public class OrdenDeCompra {
         return detalles;
     }
 
-    // setters
 
+
+    // setters
     
     public void setEstadoOrden(EstadoOrden estado){this.estado = estado;}
     public void setTotalOrdenCompra(double total){this.total = total;}
