@@ -98,7 +98,7 @@ public class servicioCarritoCompraTest {
         carritoCompra car = new carritoCompra();
         clienteFalso.setcarritoCompra(car);
 
-        //when(repoCliente.findByIdCliente(idActivo)).thenReturn(clienteFalso);
+        when(repoCliente.findByIdCliente(idActivo)).thenReturn(clienteFalso);
        //when(repositorioProd.findByIdProducto(idActivo)).thenReturn(prod);
 
         boolean res = servicioCarritoCompra.EliminarProdCarrito(idActivo, prod);
