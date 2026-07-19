@@ -19,6 +19,7 @@ public class carritoCompra {
 
     private int cantidadTotalCompra;
     private float totalCalculado;
+    private boolean envioGratis = false;
 
     public carritoCompra() {}
 
@@ -31,31 +32,15 @@ public class carritoCompra {
 
     public long getid() {return idCarrito;}
     public List<Producto> getProductos(){return producto;}
-
-    public int getCantidadTotalCompra() {
-        return cantidadTotalCompra;
-    }
-
-    public float getTotalCalculado() {
-        return totalCalculado;
-    }
-
+    public int getCantidadTotalCompra() {return cantidadTotalCompra;}
+    public float getTotalCalculado() {return totalCalculado;}
     public List<Producto> getProductoenCarrito(){return producto;}
-
+    public boolean getenvioGratis(){return envioGratis;}
     //Creamos setters
-    public void setIdCarrito(long idCarrito) {
-        this.idCarrito = idCarrito;
-    }
+    public void setIdCarrito(long idCarrito) {this.idCarrito = idCarrito;}
+    public void setCantidadTotalCompra(int cantidadTotalCompra) {this.cantidadTotalCompra += cantidadTotalCompra; }//para que se vayan sumando a los demas producto que agregamos}
+    public void setTotalCalculado(float totalCalculado) {this.totalCalculado = totalCalculado;}
+    public void setProducto(Producto producto) {this.producto.add(producto);}//solo agrega un producto a la vez    }
+    public void setenvioGratis(boolean envio){this.envioGratis = envio;}
 
-    public void setCantidadTotalCompra(int cantidadTotalCompra) {
-        this.cantidadTotalCompra += cantidadTotalCompra; //para que se vayan sumando a los demas producto que agregamos
-    }
-
-    public void setTotalCalculado(float totalCalculado) {
-        this.totalCalculado = totalCalculado;
-    }
-    // Este setter reemplaza la lista completa de productos por una nueva
-    public void setProducto(Producto producto) {
-        this.producto.add(producto);//solo agrega un producto a la vez
-    }
 }

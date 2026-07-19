@@ -8,6 +8,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -130,13 +132,27 @@ public class vistaPrincipal {
     @FXML
     private void ingresarUsuario() {
         if (ingresarUsuario.getText().isEmpty()) {
-            System.out.println("Ingresa un usuario válido");
+            mostrarMensaje("Por favor, Ingresa un usuario Válido");
             return;
         }
 
         if (control != null) {
             control.buscaCliente(ingresarUsuario.getText());
         }
+    }
+
+    //mostrar mensaje
+    public void mostrarMensaje(String mensaje){
+        if (!Platform.isFxApplicationThread()) {
+			Platform.runLater(() -> this.mostrarMensaje(mensaje));
+			return;
+		}
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Información");
+		alert.setHeaderText(null);
+		alert.setContentText(mensaje);
+		alert.showAndWait();
     }
 
 }

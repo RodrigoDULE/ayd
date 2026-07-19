@@ -37,8 +37,11 @@ public class controladorPrincipal {
     }
 
     public void buscaCliente(String Nombre){
-        
         sesionActiva = servicioCliente.dameCliente(Nombre);
-        ventanaPrincipal.muestra(sesionActiva.getNombre());
+        if(sesionActiva != null){
+            ventanaPrincipal.muestra(sesionActiva.getNombre());
+        }else{
+            ventanaPrincipal.mostrarMensaje("Ingresa un usuario registrado.");
+        }
     }
 }

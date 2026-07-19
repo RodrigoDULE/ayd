@@ -10,11 +10,15 @@ public class ServicioCliente {
     
     private final repositorioCliente repoCliente;
 
+    //constructor
     public ServicioCliente(repositorioCliente repoCliente){
         this.repoCliente = repoCliente;
     }
 
     public Cliente dameCliente(String Nombre){
+        if(repoCliente.findByNombre(Nombre) == null){
+            return null;
+        }
         return repoCliente.findByNombre(Nombre);
     }
 }

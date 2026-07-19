@@ -61,8 +61,12 @@ public class controladorCatalogoMezicuil {
             System.out.println("Dentro de barra busqueda: "+ criterio);
             prodCriterio=servicioProducto.obtenerPorBusquedaPersonalizada(criterio);
 
-            System.out.println("Tamaño de los porductos encontrados: "+ prodCriterio.size());
-            vistaCatalogo.muestra(prodCriterio);
+            if(!prodCriterio.isEmpty()){
+                System.out.println("Tamaño de los porductos encontrados: "+ prodCriterio.size());
+                vistaCatalogo.muestra(prodCriterio);
+            }else{
+                vistaCatalogo.mostrarMensaje("Lo sentimos, por el momento no hay existencia de este producto");
+            }
         }
     }
  

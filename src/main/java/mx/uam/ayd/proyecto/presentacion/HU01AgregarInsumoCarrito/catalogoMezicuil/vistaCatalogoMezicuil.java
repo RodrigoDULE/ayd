@@ -156,7 +156,7 @@ public class vistaCatalogoMezicuil {
     }
     
     //Metodo para mostrar mensajes flotantes
-    private void mostrarMensaje(String mensaje){
+    public void mostrarMensaje(String mensaje){
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(() -> this.mostrarMensaje(mensaje));
             return;

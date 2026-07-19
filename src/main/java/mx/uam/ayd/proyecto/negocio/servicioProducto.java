@@ -1,6 +1,7 @@
 package mx.uam.ayd.proyecto.negocio;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class servicioProducto {
         List<Producto> todoProducto = new ArrayList<Producto>();
 
         //Creamos un for each para meter cada producto dentro del arreglo
-        for(Producto prod : repoProd.findAll()){
+        for(Producto prod : repoProd.findAll()){ //findAll es iterador
             todoProducto.add(prod);
         }
 
@@ -38,12 +39,10 @@ public class servicioProducto {
     }
 
     public List<Producto> obtenerPorBusquedaPersonalizada(String criterio){
-        List<Producto> ProdCriterio = new ArrayList<Producto>();
-        
-        for(Producto a: repoProd.findByNombreContainingIgnoreCase(criterio)){
-            ProdCriterio.add(a);
+        if(repoProd.findByNombreContainingIgnoreCase(criterio).isEmpty()){
+            return Collections.emptyList(); // se retorna una lista vacia en caso de que la lista este, vacia
         }
-        
-        return ProdCriterio;
+
+        return repoProd.findByNombreContainingIgnoreCase(criterio);
     }
 }
