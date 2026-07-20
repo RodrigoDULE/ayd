@@ -31,6 +31,7 @@ public class vistaCatalogoMezicuil {
     private Stage stage;
     private boolean inicializado = false;
     private controladorCatalogoMezicuil controlCatalgo;
+    
 
     @FXML
     private TextField buscaProducto;
@@ -153,6 +154,14 @@ public class vistaCatalogoMezicuil {
     private void handleProductoSeleccionado(Producto p){
         System.out.println("dentro de handle");
         controlCatalgo.detallesProductoSeleccionado(p);
+    }
+
+    //visitar carrito desde la pantalla principal de la tienda
+    @FXML 
+    private void handleIrCarrito(){
+        if(controlCatalgo != null){
+            controlCatalgo.irCarrito();
+        }
     }
     
     //Metodo para mostrar mensajes flotantes

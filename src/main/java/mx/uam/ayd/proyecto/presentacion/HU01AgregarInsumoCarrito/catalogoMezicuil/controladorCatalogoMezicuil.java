@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 import mx.uam.ayd.proyecto.negocio.servicioProducto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
+import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.DetallesProductoAgregarCarrito.controladorDetallesProductoAgregarCarrito;
 import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.DetallesProductoAgregarCarrito.vistaDetallesProductoAgregarCarrito;
 
 /**
@@ -21,10 +22,12 @@ public class controladorCatalogoMezicuil {
     private final servicioProducto servicioProducto;
     private final vistaCatalogoMezicuil vistaCatalogo;
     private final vistaDetallesProductoAgregarCarrito vistaDetallesProducto;
+    private final controladorDetallesProductoAgregarCarrito controlDetalles;
     private long idActivo;
 
     @Autowired
-    public controladorCatalogoMezicuil(servicioProducto servicioProducto, vistaCatalogoMezicuil vistaCatalogo, vistaDetallesProductoAgregarCarrito vistaDetallesProducto){
+    public controladorCatalogoMezicuil(servicioProducto servicioProducto, vistaCatalogoMezicuil vistaCatalogo, vistaDetallesProductoAgregarCarrito vistaDetallesProducto, controladorDetallesProductoAgregarCarrito controlDetalles){
+        this.controlDetalles = controlDetalles;
         this.vistaDetallesProducto = vistaDetallesProducto;
         this.servicioProducto = servicioProducto;
         this.vistaCatalogo = vistaCatalogo;
@@ -74,5 +77,10 @@ public class controladorCatalogoMezicuil {
     public void detallesProductoSeleccionado(Producto p){
         System.out.println("el producto trabajando " + p);
         vistaDetallesProducto.muestraDetallesProd(idActivo, p);
+    }
+
+
+    public void irCarrito(){
+        controlDetalles.visitaCarritoCompra(idActivo);
     }
 }
