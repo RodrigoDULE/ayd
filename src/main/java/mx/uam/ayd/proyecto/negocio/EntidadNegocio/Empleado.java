@@ -1,9 +1,12 @@
 package mx.uam.ayd.proyecto.negocio.EntidadNegocio;
+import java.util.List;
 
+//Leo_d
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 
 
@@ -26,12 +29,13 @@ public class Empleado {
 
     }
 
-    /*
+    
     //cardinalidad con evento
-    @ManyToMany(targetEntity=Evento.class, fetch=FetchType.EAGER)
-    private Evento evento;
-     */
-
+    //desde la perspectiva de empleado, un empleado tiene varios eventos asignado
+    @OneToMany
+    private List<Evento> eventos_asig;
+    
+     
     //getters y setters
     public long getidEmpleado(){
 
