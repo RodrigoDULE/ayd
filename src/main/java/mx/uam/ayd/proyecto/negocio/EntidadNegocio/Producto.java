@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+//import jakarta.persistence.OneToMany;
 
 @Entity
 public class Producto {
@@ -41,7 +42,14 @@ public class Producto {
     private Cliente cliente;
 
 
-    
+    //cardinalidad con evento
+
+    @ManyToOne
+    private Evento evento;
+
+
+
+
     //realizamos getters
     public long getidProducto(){return idProducto;}
     public String getnombre(){return nombre;}
