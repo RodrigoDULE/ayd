@@ -92,18 +92,20 @@ public class servicioCarritoCompraTest {
 
     @Test
     void testEliminarProdCarrito(){
+        //given
         long idActivo = 1L;
-        Cliente clienteFalso = new Cliente(); //cliente no tiene que ser nulo
-        Producto prod = Mockito.mock(Producto.class); 
+        Cliente clFalso = new Cliente();
         carritoCompra car = new carritoCompra();
-        clienteFalso.setcarritoCompra(car);
+        Producto prod = new Producto();
+        car.setProducto(prod);
+        clFalso.setcarritoCompra(car);
 
-        when(repoCliente.findByIdCliente(idActivo)).thenReturn(clienteFalso);
-       //when(repositorioProd.findByIdProducto(idActivo)).thenReturn(prod);
+        when(repoCliente.findByIdCliente(idActivo)).thenReturn(clFalso); //Se activa el cliente
 
+        //when 
         boolean res = servicioCarritoCompra.EliminarProdCarrito(idActivo, prod);
 
+        //then
         assertTrue(res);
-
     }
 }

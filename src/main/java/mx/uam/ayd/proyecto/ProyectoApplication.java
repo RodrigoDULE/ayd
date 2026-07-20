@@ -25,7 +25,7 @@ import mx.uam.ayd.proyecto.presentacion.Principal.controladorPrincipal;
  */
 @SpringBootApplication
 public class ProyectoApplication {
-
+	
 	private final controladorPrincipal controlPrincipal;
 	private final repositorioProducto repositorioProd;
 	private final repositorioCliente repositorioCliente;

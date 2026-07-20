@@ -69,15 +69,13 @@ public class servicioCarritoCompra {
             return true;
         }
 
-        //Si ya es
-        if(noEsta(dueño, producto)){
-            return false;
-        }
 
         System.out.println("Ya tiene carrito, guardando");
         carritoCompra posee = dueño.getCarritoCompra(); // recuperamos el carrito que ya tiene el dueño
 
-        posee.setProducto(producto);
+        if(!posee.setProducto(producto)){
+            return false;
+        }
         posee.setCantidadTotalCompra(cantidad);
         // calculamos total de compra
         float total = producto.getPrecio() * cantidad;
@@ -94,13 +92,6 @@ public class servicioCarritoCompra {
 
         return true;
 
-    }
-
-    private boolean noEsta(Cliente dueño, Producto prod){
-        if(dueño.getCarritoCompra().getProductos().contains(prod)){
-            return true;
-        }
-        return false;
     }
 
     // A partir de aqui comienza la HU02
@@ -122,26 +113,15 @@ public class servicioCarritoCompra {
 
     // Eliminar producto de carrito
     public boolean EliminarProdCarrito(long idUsuario, Producto prod) {
-        // recuperamos el usuario
-        Cliente clienteActivo = repoCliente.findByIdCliente(idUsuario);
-        // recuperamos el carrito del usuario
-        carritoCompra car = clienteActivo.getCarritoCompra();
-        car.getProductoenCarrito().removeIf(p -> p.getidProducto() == prod.getidProducto()); // generado por **IA**
-        float total_calculado = car.getTotalCalculado() - prod.getPrecio();
-        car.setTotalCalculado(total_calculado);
-        /*
-         * Equivalencia
-         * boolean removido = productos.removeIf(new Predicate<Producto>() {
-         * 
-         * @Override
-         * public boolean test(Producto p) {
-         * // Aquí va la condición: si devuelve 'true', el elemento se borra
-         * return p.getIdProducto() == prod.getIdProducto();
-         * }
-         * });
-         */
-        System.out.println("el producto fue removidio");
-        repoCarrito.save(car);
-        return true;
+        
+       Cliente clienteActivo = repoCliente.findByIdCliente(idUsuario);
+       carritoCompra car = clienteActivo.getCarritoCompra();
+        if(car.removerProducto(prod)){
+
+            repoCarrito.save(car);
+            return true;
+        }
+
+        return false;
     }
 }

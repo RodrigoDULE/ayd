@@ -67,4 +67,22 @@ public class Producto {
     public void setGradoAlcohol(float GradoAlcohol){ this.GradoAlcohol = GradoAlcohol;}
     public void setGradoAlcohol(String tipoProd){ this.tipoProd = tipoProd;}
     public void setRutaImagen(String rutaImagen){ this.imagen = rutaImagen;}
+
+
+    //generado **IA**
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        
+        Producto otroProducto = (Producto) obj;
+        // Comparamos los IDs de los productos
+        return this.idProducto == otroProducto.getidProducto(); 
+    }
+
+    @Override
+    public int hashCode() {
+        // Como tu ID seguramente es de tipo 'long', debes usar Long.hashCode()
+        return Long.hashCode(this.idProducto); 
+    }
 }
