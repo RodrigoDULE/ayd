@@ -40,6 +40,8 @@ public class Producto {
     @ManyToOne(targetEntity = Cliente.class, fetch = FetchType.EAGER)
     private Cliente cliente;
 
+
+    
     //realizamos getters
     public long getidProducto(){return idProducto;}
     public String getnombre(){return nombre;}

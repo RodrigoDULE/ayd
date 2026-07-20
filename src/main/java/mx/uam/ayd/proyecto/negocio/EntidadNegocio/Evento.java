@@ -5,11 +5,12 @@ import jakarta.persistence.Entity;
 //imports para la fecha y hora de un evento
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+import java.util.List;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 
 @Entity//entidad
@@ -49,15 +50,17 @@ public class Evento {
     }
 
    
-   /*
-     //establecemos la cardinalidad con empleado 
-    @ManyToMany(targetEntity=Empleado.class, fetch=FetchType.EAGER)
-    private Empleado empleado;
+    //cardinalidad con empleado desde la perspectica de evento, cada evento tiene multiples empleados
+    @OneToMany
+    private List<Empleado> empleados_asig;
 
-    //establecemos la cardinalidad con producto
-    @ManyToMany(targetEntity=Producto.class,fetch=FetchType.EAGER)
-    private Producto producto;
-*/
+    //cardinalidad con producto 
+    //desde la perspectica de evento, cada evento tiene varios porductos asignados
+    
+    @OneToMany
+    private List <Producto> produtos_asig;
+
+
     //ponemos getters y setters
 
     public long getIdEvento(){
