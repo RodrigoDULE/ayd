@@ -96,9 +96,9 @@ public class servicioCarritoCompra {
     }
 
     // A partir de aqui comienza la HU02
-    public carritoCompra recuperaProductoEnCarrito(long idUsuario) {
+    public carritoCompra recuperaProductoEnCarrito() {
         // recuperamos el cliente
-        Cliente clienteActivo = repoCliente.findByIdCliente(idUsuario);
+        Cliente clienteActivo = repoCliente.findByIdCliente(singleton.getInstance().getIdActivo());
         // recuperamos el carrito
         carritoCompra car = clienteActivo.getCarritoCompra();
         if (car != null) {

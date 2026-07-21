@@ -1,7 +1,9 @@
 package mx.uam.ayd.proyecto.integration;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.glassfish.jaxb.runtime.v2.runtime.unmarshaller.XsiNilLoader.Single;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,7 +50,53 @@ public class CarritoIntegrationTest extends BaseIntegrationTest {
 
     @Test
     @Transactional
-    void TestEliminarProducto(){
+    void TestRecuperaProductoCarrito(){
+        //given
+        Producto prd = new Producto();
+        Cliente cliente = new Cliente();
+        repoCliente.save(cliente);
+        singleton.getInstance().iniciarSesion(cliente.getidCliente());
+        
+        carritoCompra car = new carritoCompra();
+        repoCar.save(car);
+        repoProd.save(prd);
+        cliente.setcarritoCompra(car);
+        car.setProducto(prd);
+        
 
+
+        //When
+        //recupera el carrito
+        carritoCompra carrito = servicioCarrito.recuperaProductoEnCarrito(); 
+    
+        //then
+        assertNotNull(carrito);
+
+    }
+
+
+
+    @Test
+    @Transactional
+    void TestEliminarProducto(){
+        //given
+
+        Cliente client = new Cliente();
+        repoCliente.save(client);
+        singleton.getInstance().iniciarSesion(client.getidCliente());
+        carritoCompra car = new carritoCompra();
+        repoCar.save(car);
+
+        Producto prod = new Producto();
+        repoProd.save(prod);
+
+        car.setProducto(prod);
+        client.setcarritoCompra(car);
+
+        //when
+        boolean borrado = servicioCarrito.EliminarProdCarrito(prod);
+
+        //then
+        assertTrue(borrado);
     }
 }

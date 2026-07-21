@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
-import mx.uam.ayd.proyecto.conffigPD.singleton;
 import mx.uam.ayd.proyecto.negocio.servicioCarritoCompra;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.carritoCompra;
@@ -27,7 +26,7 @@ public class controladorCarritoPrincipal {
     }
 
     public void iniciaVentanaCarrito() {
-        carritoCompra car = servicioCarritoCompra.recuperaProductoEnCarrito(singleton.getInstance().getIdActivo());
+        carritoCompra car = servicioCarritoCompra.recuperaProductoEnCarrito();
         if(car != null){
             vistaCarritoPrincipal.muestraCarrito(car);
         }else{

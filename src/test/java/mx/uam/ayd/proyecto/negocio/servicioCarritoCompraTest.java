@@ -73,20 +73,21 @@ public class servicioCarritoCompraTest {
         Cliente cliente_falso = new Cliente();
         // regresa un cliente falso
         when(repoCliente.findByIdCliente(idActivo)).thenReturn(cliente_falso);
+        singleton.getInstance().iniciarSesion(idActivo);
         carritoCompra miCarrito = new carritoCompra();
         Producto productoFalso = new Producto(); // o un mock de producto
         // Le agregamos el producto al carrito
         miCarrito.setProducto(productoFalso);
         // Y le asignamos el carrito al cliente
         cliente_falso.setcarritoCompra(miCarrito);
-        carritoCompra car = servicioCarritoCompra.recuperaProductoEnCarrito(idActivo);
+        carritoCompra car = servicioCarritoCompra.recuperaProductoEnCarrito();
         assertNotNull(car, "El carrito devuelto no debería ser null");
 
 
         // caso 2: se retorna Null
         Cliente Falso2 = new Cliente();
         when(repoCliente.findByIdCliente(idActivo)).thenReturn(Falso2);
-        carritoCompra res = servicioCarritoCompra.recuperaProductoEnCarrito(idActivo); 
+        carritoCompra res = servicioCarritoCompra.recuperaProductoEnCarrito(); 
         assertNull(res);
 
     }
