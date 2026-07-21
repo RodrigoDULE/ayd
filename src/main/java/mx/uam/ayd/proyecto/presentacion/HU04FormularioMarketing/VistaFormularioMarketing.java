@@ -209,14 +209,8 @@ public class VistaFormularioMarketing {
         }
     }
 
-    /**
-     * Valida los campos obligatorios (validarFormulario() del diagrama
-     * de secuencia). Como la pantalla de resultados solo tiene 3
-     * tarjetas fijas (no es una lista dinámica), aquí también se
-     * limita la cantidad de variaciones a un máximo de 3 — avísame si
-     * en realidad quieres que sea ilimitado, porque en ese caso hay
-     * que rediseñar esa pantalla para que no sea de tamaño fijo.
-     */
+    //Valida los campos obligatorios  Como la pantalla de resultados solo tiene 
+    // 3 tarjetas fijas (no es una lista dinámica)
     private boolean validarFormulario() {
         if (obtenerTipoContenido() == null) {
             mostrarMensaje("Selecciona un tipo de contenido.");
@@ -283,8 +277,7 @@ public class VistaFormularioMarketing {
     }
 
     /**
-     * Habilita de nuevo el botón de generar (habilitarBotonGenerar()
-     * en el diagrama de secuencia), para cuando el usuario regrese al
+     * Habilita de nuevo el botón de generar para cuando el usuario regrese al
      * formulario con "Generar de nuevo".
      */
     public void habilitarBotonGenerar() {

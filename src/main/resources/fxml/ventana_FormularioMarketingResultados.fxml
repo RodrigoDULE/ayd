@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/26">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="578.0" prefWidth="600.0">
          <children>
@@ -47,17 +47,17 @@
                   <Font name="Arial" size="11.0" />
                </font>
             </Label>
-            <Label fx:id="etiquetaResumenFecha" layoutX="371.0" layoutY="141.0" text="Label">
+            <Label fx:id="etiquetaResumenFecha" layoutX="444.0" layoutY="141.0" text="Label">
                <font>
                   <Font name="Arial" size="11.0" />
                </font>
             </Label>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="220.0" layoutX="23.0" layoutY="207.0" stroke="#00000019" strokeType="INSIDE" width="159.0" />
-            <Label fx:id="contenidoVariacion1" layoutX="23.0" layoutY="207.0" prefWidth="159.0" prefHeight="220.0" alignment="CENTER" textAlignment="CENTER" wrapText="true" />
+            <Label fx:id="contenidoVariacion1" alignment="CENTER" layoutX="23.0" layoutY="207.0" prefHeight="220.0" prefWidth="159.0" textAlignment="CENTER" wrapText="true" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="220.0" layoutX="217.0" layoutY="207.0" stroke="#0000001b" strokeType="INSIDE" width="159.0" />
-            <Label fx:id="contenidoVariacion2" layoutX="217.0" layoutY="207.0" prefWidth="159.0" prefHeight="220.0" alignment="CENTER" textAlignment="CENTER" wrapText="true" />
+            <Label fx:id="contenidoVariacion2" alignment="CENTER" layoutX="217.0" layoutY="207.0" prefHeight="220.0" prefWidth="159.0" textAlignment="CENTER" wrapText="true" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="220.0" layoutX="410.0" layoutY="207.0" stroke="#0000001b" strokeType="INSIDE" width="159.0" />
-            <Label fx:id="contenidoVariacion3" layoutX="410.0" layoutY="207.0" prefWidth="159.0" prefHeight="220.0" alignment="CENTER" textAlignment="CENTER" wrapText="true" />
+            <Label fx:id="contenidoVariacion3" alignment="CENTER" layoutX="410.0" layoutY="207.0" prefHeight="220.0" prefWidth="159.0" textAlignment="CENTER" wrapText="true" />
             <Label fx:id="descripcionVariacion1" layoutX="27.0" layoutY="435.0" prefHeight="14.0" prefWidth="152.0" text="Labe(descripcion de variacion)">
                <font>
                   <Font name="Arial" size="11.0" />
