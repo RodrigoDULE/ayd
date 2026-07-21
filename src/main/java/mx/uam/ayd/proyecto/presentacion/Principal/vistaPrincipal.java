@@ -28,6 +28,9 @@ public class vistaPrincipal {
     private Button IngresarTienda;
 
     @FXML
+    private Button ingresarFormularioMarketing;
+
+    @FXML
     private TextField ingresarUsuario;
 
     @FXML
@@ -130,6 +133,15 @@ public class vistaPrincipal {
     }
 
     @FXML
+    private void handleAbrirMarketing() {
+        if (control != null) {
+            control.abreFormularioMarketing();
+        } else {
+            System.err.println("Error: controladorPrincipal no está inyectado.");       
+        }
+    }
+
+    @FXML
     private void ingresarUsuario() {
         if (ingresarUsuario.getText().isEmpty()) {
             mostrarMensaje("Por favor, Ingresa un usuario Válido");
@@ -144,15 +156,15 @@ public class vistaPrincipal {
     //mostrar mensaje
     public void mostrarMensaje(String mensaje){
         if (!Platform.isFxApplicationThread()) {
-			Platform.runLater(() -> this.mostrarMensaje(mensaje));
-			return;
-		}
-		
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Información");
-		alert.setHeaderText(null);
-		alert.setContentText(mensaje);
-		alert.showAndWait();
+            Platform.runLater(() -> this.mostrarMensaje(mensaje));
+            return;
+        }
+        
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
 }

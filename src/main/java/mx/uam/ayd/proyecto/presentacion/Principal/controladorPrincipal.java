@@ -7,6 +7,7 @@ import jakarta.annotation.PostConstruct;
 import mx.uam.ayd.proyecto.negocio.ServicioCliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
 import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.catalogoMezicuil.controladorCatalogoMezicuil;
+import mx.uam.ayd.proyecto.presentacion.HU04FormularioMarketing.ControlFormularioMarketing;  
 
 @Component
 public class controladorPrincipal {
@@ -14,12 +15,16 @@ public class controladorPrincipal {
     private final ServicioCliente servicioCliente;
     private final controladorCatalogoMezicuil controlTiendaLinea;
     private final vistaPrincipal ventanaPrincipal;
+    private final ControlFormularioMarketing controlFormularioMarketing;  
+    
     private Cliente sesionActiva;
+    
     @Autowired
-    public controladorPrincipal(controladorCatalogoMezicuil controlTiendaLinea, vistaPrincipal ventanPrincipal, ServicioCliente servicioCliente){
+    public controladorPrincipal(controladorCatalogoMezicuil controlTiendaLinea, vistaPrincipal ventanPrincipal, ServicioCliente servicioCliente, ControlFormularioMarketing controlFormularioMarketing){
         this.controlTiendaLinea = controlTiendaLinea;
         this.ventanaPrincipal = ventanPrincipal;
         this.servicioCliente = servicioCliente;
+        this.controlFormularioMarketing = controlFormularioMarketing; 
     }
 
     //inicializamos la ventana
@@ -34,6 +39,10 @@ public class controladorPrincipal {
 
     public void visitaTiendaLinea(){
         controlTiendaLinea.inicia(sesionActiva.getidCliente());
+    }
+
+    public void abreFormularioMarketing() {
+        controlFormularioMarketing.iniciaVentanaFormularioMarketing();           
     }
 
     public void buscaCliente(String Nombre){
