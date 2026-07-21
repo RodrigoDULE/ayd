@@ -11,40 +11,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-/**
- * Entidad de negocio de la HU-04 (Formulario de Marketing).
- *
- * Representa la configuración que el usuario define en el
- * "Configurador de Contenido" antes de iniciar la generación
- * automatizada: qué tipo de contenido quiere, en qué plataformas
- * se publicará, cuántas variaciones generar, para cuándo, y qué
- * archivos de referencia adjuntó.
- *
- * Es la clase que en el diagrama de secuencia se crea con:
- * new FormularioMarketing(datos, instanciaArchivos)
- */
 @Entity
 public class FormularioMarketing {
 
-    /**
-     * Las 3 opciones de tipo de contenido que muestra el
-     * "Configurador de Contenido" (Solo Texto / Imagen Estática / Video-Reel).
-     * Es un enum interno, igual que EstadoOrden dentro de OrdenDeCompra.
-     */
+    //opciones de contenido
     public enum TipoContenido {
         SOLO_TEXTO,
-        IMAGEN_ESTATICA,
-        VIDEO_REEL
+        IMAGEN_ESTATICA
     }
 
-    /**
-     * Agrupa los datos capturados en el formulario (todo excepto los
-     * archivos, que se manejan aparte). Es el "datosFormulario" que
-     * viaja de la vista al controlador y al servicio en el diagrama
-     * de secuencia, y el primer parámetro del constructor de abajo.
-     *
-     * No es una entidad: es solo un contenedor de datos (DTO).
-     */
+    // Agrupa los datos capturados en el formulario (todo excepto los archivos, que se manejan aparte).
     public static class DatosFormulario {
 
         private TipoContenido tipoContenido;
@@ -96,26 +72,16 @@ public class FormularioMarketing {
     private LocalDate fechaEstimadaPublicacion;
 
     // Archivos de referencia que el usuario cargó como base para la
-    // generación. mappedBy indica que ArchivoReferencia es quien tiene
-    // la llave foránea (relación bidireccional uno-a-muchos).
-    // cascade + orphanRemoval: si se guarda/borra el formulario, sus
-    // archivos se guardan/borran junto con él automáticamente.
+    // generación
     @OneToMany(mappedBy = "formularioMarketing", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ArchivoReferencia> archivos = new ArrayList<>();
 
-    /**
-     * Constructor vacío. JPA lo necesita internamente para poder
-     * reconstruir el objeto cuando lo lee de la base de datos.
-     */
+    //Constructor Vacío
     public FormularioMarketing() {
     }
 
-    /**
-     * Constructor principal: recibe los datos ya empaquetados en un
-     * DatosFormulario y la lista de archivos ya convertidos a
-     * ArchivoReferencia. Coincide tal cual con el diagrama de
-     * secuencia: new FormularioMarketing(datos, instanciaArchivos).
-     */
+    //recibe los datos ya empaquetados en un DatosFormulario y la lista de archivos ya convertidos 
+    // a ArchivoReferencia. 
     public FormularioMarketing(DatosFormulario datos, List<ArchivoReferencia> archivos) {
         this.tipoContenido = datos.getTipoContenido();
         this.plataformasDestino = datos.getPlataformasDestino();
@@ -124,14 +90,7 @@ public class FormularioMarketing {
         agregarArchivos(archivos);
     }
 
-    /**
-     * Asocia una lista de archivos a este formulario.
-     *
-     * No basta con hacer this.archivos.add(archivo): como la relación es
-     * bidireccional, también hay que decirle a cada ArchivoReferencia
-     * quién es su formulario (archivo.setFormularioMarketing(this)),
-     * o JPA no sabrá guardar la relación correctamente.
-     */
+    //Asocia una lista de archivos a este formulario.
     public void agregarArchivos(List<ArchivoReferencia> nuevosArchivos) {
         if (nuevosArchivos == null) {
             return;
@@ -143,9 +102,6 @@ public class FormularioMarketing {
     }
 
     // --- Getters y setters ---
-    // Los usa JPA internamente y también el resto de las capas
-    // (servicio, controlador) para leer/modificar los datos del formulario.
-
     public Long getId() {
         return id;
     }
