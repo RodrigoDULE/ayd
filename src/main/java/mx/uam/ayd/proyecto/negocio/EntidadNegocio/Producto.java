@@ -77,6 +77,7 @@ public class Producto {
     public void setGradoAlcohol(float GradoAlcohol){ this.GradoAlcohol = GradoAlcohol;}
     public void setGradoAlcohol(String tipoProd){ this.tipoProd = tipoProd;}
     public void setRutaImagen(String rutaImagen){ this.imagen = rutaImagen;}
+    public void setTipoProd(String tipoProd){ this.tipoProd = tipoProd;}
 
 
     //generado **IA**

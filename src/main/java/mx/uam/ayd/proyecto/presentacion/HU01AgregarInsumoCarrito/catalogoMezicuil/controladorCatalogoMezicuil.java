@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
+import mx.uam.ayd.proyecto.conffigPD.singleton;
 import mx.uam.ayd.proyecto.negocio.servicioProducto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.DetallesProductoAgregarCarrito.controladorDetallesProductoAgregarCarrito;
@@ -23,7 +24,7 @@ public class controladorCatalogoMezicuil {
     private final vistaCatalogoMezicuil vistaCatalogo;
     private final vistaDetallesProductoAgregarCarrito vistaDetallesProducto;
     private final controladorDetallesProductoAgregarCarrito controlDetalles;
-    private long idActivo;
+    private long idActivo = singleton.getInstance().getIdActivo();
 
     @Autowired
     public controladorCatalogoMezicuil(servicioProducto servicioProducto, vistaCatalogoMezicuil vistaCatalogo, vistaDetallesProductoAgregarCarrito vistaDetallesProducto, controladorDetallesProductoAgregarCarrito controlDetalles){
@@ -40,8 +41,7 @@ public class controladorCatalogoMezicuil {
         vistaCatalogo.setControlador(this);
     }
 
-    public void inicia(long idUsuario){
-        idActivo = idUsuario;
+    public void inicia(){
         List<Producto> prod = servicioProducto.obtenerProductosDisponibles();
         vistaCatalogo.muestra(prod);
     }
@@ -76,11 +76,11 @@ public class controladorCatalogoMezicuil {
     //redireccion a los detalles de producto
     public void detallesProductoSeleccionado(Producto p){
         System.out.println("el producto trabajando " + p);
-        vistaDetallesProducto.muestraDetallesProd(idActivo, p);
+        vistaDetallesProducto.muestraDetallesProd(p);
     }
 
 
     public void irCarrito(){
-        controlDetalles.visitaCarritoCompra(idActivo);
+        controlDetalles.visitaCarritoCompra();
     }
 }

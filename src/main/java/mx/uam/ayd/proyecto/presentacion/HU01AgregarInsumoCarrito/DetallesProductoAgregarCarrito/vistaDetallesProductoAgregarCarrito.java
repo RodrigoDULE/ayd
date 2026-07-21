@@ -17,6 +17,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import mx.uam.ayd.proyecto.conffigPD.singleton;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 
 /**
@@ -43,7 +44,6 @@ public class vistaDetallesProductoAgregarCarrito {
     private TextField cantidadTexto;
     
     private int contador = 1;
-    private long idActivo;
     private Producto actual;
 
     private Stage stage;
@@ -88,15 +88,13 @@ public class vistaDetallesProductoAgregarCarrito {
 
     }
 
-    public void muestraDetallesProd(long idUsuario, Producto producto) {
+    public void muestraDetallesProd(Producto producto) {
         contador = 1;
-        //le pasamos el idActivo
-        idActivo = idUsuario;
         actual = producto;
 
         System.out.println("EL producto en el que se esta trabajando "+actual);
         if (!Platform.isFxApplicationThread()) {
-            Platform.runLater(() -> muestraDetallesProd(idUsuario,actual));
+            Platform.runLater(() -> muestraDetallesProd(actual));
             return;
         }
 
@@ -111,7 +109,7 @@ public class vistaDetallesProductoAgregarCarrito {
         nombreDetalles.getChildren().add(new Text(actual.getnombre()));
         precioDetalles.setText("$" + actual.getPrecio() + " MXN");
         descripcionProdDetalles.getChildren().add(new Text(actual.getDescripcion()));
-        piezasDetalles.setText("Hay " + actual.getcantidadStock() + " disponibles dentro de stock. \nUsuario con id: " + idUsuario);
+        piezasDetalles.setText("Hay " + actual.getcantidadStock() + " disponibles dentro de stock. \nUsuario con id: " + singleton.getInstance().getIdActivo());
 
         // Cargamos la ruta de la imagen
         ImageView imagen = new ImageView(new Image(getClass().getResourceAsStream(actual.getRutaImagen())));
@@ -151,14 +149,14 @@ public class vistaDetallesProductoAgregarCarrito {
     private void handleAgregaraCarrito(){
         if(controlDetalles != null){
             System.out.println("Boton presionado");
-            controlDetalles.agregarProductoaCarrito(idActivo, actual, contador);
+            controlDetalles.agregarProductoaCarrito(actual, contador);
         }
     }
 
     @FXML 
     private void handleIrCarrito(){
         if(controlDetalles != null){
-            controlDetalles.visitaCarritoCompra(idActivo);
+            controlDetalles.visitaCarritoCompra();
         }
     }
     

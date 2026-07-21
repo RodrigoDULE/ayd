@@ -3,6 +3,7 @@ package mx.uam.ayd.proyecto.negocio;
 import org.springframework.stereotype.Service;
 
 import mx.uam.ayd.proyecto.datos.repositoriocarritoCompra;
+import mx.uam.ayd.proyecto.conffigPD.singleton;
 import mx.uam.ayd.proyecto.datos.repositorioCliente;
 import mx.uam.ayd.proyecto.datos.repositorioProducto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
@@ -33,11 +34,11 @@ public class servicioCarritoCompra {
      * producto.setingresarIdDueño(pertenece);
      * rp.save(producto);
      */
-    public boolean agregarItem(long idUsuario, Producto producto, int cantidad) {
+    public boolean agregarItem(Producto producto, int cantidad) {
         // verificamos si el cliente cuenta con un carrito de compra
         // recuperamos al cliente con el Id, va a carrito ----
         // carritoCompra----idCarrito
-        Cliente dueño = repoCliente.findByIdCliente(idUsuario);
+        Cliente dueño = repoCliente.findByIdCliente(singleton.getInstance().getIdActivo());
         sobrantes = 0;
 
         if (producto.getcantidadStock() <= cantidad) {
@@ -112,9 +113,9 @@ public class servicioCarritoCompra {
     }
 
     // Eliminar producto de carrito
-    public boolean EliminarProdCarrito(long idUsuario, Producto prod) {
+    public boolean EliminarProdCarrito(Producto prod) {
         
-       Cliente clienteActivo = repoCliente.findByIdCliente(idUsuario);
+       Cliente clienteActivo = repoCliente.findByIdCliente(singleton.getInstance().getIdActivo());
        carritoCompra car = clienteActivo.getCarritoCompra();
         if(car.removerProducto(prod)){
 

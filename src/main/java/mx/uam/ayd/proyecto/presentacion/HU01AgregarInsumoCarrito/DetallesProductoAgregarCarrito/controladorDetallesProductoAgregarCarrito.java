@@ -34,9 +34,9 @@ public class controladorDetallesProductoAgregarCarrito {
         vistaDetalle.setControlador(this);
     }
 
-    public void agregarProductoaCarrito(long idUsuario, Producto producto, int cantidad) {
+    public void agregarProductoaCarrito(Producto producto, int cantidad) {
 
-        boolean bandera = agregarCarrito.agregarItem(idUsuario, producto, cantidad);
+        boolean bandera = agregarCarrito.agregarItem(producto, cantidad);
 
         if (bandera) {
             vistaDetalle.mostrarMensaje("Producto agregado correctamente");
@@ -46,7 +46,7 @@ public class controladorDetallesProductoAgregarCarrito {
 
     }
 
-    public void visitaCarritoCompra(long idUsuario) {
-        controlCarrito.iniciaVentanaCarrito(idUsuario);
+    public void visitaCarritoCompra() {
+        controlCarrito.iniciaVentanaCarrito();
     }
 }

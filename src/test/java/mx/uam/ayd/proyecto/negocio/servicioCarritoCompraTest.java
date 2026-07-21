@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import mx.uam.ayd.proyecto.conffigPD.singleton;
 import mx.uam.ayd.proyecto.datos.repositorioCliente;
 import mx.uam.ayd.proyecto.datos.repositorioProducto;
 import mx.uam.ayd.proyecto.datos.repositoriocarritoCompra;
@@ -37,8 +38,9 @@ public class servicioCarritoCompraTest {
     void testagregarItem() {
         // caso 1: retorna falso si es que no se pudo agregar el producto
 
-        // 1. PREPARACIÓN (Arrange)
+        //given
         long idUsuario = 1L;
+        singleton.getInstance().iniciarSesion(idUsuario);
         int cantidad = 2; // La cantidad que intentamos agregar
         Producto productoMock = Mockito.mock(Producto.class);
 
@@ -47,7 +49,7 @@ public class servicioCarritoCompraTest {
 
         // 2. EJECUCIÓN (Act)
         // Llamamos al método real de nuestro servicio inyectado
-        boolean resultado = servicioCarritoCompra.agregarItem(idUsuario, productoMock, cantidad);
+        boolean resultado = servicioCarritoCompra.agregarItem(productoMock, cantidad);
 
         // 3. VERIFICACIÓN (Assert)
         // Verificamos que el resultado sea efectivamente 'false'
@@ -60,7 +62,7 @@ public class servicioCarritoCompraTest {
         // configiramos el comportamiento simulando que hay mas productos
         when(productoMock.getcantidadStock()).thenReturn(5);
 
-        boolean resultado2 = servicioCarritoCompra.agregarItem(idUsuario, productoMock, cantidad);
+        boolean resultado2 = servicioCarritoCompra.agregarItem(productoMock, cantidad);
         assertTrue(resultado2);
     }
 
@@ -94,6 +96,7 @@ public class servicioCarritoCompraTest {
     void testEliminarProdCarrito(){
         //given
         long idActivo = 1L;
+        singleton.getInstance().iniciarSesion(idActivo);
         Cliente clFalso = new Cliente();
         carritoCompra car = new carritoCompra();
         Producto prod = new Producto();
@@ -103,7 +106,7 @@ public class servicioCarritoCompraTest {
         when(repoCliente.findByIdCliente(idActivo)).thenReturn(clFalso); //Se activa el cliente
 
         //when 
-        boolean res = servicioCarritoCompra.EliminarProdCarrito(idActivo, prod);
+        boolean res = servicioCarritoCompra.EliminarProdCarrito(prod);
 
         //then
         assertTrue(res);
