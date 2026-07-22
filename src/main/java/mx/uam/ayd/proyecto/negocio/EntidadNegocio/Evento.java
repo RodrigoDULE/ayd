@@ -30,8 +30,8 @@ public class Evento {
     private LocalTime horaFin;
     private LocalDate notificacion;
 
-    public Evento(String nombreEvento, String Lugar, int Comision, int NoAsistentes, LocalDate fechaE, LocalTime horaIn, LocalTime horaFin, LocalDate notificacion){
-
+    public Evento( String nombreEvento, String Lugar, int Comision, int NoAsistentes, LocalDate fechaE, LocalTime horaIn, LocalTime horaFin, LocalDate notificacion){
+        
         this.nombreEvento = nombreEvento;
         this.Lugar = Lugar;
         this.Comision = Comision;
