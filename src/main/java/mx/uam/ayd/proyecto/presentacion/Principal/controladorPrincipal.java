@@ -8,53 +8,62 @@ import mx.uam.ayd.proyecto.conffigPD.singleton;
 import mx.uam.ayd.proyecto.negocio.ServicioCliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
 import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.catalogoMezicuil.controladorCatalogoMezicuil;
-import mx.uam.ayd.proyecto.presentacion.HU04FormularioMarketing.ControlFormularioMarketing;  
+import mx.uam.ayd.proyecto.presentacion.HU04FormularioMarketing.ControlFormularioMarketing;
+import mx.uam.ayd.proyecto.presentacion.HU08AgendarNuevoEvento.controlAgendarNuevoEvento;
 
 @Component
 public class controladorPrincipal {
-    
+
     private final ServicioCliente servicioCliente;
     private final controladorCatalogoMezicuil controlTiendaLinea;
     private final vistaPrincipal ventanaPrincipal;
-    private final ControlFormularioMarketing controlFormularioMarketing;  
-    
+    private final ControlFormularioMarketing controlFormularioMarketing;
+    private final controlAgendarNuevoEvento controlAgendarNuevoEvento;
+
     private Cliente sesionActiva;
-    
+
     @Autowired
-    public controladorPrincipal(controladorCatalogoMezicuil controlTiendaLinea, vistaPrincipal ventanPrincipal, ServicioCliente servicioCliente, ControlFormularioMarketing controlFormularioMarketing){
+    public controladorPrincipal(controladorCatalogoMezicuil controlTiendaLinea, vistaPrincipal ventanPrincipal,
+            ServicioCliente servicioCliente, ControlFormularioMarketing controlFormularioMarketing,
+            controlAgendarNuevoEvento controlAgendarNuevoEvento) {
         this.controlTiendaLinea = controlTiendaLinea;
         this.ventanaPrincipal = ventanPrincipal;
         this.servicioCliente = servicioCliente;
-        this.controlFormularioMarketing = controlFormularioMarketing; 
+        this.controlFormularioMarketing = controlFormularioMarketing;
+        this.controlAgendarNuevoEvento = controlAgendarNuevoEvento;
     }
 
-    //inicializamos la ventana
+    // inicializamos la ventana
     @PostConstruct
-    public void inicializar(){
+    public void inicializar() {
         ventanaPrincipal.setControlPrincipal(this);
     }
 
-    public void inicia(){
+    public void inicia() {
         ventanaPrincipal.muestra(null);
     }
 
-    public void visitaTiendaLinea(){
+    public void visitaTiendaLinea() {
         controlTiendaLinea.inicia();
     }
 
-    public void abreFormularioMarketing() {
-        controlFormularioMarketing.iniciaVentanaFormularioMarketing();           
+    public void agendaNuevoEvento() {
+        controlAgendarNuevoEvento.iniciaVentanaAgendarNuevoEvento();
     }
 
-    public void buscaCliente(String Nombre){
+    public void abreFormularioMarketing() {
+        controlFormularioMarketing.iniciaVentanaFormularioMarketing();
+    }
+
+    public void buscaCliente(String Nombre) {
 
         sesionActiva = servicioCliente.dameCliente(Nombre);
-        //establecemos el id del usuario en el singleton
+        // establecemos el id del usuario en el singleton
         singleton.getInstance().iniciarSesion(sesionActiva.getidCliente());
         System.out.println("EL id del usuaario que ingreso al sistema es: " + singleton.getInstance().getIdActivo());
-        if(sesionActiva != null){
+        if (sesionActiva != null) {
             ventanaPrincipal.muestra(sesionActiva.getNombre());
-        }else{
+        } else {
             ventanaPrincipal.mostrarMensaje("Ingresa un usuario registrado.");
         }
     }

@@ -76,36 +76,35 @@ public class vistaPrincipal {
     public void muestra(String NombreUsuario) {
 
         if (NombreUsuario == null) {
-            
+
             // this.control = control;
             System.out.println("Intentando abrir la ventana principal");
             if (!Platform.isFxApplicationThread()) {
                 Platform.runLater(() -> this.muestra(null));
                 return;
             }
-            
+
             inicializarUI();
 
             // Deshabilitamos los botones al inicio del mundo
             IngresarTienda.setDisable(true);
             ingresarUsuario.setText("Rodrigo");
             stage.show();
-        }else{
+        } else {
             System.out.println("Intentando abrir la ventana principal");
             if (!Platform.isFxApplicationThread()) {
                 Platform.runLater(() -> this.muestra(NombreUsuario));
                 return;
             }
-            
+
             inicializarUI();
             // Deshabilitamos los botones al inicio del mundo
             IngresarTienda.setDisable(false);
             ingresarUsuario.setDisable(false);
-            textoPrincipal.setText("Bienvenido, "+NombreUsuario);
+            textoPrincipal.setText("Bienvenido, " + NombreUsuario);
             System.out.println(NombreUsuario);
             stage.show();
         }
-
 
     }
 
@@ -127,8 +126,11 @@ public class vistaPrincipal {
 
     @FXML
     private void agendarEvento() {
+        System.out.println("Boton presionado");
         if (control != null) {
-
+            control.agendaNuevoEvento();
+        } else {
+            System.err.println("Error: controladorPrincipal no está inyectado.");
         }
     }
 
@@ -137,7 +139,7 @@ public class vistaPrincipal {
         if (control != null) {
             control.abreFormularioMarketing();
         } else {
-            System.err.println("Error: controladorPrincipal no está inyectado.");       
+            System.err.println("Error: controladorPrincipal no está inyectado.");
         }
     }
 
@@ -153,13 +155,13 @@ public class vistaPrincipal {
         }
     }
 
-    //mostrar mensaje
-    public void mostrarMensaje(String mensaje){
+    // mostrar mensaje
+    public void mostrarMensaje(String mensaje) {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(() -> this.mostrarMensaje(mensaje));
             return;
         }
-        
+
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Información");
         alert.setHeaderText(null);
