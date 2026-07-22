@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,9 +17,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import mx.uam.ayd.proyecto.conffigPD.singleton;
 import mx.uam.ayd.proyecto.datos.repositorioCliente;
+import mx.uam.ayd.proyecto.datos.repositorioIntermedioCarrito;
 import mx.uam.ayd.proyecto.datos.repositorioProducto;
 import mx.uam.ayd.proyecto.datos.repositoriocarritoCompra;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.IntermediaCarritoProd;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.carritoCompra;
 
@@ -30,6 +34,8 @@ public class servicioCarritoCompraTest {
     private repositorioCliente repoCliente;
     @Mock
     private repositorioProducto repositorioProd;
+    @Mock 
+    private repositorioIntermedioCarrito repoInter;
 
     @InjectMocks
     private servicioCarritoCompra servicioCarritoCompra;
@@ -95,21 +101,50 @@ public class servicioCarritoCompraTest {
 
     @Test
     void testEliminarProdCarrito(){
+        /*
         //given
         long idActivo = 1L;
         singleton.getInstance().iniciarSesion(idActivo);
         Cliente clFalso = new Cliente();
         carritoCompra car = new carritoCompra();
         Producto prod = new Producto();
+        List<IntermediaCarritoProd> inter;
+        
+        car.setProducto(prod);
+        clFalso.setcarritoCompra(car);
+        
+        when(repoCliente.findByIdCliente(idActivo)).thenReturn(clFalso); //Se activa el cliente
+        when(repoInter.findByCarIdCarrito(idActivo)).thenReturn(inter);
+        
+        //when 
+        boolean res = servicioCarritoCompra.EliminarProdCarrito(prod);
+        
+        //then
+        assertTrue(res);
+        */
+
+        //**Generado por IA **/
+        long idActivo = 1L;
+        singleton.getInstance().iniciarSesion(idActivo);
+
+        Cliente clFalso = new Cliente();
+        carritoCompra car = new carritoCompra();
+        Producto prod = new Producto();
+        IntermediaCarritoProd inter = new IntermediaCarritoProd();
+
+        car.setIdCarrito(10L);
+        inter.setCarrito(car);
+        inter.setProd(prod);
+        inter.setCantidadTotalProd(1);
+
         car.setProducto(prod);
         clFalso.setcarritoCompra(car);
 
-        when(repoCliente.findByIdCliente(idActivo)).thenReturn(clFalso); //Se activa el cliente
+        when(repoCliente.findByIdCliente(idActivo)).thenReturn(clFalso);
+        when(repoInter.findByCarIdCarrito(car.getid())).thenReturn(List.of(inter));
 
-        //when 
         boolean res = servicioCarritoCompra.EliminarProdCarrito(prod);
 
-        //then
         assertTrue(res);
     }
 }

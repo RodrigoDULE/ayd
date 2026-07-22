@@ -53,10 +53,10 @@ public class carritoCompra {
         return producto.add(prod);
     }
 
-    public boolean removerProducto(Producto prod){
+    public boolean removerProducto(Producto prod, int cantidad){
         if(producto.contains(prod)){
             producto.remove(prod);
-            setTotalCalculado(-prod.getPrecio());
+            setTotalCalculado(-prod.getPrecio()*cantidad);
             return true;
         }
 

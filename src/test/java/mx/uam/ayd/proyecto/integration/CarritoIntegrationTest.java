@@ -3,7 +3,6 @@ package mx.uam.ayd.proyecto.integration;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.glassfish.jaxb.runtime.v2.runtime.unmarshaller.XsiNilLoader.Single;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,10 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 import mx.uam.ayd.proyecto.BaseIntegrationTest;
 import mx.uam.ayd.proyecto.conffigPD.singleton;
 import mx.uam.ayd.proyecto.datos.repositorioCliente;
+import mx.uam.ayd.proyecto.datos.repositorioIntermedioCarrito;
 import mx.uam.ayd.proyecto.datos.repositorioProducto;
 import mx.uam.ayd.proyecto.datos.repositoriocarritoCompra;
 import mx.uam.ayd.proyecto.negocio.servicioCarritoCompra;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.IntermediaCarritoProd;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.carritoCompra;
 
@@ -26,6 +27,8 @@ public class CarritoIntegrationTest extends BaseIntegrationTest {
     private repositorioProducto repoProd;
     @Autowired
     private repositoriocarritoCompra repoCar;
+    @Autowired
+    private repositorioIntermedioCarrito repoInter;
     @Autowired
     private servicioCarritoCompra servicioCarrito;
 
@@ -80,16 +83,21 @@ public class CarritoIntegrationTest extends BaseIntegrationTest {
     @Transactional
     void TestEliminarProducto(){
         //given
-
         Cliente client = new Cliente();
         repoCliente.save(client);
         singleton.getInstance().iniciarSesion(client.getidCliente());
+
         carritoCompra car = new carritoCompra();
         repoCar.save(car);
 
         Producto prod = new Producto();
         repoProd.save(prod);
 
+        IntermediaCarritoProd inter = new IntermediaCarritoProd();
+        inter.setCarrito(car);
+        inter.setProd(prod);
+        repoInter.save(inter);
+        
         car.setProducto(prod);
         client.setcarritoCompra(car);
 

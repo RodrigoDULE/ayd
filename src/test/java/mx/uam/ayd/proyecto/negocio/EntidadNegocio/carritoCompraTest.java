@@ -19,6 +19,7 @@ public class carritoCompraTest {
 
         productoPrueba.setnombre("Mezcal v2.0");
         productoPrueba.setPrecio(18.5f);
+        productoPrueba.setcantidadStock(25);
     }
 
     @Test
@@ -50,7 +51,7 @@ public class carritoCompraTest {
         //given 
         carritoPrueba.setProducto(productoPrueba);
         //when
-        boolean test = carritoPrueba.removerProducto(productoPrueba);
+        boolean test = carritoPrueba.removerProducto(productoPrueba, 15);
         //then
         assertTrue(test, "Deberia remover el producto");
     }
@@ -60,7 +61,7 @@ public class carritoCompraTest {
     void TestremoverProductoInexistente(){
         
         //when
-        boolean test = carritoPrueba.removerProducto(productoPrueba);
+        boolean test = carritoPrueba.removerProducto(productoPrueba, 48);
 
         //then
         assertFalse(test, "No se deberia remover nada dentro del carrito");

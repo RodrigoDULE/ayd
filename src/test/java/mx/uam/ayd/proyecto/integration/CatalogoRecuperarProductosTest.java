@@ -12,12 +12,8 @@ import mx.uam.ayd.proyecto.BaseIntegrationTest;
 import mx.uam.ayd.proyecto.datos.repositorioProducto;
 import mx.uam.ayd.proyecto.negocio.servicioProducto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
-import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.catalogoMezicuil.controladorCatalogoMezicuil;
 
 public class CatalogoRecuperarProductosTest extends BaseIntegrationTest {
-    
-    @Autowired
-    private controladorCatalogoMezicuil controladorCatalgo;
     
     @Autowired
     private servicioProducto servicioProducto;
