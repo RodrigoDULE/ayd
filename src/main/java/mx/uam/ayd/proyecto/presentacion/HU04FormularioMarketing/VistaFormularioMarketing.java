@@ -213,7 +213,7 @@ public class VistaFormularioMarketing {
         }
     }
 
-    //Valida los campos obligatorios  Como la pantalla de resultados solo tiene 
+    //Valida los campos obligatorios Como la pantalla de resultados solo tiene 
     // 3 tarjetas fijas (no es una lista dinámica)
     private boolean validarFormulario() {
         if (obtenerTipoContenido() == null) {
@@ -310,7 +310,7 @@ public class VistaFormularioMarketing {
         Label[] cajasContenido = { contenidoVariacion1, contenidoVariacion2, contenidoVariacion3 };
         Label[] cajasDescripcion = { descripcionVariacion1, descripcionVariacion2, descripcionVariacion3 };
 
-        // 1. Preparar las rutas y mezclarlas aleatoriamente
+        // Preparar las rutas de imágenes y mezclarlas aleatoriamente
         List<String> rutasImagenes = Arrays.asList(
             "/Imagenes/ImagenContenido1.png",
             "/Imagenes/ImagenContenido2.png",
@@ -319,37 +319,49 @@ public class VistaFormularioMarketing {
         Collections.shuffle(rutasImagenes);
 
         for (int i = 0; i < cajasContenido.length; i++) {
-            // Limpiamos los gráficos previos por si el usuario le dio a "Generar de nuevo"
+            // Limpiar el estado visual anterior del slot
             cajasContenido[i].setGraphic(null); 
-            
+            cajasContenido[i].setText("");
+            cajasContenido[i].setStyle("");
+
             if (i < variaciones.size()) {
                 VariacionContenido variacion = variaciones.get(i);
-                
+
                 if (formulario.getTipoContenido() == TipoContenido.IMAGEN_ESTATICA) {
+                    
+                    // ================= CASO IMAGEN =================
                     try {
-                        // Cargar la imagen simulada
                         Image imagen = new Image(getClass().getResourceAsStream(rutasImagenes.get(i)));
                         ImageView imageView = new ImageView(imagen);
-                        
-                        // Ajustar tamaño para que encaje bien en el espacio de tu Label
+
                         imageView.setFitWidth(150); 
                         imageView.setFitHeight(160);
                         imageView.setPreserveRatio(true);
-                        
-                        cajasContenido[i].setText(""); // Quitamos el texto/emoji
-                        cajasContenido[i].setStyle(""); 
-                        cajasContenido[i].setGraphic(imageView); // Insertamos la imagen en el Label
-                        
+
+                        cajasContenido[i].setGraphic(imageView);
                     } catch (Exception e) {
                         cajasContenido[i].setText("Error visual");
                         System.err.println("No se encontró la imagen: " + rutasImagenes.get(i));
                     }
+
                 } else {
+                    
+                    // ================= CASO SOLO TEXTO =================
+                    cajasContenido[i].setWrapText(true); // Permite salto de línea si la frase es larga
                     cajasContenido[i].setText(variacion.getNombre());
-                    cajasContenido[i].setStyle("");
+                    cajasContenido[i].setStyle(
+                        "-fx-alignment: center; " +
+                        "-fx-text-alignment: center; " +
+                        "-fx-font-size: 13px; " +
+                        "-fx-font-weight: bold;" +
+                        "-fx-padding: 12px 15px 12px 15px;"
+                    );
                 }
+
                 cajasDescripcion[i].setText(variacion.getDescripcion());
+
             } else {
+                // Si el usuario pidió menos de 3 variaciones, limpiar completamente la tarjeta restante
                 cajasContenido[i].setText("");
                 cajasDescripcion[i].setText("");
             }

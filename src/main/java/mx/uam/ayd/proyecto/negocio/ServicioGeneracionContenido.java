@@ -3,18 +3,19 @@ package mx.uam.ayd.proyecto.negocio;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
-import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing;
 
-//Servicio de negocio de HU-04 encargado de "generar" el contenido de marketing a partir de un FormularioMarketing ya guardado.
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing.TipoContenido;
+
+/**
+ * Servicio de negocio de HU-04 encargado de "generar" el contenido de marketing
+ * a partir de un FormularioMarketing ya guardado.
+ */
 @Service
 public class ServicioGeneracionContenido {
 
     /**
-     * Representa una variación de contenido generada (ej. "Variación A:
-     * Enfoque Visual"). Va anidada aquí, no en EntidadNegocio, porque
-     * NO es una entidad de base de datos: solo existe mientras se
-     * genera y se muestra en pantalla, nunca se persiste. Mismo patrón
-     * que ya usan con OrdenDeCompra.EstadoOrden.
+     * Representa una variación de contenido generada.
      */
     public static class VariacionContenido {
 
@@ -35,26 +36,45 @@ public class ServicioGeneracionContenido {
         }
     }
 
-    //Genera (de forma simulada) las variaciones de contenido paravel formulario recibido. Es el método que llama
-
+    /**
+     * Genera (de forma simulada) las variaciones de contenido para el formulario recibido.
+     */
     public List<VariacionContenido> generarVariaciones(FormularioMarketing formularioGuardado) {
         return simularGeneracion(formularioGuardado);
     }
 
-    //Simula la generación: arma una variación por cada letra (A, B, C...) hasta completar 
-    // cantidadVariaciones, usando el tipo de contenido del formulario como referencia
+    /**
+     * Simula la generación ajustando el texto devuelto según el TipoContenido.
+     */
     private List<VariacionContenido> simularGeneracion(FormularioMarketing formulario) {
         List<VariacionContenido> variaciones = new ArrayList<>();
 
         int cantidad = formulario.getCantidadVariaciones() != null ? formulario.getCantidadVariaciones() : 1;
-        String tipoContenido = formulario.getTipoContenido() != null
-                ? formulario.getTipoContenido().name()
-                : "CONTENIDO";
+        TipoContenido tipoContenido = formulario.getTipoContenido();
+
+        // Arreglo de frases de ejemplo para simular copys/textos de marketing
+        String[] textosMarketing = {
+            "¡Elixir ancestral para el alma! Descubre el sabor auténtico de nuestro mezcal artesanal, hecho 100% de agave de origen.",
+            "Para todo mal, mezcal; para todo bien, también. Disfruta una tradición viva llena de carácter y aroma ahumado.",
+            "Sabor que honra la tierra. Cada gota cuenta una historia de maestría, tradición y pasion palenquera. ¡Pide el tuyo!"
+
+        };
 
         for (int i = 0; i < cantidad; i++) {
             char letra = (char) ('A' + i);
-            String nombre = "Variación " + letra;
-            String descripcion = "Contenido de tipo " + tipoContenido + " generado automáticamente (simulado).";
+            String nombre;
+            String descripcion;
+
+            if (tipoContenido == TipoContenido.SOLO_TEXTO) {
+                // Para SOLO_TEXTO asignamos un copy persuasivo al campo 'nombre' (que es el que se muestra al centro)
+                nombre = textosMarketing[i % textosMarketing.length];
+                descripcion = "Opción " + letra + ": Copy promocional orientado a conversión.";
+            } else {
+                // Para IMAGEN_ESTATICA u otros tipos visuales
+                nombre = "Variación " + letra;
+                descripcion = "Diseño gráfico adaptado para plataformas de marketing.";
+            }
+
             variaciones.add(new VariacionContenido(nombre, descripcion));
         }
 
