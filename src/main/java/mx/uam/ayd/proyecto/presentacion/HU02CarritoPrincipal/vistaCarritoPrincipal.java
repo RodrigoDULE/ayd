@@ -134,7 +134,14 @@ public class vistaCarritoPrincipal {
             controlcarritoPrincipal.EliminarProd(p);
         }
     }
-
+    
+    @FXML
+    private void handleDireccionEnvio(){
+        if(controlcarritoPrincipal != null){
+            controlcarritoPrincipal.irDireccionEnvio();
+        }
+        
+    }
     //Metodo para mostrar mensajes de error o advertencia
     public void mostrarMensaje(String mensaje){
         if (!Platform.isFxApplicationThread()) {
@@ -148,4 +155,5 @@ public class vistaCarritoPrincipal {
 		alert.setContentText(mensaje);
 		alert.showAndWait();
     }
+
 }

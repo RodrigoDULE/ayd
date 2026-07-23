@@ -220,4 +220,9 @@ public class servicioCarritoCompra {
         return false;
     }
 
+    public Cliente recuperaClienToDireccion(){
+        Cliente dueño = repoCliente.findByIdCliente(singleton.getInstance().getIdActivo());
+        return dueño;
+    }
+
 }
