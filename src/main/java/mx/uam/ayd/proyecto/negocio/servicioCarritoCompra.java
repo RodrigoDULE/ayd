@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import mx.uam.ayd.proyecto.datos.repositoriocarritoCompra;
-import mx.uam.ayd.proyecto.conffigPD.singleton;
+import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
 import mx.uam.ayd.proyecto.datos.repositorioCliente;
 import mx.uam.ayd.proyecto.datos.repositorioIntermedioCarrito;
 import mx.uam.ayd.proyecto.datos.repositorioProducto;
@@ -38,7 +38,7 @@ public class servicioCarritoCompra {
      * // recuperamos al cliente con el Id, va a carrito ----
      * // carritoCompra----idCarrito
      * Cliente dueño =
-     * repoCliente.findByIdCliente(singleton.getInstance().getIdActivo());
+     * repoCliente.findByIdCliente(gestionCliente.getInstance().getIdActivo());
      * sobrantes = 0;
      * 
      * if (producto.getcantidadStock() <= cantidad) {
@@ -100,7 +100,7 @@ public class servicioCarritoCompra {
 
     public boolean agregarItem(Producto producto, int cantidad) {
 
-        Cliente dueño = repoCliente.findByIdCliente(singleton.getInstance().getIdActivo());
+        Cliente dueño = repoCliente.findByIdCliente(gestionCliente.getInstance().getIdActivo());
         IntermediaCarritoProd inter = new IntermediaCarritoProd();
         sobrantes = 0;
 
@@ -170,7 +170,7 @@ public class servicioCarritoCompra {
     // A partir de aqui comienza la HU02
     public carritoCompra recuperaProductoEnCarrito() {
         // recuperamos el cliente
-        Cliente clienteActivo = repoCliente.findByIdCliente(singleton.getInstance().getIdActivo());
+        Cliente clienteActivo = repoCliente.findByIdCliente(gestionCliente.getInstance().getIdActivo());
         // recuperamos el carrito
         carritoCompra car = clienteActivo.getCarritoCompra();
         if (car != null) {
@@ -187,7 +187,7 @@ public class servicioCarritoCompra {
     // Eliminar producto de carrito
     public boolean EliminarProdCarrito(Producto prod) {
 
-        Cliente clienteActivo = repoCliente.findByIdCliente(singleton.getInstance().getIdActivo());
+        Cliente clienteActivo = repoCliente.findByIdCliente(gestionCliente.getInstance().getIdActivo());
         IntermediaCarritoProd relacionEncontrada = null;
         carritoCompra car = clienteActivo.getCarritoCompra();
         // recuperamos la tabla intermedia con el id del carrito del dueño con sesion
@@ -221,7 +221,7 @@ public class servicioCarritoCompra {
     }
 
     public Cliente recuperaClienToDireccion(){
-        Cliente dueño = repoCliente.findByIdCliente(singleton.getInstance().getIdActivo());
+        Cliente dueño = repoCliente.findByIdCliente(gestionCliente.getInstance().getIdActivo());
         return dueño;
     }
 

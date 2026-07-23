@@ -15,7 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import mx.uam.ayd.proyecto.conffigPD.singleton;
+import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
 import mx.uam.ayd.proyecto.datos.repositorioCliente;
 import mx.uam.ayd.proyecto.datos.repositorioIntermedioCarrito;
 import mx.uam.ayd.proyecto.datos.repositorioProducto;
@@ -46,7 +46,7 @@ public class servicioCarritoCompraTest {
 
         //given
         long idUsuario = 1L;
-        singleton.getInstance().iniciarSesion(idUsuario);
+        gestionCliente.getInstance().iniciarSesion(idUsuario);
         int cantidad = 2; // La cantidad que intentamos agregar
         Producto productoMock = Mockito.mock(Producto.class);
 
@@ -79,7 +79,7 @@ public class servicioCarritoCompraTest {
         Cliente cliente_falso = new Cliente();
         // regresa un cliente falso
         when(repoCliente.findByIdCliente(idActivo)).thenReturn(cliente_falso);
-        singleton.getInstance().iniciarSesion(idActivo);
+        gestionCliente.getInstance().iniciarSesion(idActivo);
         carritoCompra miCarrito = new carritoCompra();
         Producto productoFalso = new Producto(); // o un mock de producto
         // Le agregamos el producto al carrito
@@ -104,7 +104,7 @@ public class servicioCarritoCompraTest {
         /*
         //given
         long idActivo = 1L;
-        singleton.getInstance().iniciarSesion(idActivo);
+        gestionCliente.getInstance().iniciarSesion(idActivo);
         Cliente clFalso = new Cliente();
         carritoCompra car = new carritoCompra();
         Producto prod = new Producto();
@@ -125,7 +125,7 @@ public class servicioCarritoCompraTest {
 
         //**Generado por IA **/
         long idActivo = 1L;
-        singleton.getInstance().iniciarSesion(idActivo);
+        gestionCliente.getInstance().iniciarSesion(idActivo);
 
         Cliente clFalso = new Cliente();
         carritoCompra car = new carritoCompra();

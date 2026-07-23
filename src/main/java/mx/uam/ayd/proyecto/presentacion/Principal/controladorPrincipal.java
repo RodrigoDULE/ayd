@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
-import mx.uam.ayd.proyecto.conffigPD.singleton;
+import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
 import mx.uam.ayd.proyecto.negocio.ServicioCliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
 import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.catalogoMezicuil.controladorCatalogoMezicuil;
@@ -58,9 +58,9 @@ public class controladorPrincipal {
     public void buscaCliente(String Nombre) {
 
         sesionActiva = servicioCliente.dameCliente(Nombre);
-        // establecemos el id del usuario en el singleton
-        singleton.getInstance().iniciarSesion(sesionActiva.getidCliente());
-        System.out.println("EL id del usuaario que ingreso al sistema es: " + singleton.getInstance().getIdActivo());
+        // establecemos el id del usuario en el gestionCliente
+        gestionCliente.getInstance().iniciarSesion(sesionActiva.getidCliente());
+        System.out.println("EL id del usuaario que ingreso al sistema es: " + gestionCliente.getInstance().getIdActivo());
         if (sesionActiva != null) {
             ventanaPrincipal.muestra(sesionActiva.getNombre());
         } else {

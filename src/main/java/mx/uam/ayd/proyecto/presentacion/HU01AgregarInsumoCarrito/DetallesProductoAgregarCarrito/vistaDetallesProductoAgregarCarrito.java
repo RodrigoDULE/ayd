@@ -17,7 +17,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-import mx.uam.ayd.proyecto.conffigPD.singleton;
+import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 
 /**
@@ -109,7 +109,7 @@ public class vistaDetallesProductoAgregarCarrito {
         nombreDetalles.getChildren().add(new Text(actual.getnombre()));
         precioDetalles.setText("$" + actual.getPrecio() + " MXN");
         descripcionProdDetalles.getChildren().add(new Text(actual.getDescripcion()));
-        piezasDetalles.setText("Hay " + actual.getcantidadStock() + " disponibles dentro de stock. \nUsuario con id: " + singleton.getInstance().getIdActivo());
+        piezasDetalles.setText("Hay " + actual.getcantidadStock() + " disponibles dentro de stock. \nUsuario con id: " + gestionCliente.getInstance().getIdActivo());
 
         // Cargamos la ruta de la imagen
         ImageView imagen = new ImageView(new Image(getClass().getResourceAsStream(actual.getRutaImagen())));

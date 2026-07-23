@@ -1,20 +1,20 @@
 package mx.uam.ayd.proyecto.conffigPD;
 
-public class singleton {
+public class gestionCliente {
 
     // 1. Única instancia de la clase
-    private static singleton instance;
+    private static gestionCliente instance;
 
     // 2. Atributo de instancia (aquí YA NO lleva static)
     private long idActivo;
 
     // 3. Constructor privado
-    private singleton() {}
+    private gestionCliente() {}
 
     // 4. Método global para obtener la instancia única
-    public static singleton getInstance() {
+    public static gestionCliente getInstance() {
         if (instance == null) {
-            instance = new singleton();
+            instance = new gestionCliente();
         }
         return instance;
     }

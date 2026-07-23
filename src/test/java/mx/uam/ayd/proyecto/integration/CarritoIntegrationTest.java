@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import mx.uam.ayd.proyecto.BaseIntegrationTest;
-import mx.uam.ayd.proyecto.conffigPD.singleton;
+import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
 import mx.uam.ayd.proyecto.datos.repositorioCliente;
 import mx.uam.ayd.proyecto.datos.repositorioIntermedioCarrito;
 import mx.uam.ayd.proyecto.datos.repositorioProducto;
@@ -40,7 +40,7 @@ public class CarritoIntegrationTest extends BaseIntegrationTest {
         Cliente cliente = new Cliente();
         producto.setcantidadStock(20);
         repoCliente.save(cliente);
-        singleton.getInstance().iniciarSesion(cliente.getidCliente());
+        gestionCliente.getInstance().iniciarSesion(cliente.getidCliente());
 
         repoProd.save(producto);
         
@@ -58,7 +58,7 @@ public class CarritoIntegrationTest extends BaseIntegrationTest {
         Producto prd = new Producto();
         Cliente cliente = new Cliente();
         repoCliente.save(cliente);
-        singleton.getInstance().iniciarSesion(cliente.getidCliente());
+        gestionCliente.getInstance().iniciarSesion(cliente.getidCliente());
         
         carritoCompra car = new carritoCompra();
         repoCar.save(car);
@@ -85,7 +85,7 @@ public class CarritoIntegrationTest extends BaseIntegrationTest {
         //given
         Cliente client = new Cliente();
         repoCliente.save(client);
-        singleton.getInstance().iniciarSesion(client.getidCliente());
+        gestionCliente.getInstance().iniciarSesion(client.getidCliente());
 
         carritoCompra car = new carritoCompra();
         repoCar.save(car);

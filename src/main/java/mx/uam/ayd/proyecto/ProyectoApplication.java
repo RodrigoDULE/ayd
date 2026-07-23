@@ -110,39 +110,56 @@ public class ProyectoApplication {
 		prod.setnombre("Lista de Productos Disponibles");
 		
 		repositorioProd.save(new Producto("Mezcal Espadin Joven", 450.0f, "Mezcal artesanal notas citricas y ahumado suave",
-				50, 750, 40.0f, "Mezcal", "/Imagenes/imagenPrincipal.jpg"));
+				50, 750, 40.0f, "Mezcal", "/Imagenes/Mezcales/mz1.jpg"));
 		repositorioProd.save(new Producto("Mezcal Reposado con Gusano", 550.0f,
-				"Reposado 6 meses en barrica de roble con gusano de maguey", 30, 750, 38.0f, "Mezcal Tradicional", "/Imagenes/imagenPrincipal.jpg"));
+				"Reposado 6 meses en barrica de roble con gusano de maguey", 30, 750, 38.0f, "Mezcal", "/Imagenes/Mezcales/mz2.jpg"));
 		repositorioProd.save(new Producto("Mezcal Anejo Reserva", 850.0f, "Anejado por 14 meses, notas de vainilla y madera",
-				20, 750, 40.0f, "Mezcal", "/Imagenes/imagenPrincipal.jpg"));
+				20, 750, 40.0f, "Mezcal", "/Imagenes/Mezcales/mz3.jpg"));
 		repositorioProd.save(new Producto("Mezcal Tobala Silvestre", 1100.0f,
-				"Elaborado con agave silvestre, sabor complejo y floral", 15, 750, 42.0f, "Mezcal Premium", "/Imagenes/imagenPrincipal.jpg"));
+				"Elaborado con agave silvestre, sabor complejo y floral", 15, 750, 42.0f, "Mezcal", "/Imagenes/Mezcales/mz4.jpg"));
 		repositorioProd.save(new Producto("Mezcal Tepeztate", 1250.0f, "Agave madurado por 25 anos, notas herbales intensas",
-				10, 750, 45.0f, "Mezcal", "/Imagenes/imagenPrincipal.jpg"));
+				10, 750, 45.0f, "Mezcal", "/Imagenes/Mezcales/mz5.png"));
 		repositorioProd.save(new Producto("Mezcal Artesanal de Pechuga", 1500.0f,
 				"Doble destilación con pechuga de pavo y frutas de temporada", 5, 750, 46.0f,
-				"Mezcal", "/Imagenes/imagenPrincipal.jpg"));
+				"Mezcal", "/Imagenes/Mezcales/mz6.png"));
 
 		// Cremas de Mezcal (Menor grado de alcohol)
 		repositorioProd.save(new Producto("Crema de Mezcal sabor Cafe", 250.0f,
-				"Deliciosa crema dulce con toque intenso a cafe tostado", 40, 750, 15.0f, "Mezcal", "/Imagenes/imagenPrincipal.jpg"));
+				"Deliciosa crema dulce con toque intenso a cafe tostado", 40, 750, 15.0f, "Mezcal", "/Imagenes/Mezcales/mz7.png"));
 		repositorioProd.save(new Producto("Crema de Mezcal sabor Pinon", 280.0f,
-				"Crema dulce con autentico sabor a piñón rosa", 35, 750, 15.0f, "Mezcal", "/Imagenes/imagenPrincipal.jpg"));
+				"Crema dulce con autentico sabor a piñón rosa", 35, 750, 15.0f, "Mezcal", "/Imagenes/Mezcales/mz8.png"));
 		repositorioProd.save(new Producto("Crema de Mezcal sabor Fresa", 250.0f,
-				"Licor cremoso ideal para postres o digestivo", 45, 750, 15.0f, "Mezcal", "/Imagenes/imagenPrincipal.jpg"));
-		repositorioProd.save(new Producto("Licor de Damiana", 350.0f, "Licor herbal tradicional endulzado", 25, 750, 20.0f,
-				"Mezcal", "/Imagenes/imagenPrincipal.jpg"));
+				"Licor cremoso ideal para postres o digestivo", 45, 750, 15.0f, "Mezcal", "/Imagenes/Mezcales/mz9.png"));
 
 		// Complementos y Accesorios (0 grado de alcohol)
-		repositorioProd.save(new Producto("Sal de Gusano (100g)", 120.0f, "Sal del mar con chile costeño y gusano tostado",
-				100, 100, 0.0f, "Complementos", "/Imagenes/imagenPrincipal.jpg"));
-		repositorioProd.save(new Producto("Sal de Chapulín (100g)", 150.0f,
-				"Mezcla de chapulín oaxaqueño tostado, sal y chile", 85, 100, 0.0f, "Complementos", "/Imagenes/imagenPrincipal.jpg"));
-		repositorioProd.save(new Producto("Set de Vasos Veladora", 180.0f,
-				"Juego de 4 vasos tradicionales de vidrio para mezcal", 40, 0, 0.0f, "Complementos", "/Imagenes/imagenPrincipal.jpg"));
-		repositorioProd.save(new Producto("Jícara Mezcalera Tallada", 90.0f,
-				"Jícara natural tallada a mano con base de carrizo", 60, 0, 0.0f, "Complementos", "/Imagenes/imagenPrincipal.jpg"));
-		repositorioProd.save(new Producto("Cerveza Artesanal con Agave", 85.0f,
-				"Cerveza tipo Pale Ale con un toque de miel de agave", 120, 355, 6.0f, "Complementos", "/Imagenes/imagenPrincipal.jpg"));
+		// Imagen 1: Vaso Veladora Clásico
+repositorioProd.save(new Producto("Vaso Veladora Mezcalero Clásico", 45.0f,
+        "Vaso tradicional de vidrio acanalado con base de cruz, ideal para degustar mezcal", 
+        60, 60, 0.0f, "Complementos", "/Imagenes/Complementos/ct1.jpg"));
+
+// Imagen 2: Estuche de Presentación
+repositorioProd.save(new Producto("Estuche de Presentación Agave Azul", 250.0f,
+        "Caja decorativa de edición especial con ventana circular y arte de corazón de agave", 
+        25, 0, 0.0f, "Complementos", "/Imagenes/Complementos/ct2.png"));
+
+// Imagen 3: Figura Alebrije Ajolote
+repositorioProd.save(new Producto("Figura Alebrije Ajolote Místico", 320.0f,
+        "Pieza artesanal tallada y pintada a mano inspirada en un ajolote con base brillante", 
+        15, 0, 0.0f, "Complementos", "/Imagenes/Complementos/ct3.png"));
+
+// Imagen 4: Botella Decorativa Tlacuache
+repositorioProd.save(new Producto("Botella Decorativa Alebrije Tlacuache", 450.0f,
+        "Botella artesanal adornada con una figura de tlacuache estilo alebrije tallada a mano", 
+        10, 750, 0.0f, "Complementos", "/Imagenes/Complementos/ct4.png"));
+
+// Imagen 5: Miniatura Alebrije Dragón
+repositorioProd.save(new Producto("Miniatura Edición Alebrije Dragón", 380.0f,
+        "Figura artesanal en tonos naranja y violeta abrazando una botella de degustación", 
+        20, 50, 0.0f, "Complementos", "/Imagenes/Complementos/ct5.png"));
+
+// Imagen 6: Alebrije Serpiente Alada
+repositorioProd.save(new Producto("Adorno Alebrije Serpiente Alada", 400.0f,
+        "Alebrije multicolor de serpiente alada diseñado para sujetarse al cuello de la botella", 
+        15, 750, 0.0f, "Complementos", "/Imagenes/Complementos/ct6.png"));
 	}
 }

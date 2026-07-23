@@ -94,8 +94,14 @@ public class vistaCarritoPrincipal {
         
         cantidadTotalcarrito.setText("$"+carrito.getTotalCalculado()+"MXN");
 
-        String envio = (carrito.getenvioGratis()) ? "Envio Gratis" : "$320.00 MXN";
-        costoEnvioCarrito.setText(envio);
+        if (carrito.getenvioGratis()) {
+            costoEnvioCarrito.setText("Envio Gratis");
+            costoTotal.setText(""+carrito.getTotalCalculado()+"MXN");
+        }  else{
+            costoEnvioCarrito.setText("$320 MXN");
+            costoTotal.setText(""+ (carrito.getTotalCalculado() + 320) +"MXN");
+            carrito.setTotalCalculado(carrito.getTotalCalculado() + 320); //Le añadimos el costo de envio
+        }
 
         //contenedor siempre va a estar vacio, por eso es mejor si la lista esta vacia
         if(listaProd.isEmpty()){
