@@ -27,6 +27,10 @@ public class Cliente {
     @OneToOne(targetEntity = carritoCompra.class, fetch = FetchType.EAGER)
     private carritoCompra carrito;
 
+    // HU-05: cada cliente puede tener cero o una direccion predeterminada
+    @OneToOne(targetEntity = DireccionEnvio.class, fetch = FetchType.EAGER)
+    private DireccionEnvio direccionPredeterminada;
+
     //Inicializamos un constructor vacio
     public Cliente(){}
 
@@ -37,5 +41,8 @@ public class Cliente {
 
     //agregamos un setter para agregarle un carrito a la posesion del cliente
     public void setcarritoCompra(carritoCompra carrito){this.carrito = carrito;}
+
+    public DireccionEnvio getDireccionPredeterminada(){return direccionPredeterminada;}
+    public void setDireccionPredeterminada(DireccionEnvio direccion){this.direccionPredeterminada = direccion;}
 
 }
