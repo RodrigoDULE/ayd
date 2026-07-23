@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -21,6 +23,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -306,13 +310,40 @@ public class VistaFormularioMarketing {
         Label[] cajasContenido = { contenidoVariacion1, contenidoVariacion2, contenidoVariacion3 };
         Label[] cajasDescripcion = { descripcionVariacion1, descripcionVariacion2, descripcionVariacion3 };
 
+        // 1. Preparar las rutas y mezclarlas aleatoriamente
+        List<String> rutasImagenes = Arrays.asList(
+            "/Imagenes/ImagenContenido1.png",
+            "/Imagenes/ImagenContenido2.png",
+            "/Imagenes/ImagenContenido3.png"
+        );
+        Collections.shuffle(rutasImagenes);
+
         for (int i = 0; i < cajasContenido.length; i++) {
+            // Limpiamos los gráficos previos por si el usuario le dio a "Generar de nuevo"
+            cajasContenido[i].setGraphic(null); 
+            
             if (i < variaciones.size()) {
                 VariacionContenido variacion = variaciones.get(i);
+                
                 if (formulario.getTipoContenido() == TipoContenido.IMAGEN_ESTATICA) {
-                    // Marcador visual de imagen simulada, no hay archivo real generado.
-                    cajasContenido[i].setText("🖼");
-                    cajasContenido[i].setStyle("-fx-font-size: 36px;");
+                    try {
+                        // Cargar la imagen simulada
+                        Image imagen = new Image(getClass().getResourceAsStream(rutasImagenes.get(i)));
+                        ImageView imageView = new ImageView(imagen);
+                        
+                        // Ajustar tamaño para que encaje bien en el espacio de tu Label
+                        imageView.setFitWidth(150); 
+                        imageView.setFitHeight(160);
+                        imageView.setPreserveRatio(true);
+                        
+                        cajasContenido[i].setText(""); // Quitamos el texto/emoji
+                        cajasContenido[i].setStyle(""); 
+                        cajasContenido[i].setGraphic(imageView); // Insertamos la imagen en el Label
+                        
+                    } catch (Exception e) {
+                        cajasContenido[i].setText("Error visual");
+                        System.err.println("No se encontró la imagen: " + rutasImagenes.get(i));
+                    }
                 } else {
                     cajasContenido[i].setText(variacion.getNombre());
                     cajasContenido[i].setStyle("");
