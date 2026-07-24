@@ -12,6 +12,9 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio.DatosDireccion;
 
+// 1. IMPORTAMOS EL CONTROLADOR DE LA HU-03
+import mx.uam.ayd.proyecto.presentacion.HU03MetodoPago.ControlMetodoPago;
+
 /**
  * Controlador de HU-05 (Direcciones de envío). Orquesta los cuatro
  * flujos del diagrama de secuencia: listar, registrar, marcar
@@ -22,15 +25,21 @@ public class ControlDireccionesEnvio {
 
     private final VistaDireccionesEnvio vistaDireccionesEnvio;
     private final ServicioDireccionesEnvio servicioDireccionesEnvio;
+    
+    // 2. DECLARAMOS EL CONTROLADOR DE PAGO
+    private final ControlMetodoPago controlMetodoPago; 
 
     /** El Cliente para el que se está gestionando direcciones en esta sesión. */
     private Cliente clienteActivo;
 
+    // 3. LO INYECTAMOS EN EL CONSTRUCTOR
     @Autowired
     public ControlDireccionesEnvio(VistaDireccionesEnvio vistaDireccionesEnvio,
-            ServicioDireccionesEnvio servicioDireccionesEnvio) {
+            ServicioDireccionesEnvio servicioDireccionesEnvio,
+            ControlMetodoPago controlMetodoPago) { 
         this.vistaDireccionesEnvio = vistaDireccionesEnvio;
         this.servicioDireccionesEnvio = servicioDireccionesEnvio;
+        this.controlMetodoPago = controlMetodoPago;
     }
 
     @PostConstruct
@@ -40,9 +49,6 @@ public class ControlDireccionesEnvio {
 
     /**
      * Abre la ventana de direcciones para el cliente dado
-     * (iniciaVentana(idUsuario) en el diagrama — aquí recibe el
-     * Cliente completo, como ya quedamos con el compañero de equipo
-     * que integra esta parte).
      */
     public void iniciaVentana(Cliente cliente) {
         this.clienteActivo = cliente;
@@ -77,13 +83,21 @@ public class ControlDireccionesEnvio {
 
     /**
      * Vuelve a pedir la lista actualizada y se la manda a la vista.
-     * Unifica lo que en el diagrama son 3 llamadas con nombres
-     * distintos (actualizarVista, refrescarInterfaz,
-     * removerDireccionDePantalla) — las tres terminan haciendo lo
-     * mismo: refrescar la lista completa.
      */
     private void actualizarListaDirecciones() {
         List<DireccionEnvio> direcciones = servicioDireccionesEnvio.obtenerListaDirecciones(clienteActivo);
         vistaDireccionesEnvio.muestraDirecciones(direcciones, clienteActivo);
+    }
+
+    // ====================================================================
+    //PUENTE HACIA LA HU-03 (MÉTODO DE PAGO)
+    // ====================================================================
+    public void continuarAlPago(DireccionEnvio direccionSeleccionada) {
+        // Como el método de tu compañero aún no recibe parámetros,
+        // simplemente disparamos el inicio de su ventana.
+        controlMetodoPago.iniciaVentanaMetodoPago();
+        
+        // (Opcional) Si quieres que tu ventana de direcciones se cierre al abrir la de pago,
+        // tendrías que crear un método en tu vistaDireccionesEnvio.cerrar() y llamarlo aquí.
     }
 }

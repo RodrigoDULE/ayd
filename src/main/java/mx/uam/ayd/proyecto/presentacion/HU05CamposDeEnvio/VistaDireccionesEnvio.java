@@ -287,6 +287,8 @@ public class VistaDireccionesEnvio {
         stage.setScene(sceneSeleccionar);
     }
 
+
+    ///para cntinuar con la siguiente Hu
     @FXML
     private void handleContinuarPago() {
         // 4. Validación de seguridad en el handler
@@ -295,7 +297,10 @@ public class VistaDireccionesEnvio {
             return;
         }
         
-        mostrarMensaje("Continuando al pago (pendiente conectar con la HU de pago).");
+        // Llamamos al controlador para que abra la ventana de la HU-03
+        if (control != null) {
+            control.continuarAlPago(direccionSeleccionada);
+        }
     }
 
     @FXML
