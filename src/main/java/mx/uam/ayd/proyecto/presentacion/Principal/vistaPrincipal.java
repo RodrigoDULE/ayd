@@ -178,4 +178,15 @@ public class vistaPrincipal {
         alert.showAndWait();
     }
 
+
+    // BOTON DE JEAN
+    @FXML
+    public void iniciarRevisionOrdenes()
+    {
+        if(control != null)
+        {
+            control.irAVentanaOrdenesCreadas();
+        }
+    }
+
 }
