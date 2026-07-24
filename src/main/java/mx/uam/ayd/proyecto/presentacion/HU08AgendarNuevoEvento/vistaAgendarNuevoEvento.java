@@ -1,11 +1,16 @@
 package mx.uam.ayd.proyecto.presentacion.HU08AgendarNuevoEvento;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 import org.springframework.stereotype.Component;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
@@ -15,11 +20,10 @@ import javafx.stage.Stage;
 
 @Component
 public class vistaAgendarNuevoEvento {
-    private controlAgendarNuevoEvento control;
+
     private boolean initialized = false;
     private Stage stage;
     private Scene scenePrincipal;
-    private Scene sceneConfirmation;
 
     @FXML
     private TextField txtNombreEvento;
@@ -40,7 +44,6 @@ public class vistaAgendarNuevoEvento {
     @FXML
     private ListView<String> lvEmpleados;
 
-    @FXML
     public void initialize() {
 
         cmbTipoEvento.getItems().addAll(
@@ -60,11 +63,6 @@ public class vistaAgendarNuevoEvento {
 
     // constructor sin parametos
     public vistaAgendarNuevoEvento() {
-    }
-
-    // set del controlador
-    public void setControlador(controlAgendarNuevoEvento control) {
-        this.control = control;
     }
 
     // método inicializar UI
@@ -87,15 +85,6 @@ public class vistaAgendarNuevoEvento {
             loaderPrincipal.setController(this);
             scenePrincipal = new Scene(loaderPrincipal.load());
 
-            // Comentado temporalmente porque 'ventana-confirmacion-agendar-evento.fxml' no
-            // existe en los recursos
-            /*
-             * FXMLLoader loaderConfirmacion = new FXMLLoader(
-             * getClass().getResource("/fxml/ventana-confirmacion-agendar-evento.fxml"));
-             * loaderConfirmacion.setController(this);
-             * sceneConfirmation = new Scene(loaderConfirmacion.load());
-             */
-
             initialized = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,6 +106,43 @@ public class vistaAgendarNuevoEvento {
         stage.show();
     }
 
+    public boolean verificarCampos() {
+        if (txtNombreEvento.getText().isEmpty()) {
+            mostrarMensaje("Debe ingresar un nombre para el evento");
+            return false;
+        }
+        if (cmbTipoEvento.getValue() == null) {
+            mostrarMensaje("Debe seleccionar un tipo de evento");
+            return false;
+        }
+        if (dpFecha.getValue() == null) {
+            mostrarMensaje("Debe seleccionar una fecha");
+            return false;
+        }
+
+        try {
+            LocalTime.parse(txtHoraInicio.getText());
+        } catch (DateTimeParseException e) {
+            mostrarMensaje("La hora de inicio debe tener el formato HH:mm");
+
+            return false;
+        }
+
+        try {
+            LocalTime.parse(txtHoraFin.getText());
+        } catch (DateTimeParseException e) {
+            mostrarMensaje("La hora de finalización debe tener el formato HH:mm");
+            return false;
+        }
+
+        if (cmbAcuerdo.getValue() == null) {
+            mostrarMensaje("Debe seleccionar un acuerdo");
+            return false;
+        }
+
+        return true;
+    }
+
     @FXML
     public void agregarEmpleado() {
         String empleado = cmbEmpleado.getValue();
@@ -126,27 +152,37 @@ public class vistaAgendarNuevoEvento {
         }
     }
 
-    @FXML
     public void cancelarEvento() {
+        limpiarCampos();
+        stage.close();
+    }
+
+    public void guardarEvento() {
+        if (verificarCampos()) {
+            mostrarMensaje("Evento guardado exitosamente");
+            limpiarCampos();
+            stage.close();
+        }
+    }
+
+    private void mostrarMensaje(String mensaje) {
+        if (!Platform.isFxApplicationThread()) {
+            Platform.runLater(() -> this.mostrarMensaje(mensaje));
+            return;
+        }
+
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private void limpiarCampos() {
         txtNombreEvento.clear();
         txtHoraInicio.clear();
         txtHoraFin.clear();
         txtNotas.clear();
         lvEmpleados.getItems().clear();
-    }
-
-    @FXML
-    public void guardarEvento() {
-
-        System.out.println("Guardando evento");
-        System.out.println(
-                "Evento: " + txtNombreEvento.getText());
-    }
-
-    @FXML
-    public void confirmarRegistro() {
-
-        System.out.println("Registro confirmado");
-
     }
 }
