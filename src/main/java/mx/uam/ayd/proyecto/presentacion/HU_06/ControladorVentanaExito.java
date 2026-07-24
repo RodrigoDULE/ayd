@@ -29,11 +29,12 @@ public class ControladorVentanaExito {
     public void iniciaVentanaExito(Stage ventanaActual, OrdenDeCompra orden, String nombreProveedor) {
         // Le pasamos la ventana existente a la vista para que no cree una nueva
         vistaVentanaExito.muestraExito(ventanaActual, orden, nombreProveedor);
+        
     }
 
     public void volverAOrdenesPendientes(Stage ventanaActual) {
-        // Al volver, le regresamos la misma ventana al controlador principal
-        // para que vuelva a poner la tabla de órdenes ahí mismo.
+        
         controladorOrdenes.iniciaVentanaOrdenesCreadas(); 
+        ventanaActual.close();
     }
 }
