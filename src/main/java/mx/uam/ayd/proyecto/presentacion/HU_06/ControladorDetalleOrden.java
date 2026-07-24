@@ -39,6 +39,7 @@ public class ControladorDetalleOrden{
     public void volverAOrdenesPendientes(Stage ventanaActual)
     {
         controladorOrdenes.iniciaVentanaOrdenesCreadas();
+        ventanaActual.close();
     }
 
     public void irAConfirmarAutorizacion(Stage ventanaActual, OrdenDeCompra orden, String proveedor)
