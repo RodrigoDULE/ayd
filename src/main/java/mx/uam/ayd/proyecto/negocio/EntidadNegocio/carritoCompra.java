@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class carritoCompra {
@@ -26,6 +27,9 @@ public class carritoCompra {
     //Solo necesitamos saber que productos estan dentro de carrito
     @ManyToMany(targetEntity = Producto.class, fetch = FetchType.EAGER)
     private List<Producto> producto = new ArrayList<>();
+
+    @OneToMany(targetEntity = Producto.class, fetch = FetchType.EAGER)
+    private List<IntermediaCarritoProd> interCar;
 
     // tiene que llevar metodos para calcular el precio total
     

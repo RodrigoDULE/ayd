@@ -124,9 +124,6 @@
 
                 <Button text="Guardar Evento"
                         onAction="#guardarEvento"/>
-                
-                <Button text="Confirmar Registro"
-                        onAction="#confirmarRegistro"/>
 
             </HBox>
 

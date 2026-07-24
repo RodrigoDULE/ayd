@@ -79,6 +79,7 @@ public class vistaDetallesProductoAgregarCarrito {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana-detalles-producto.fxml"));
             loader.setController(this); // le estamos diciendo a javafx que esta clase es la que controla el fxml
             Scene scene = new Scene(loader.load(), 600, 410);
+            scene.getStylesheets().add(getClass().getResource("/css/estilos-mezicuil.css").toExternalForm()); //Estilo CSS
             stage.setScene(scene);
 
             inicializado = true;

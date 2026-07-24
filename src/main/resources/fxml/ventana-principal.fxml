@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.InnerShadow?>
@@ -9,14 +10,32 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<<<<<<< HEAD
 <Pane id="ingresarUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text fx:id="textoPrincipal" fill="#949494" layoutX="47.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido">
+=======
+<Pane id="ingresarUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root-pane" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="333.0" fitWidth="262.0" layoutX="311.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Imagenes/imagenPrincipal.jpeg" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </ImageView>
+      <Text fx:id="textoPrincipal" layoutX="45.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido, Usuario">
+>>>>>>> 016a2e8804b39cb44633b613e1be2716b04acdd3
          <font>
             <Font name="Serif Bold" size="26.0" />
          </font>
       </Text>
+<<<<<<< HEAD
       <Button fx:id="IngresarTienda" layoutX="59.0" layoutY="183.0" mnemonicParsing="false" onAction="#handleVisitarTiendaLinea" prefHeight="34.0" prefWidth="107.0" style="-fx-background-color: #d9f4ff;" text="TiendaLinea" textAlignment="CENTER">
+=======
+      <Button fx:id="IngresarTienda" layoutX="114.0" layoutY="159.0" mnemonicParsing="false" onAction="#handleVisitarTiendaLinea" prefHeight="34.0" prefWidth="107.0" text="TiendaLinea" textAlignment="CENTER">
+>>>>>>> 016a2e8804b39cb44633b613e1be2716b04acdd3
          <font>
             <Font name="Serif Bold" size="13.0" />
          </font>
@@ -24,6 +43,7 @@
             <InnerShadow />
          </effect>
       </Button>
+<<<<<<< HEAD
       <Button fx:id="AgregarEvento" layoutX="185.0" layoutY="183.0" mnemonicParsing="false" onAction="#agendarEvento" prefHeight="34.0" prefWidth="107.0" style="-fx-background-color: #d9f4ff;" text="Evento">
          <font>
             <Font name="Serif Bold" size="14.0" />
@@ -56,5 +76,13 @@
          <effect>
             <InnerShadow />
          </effect></Button>
+=======
+      <Button fx:id="AgregarEvento" layoutX="114.0" layoutY="200.0" mnemonicParsing="false" onAction="#agendarEvento" prefHeight="34.0" prefWidth="107.0" text="Evento" />
+      <Text layoutX="94.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresa tu Nombre, Usuario" />
+      <TextField fx:id="ingresarUsuario" layoutX="82.0" layoutY="77.0" prefHeight="26.0" prefWidth="171.0" />
+      <Button layoutX="138.0" layoutY="108.0" mnemonicParsing="false" onAction="#ingresarUsuario" text="Ingresar" />
+      <Button fx:id="ingresarFormularioMarketing" layoutX="94.0" layoutY="249.0" mnemonicParsing="false" onAction="#handleAbrirMarketing" prefHeight="34.0" prefWidth="147.0" text="Formulario de Marketing" />
+      <Button fx:id="RevisionPedidos" layoutX="94.0" layoutY="300.0" mnemonicParsing="false" onAction="#iniciarRevisionOrdenes" prefHeight="34.0" prefWidth="147.0" text="Revision de Pedidos" />
+>>>>>>> 016a2e8804b39cb44633b613e1be2716b04acdd3
    </children>
 </Pane>
