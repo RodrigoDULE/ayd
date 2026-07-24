@@ -11,7 +11,7 @@
 
 <Pane id="ingresarUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="textoPrincipal" fill="#949494" layoutX="47.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido, Usuario">
+      <Text fx:id="textoPrincipal" fill="#949494" layoutX="47.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido">
          <font>
             <Font name="Serif Bold" size="26.0" />
          </font>
@@ -37,8 +37,11 @@
             <Image url="@../Imagenes/imagenPrincipal.jpeg" />
          </image>
       </ImageView>
-      <Text layoutX="47.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresa tu Nombre, Usuario" />
-      <TextField fx:id="ingresarUsuario" layoutX="47.0" layoutY="88.0" prefHeight="26.0" prefWidth="240.0" text="Ingresa  tu nombre de usuario" />
+      <Text fill="#efffbd" layoutX="47.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresa tu Nombre, Usuario">
+         <font>
+            <Font name="Serif Bold" size="13.0" />
+         </font></Text>
+      <TextField fx:id="ingresarUsuario" layoutX="47.0" layoutY="88.0" prefHeight="26.0" prefWidth="240.0" />
       <Button defaultButton="true" layoutX="213.0" layoutY="124.0" mnemonicParsing="false" onAction="#ingresarUsuario" text="Ingresar">
          <font>
             <Font name="Serif Bold" size="14.0" />
