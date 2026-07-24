@@ -31,7 +31,7 @@ public class vistaPrincipal {
     private Button ingresarFormularioMarketing;
     @FXML
     private Button RevisionPedidos;
-    
+
     @FXML
     private Button AgregarEvento;
 
@@ -64,7 +64,7 @@ public class vistaPrincipal {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana-principal.fxml"));
             loader.setController(this);
             Scene scene = new Scene(loader.load(), 600, 450);
-           // scene.getStylesheets().add(getClass().getResource("/css/estilos-mezicuil.css").toExternalForm());
+            // scene.getStylesheets().add(getClass().getResource("/css/estilos-mezicuil.css").toExternalForm());
             stage.setScene(scene);
 
             Initialized = true;
@@ -97,7 +97,7 @@ public class vistaPrincipal {
             AgregarEvento.setDisable(true);
             RevisionPedidos.setDisable(true);
             ingresarFormularioMarketing.setDisable(true);
-            
+
             ingresarUsuario.setText("");
             stage.show();
         } else {
@@ -106,7 +106,7 @@ public class vistaPrincipal {
                 Platform.runLater(() -> this.muestra(NombreUsuario));
                 return;
             }
-            
+
             inicializarUI();
             // Deshabilitamos los botones al inicio del mundo
             IngresarTienda.setDisable(false);
@@ -141,7 +141,7 @@ public class vistaPrincipal {
     private void agendarEvento() {
         System.out.println("Boton presionado");
         if (control != null) {
-            control.agendaNuevoEvento();
+            control.Eventos();
         } else {
             System.err.println("Error: controladorPrincipal no está inyectado.");
         }
@@ -182,13 +182,10 @@ public class vistaPrincipal {
         alert.showAndWait();
     }
 
-
     // BOTON DE JEAN
     @FXML
-    public void iniciarRevisionOrdenes()
-    {
-        if(control != null)
-        {
+    public void iniciarRevisionOrdenes() {
+        if (control != null) {
             control.irAVentanaOrdenesCreadas();
         }
     }

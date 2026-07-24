@@ -9,9 +9,8 @@ import mx.uam.ayd.proyecto.negocio.ServicioCliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
 import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.catalogoMezicuil.controladorCatalogoMezicuil;
 import mx.uam.ayd.proyecto.presentacion.HU04FormularioMarketing.ControlFormularioMarketing;
-import mx.uam.ayd.proyecto.presentacion.HU08AgendarNuevoEvento.controlAgendarNuevoEvento;
+import mx.uam.ayd.proyecto.presentacion.Eventos.ControlEventos;
 import mx.uam.ayd.proyecto.presentacion.HU_06.ControladorOrdenesPendientes;
-
 
 @Component
 public class controladorPrincipal {
@@ -20,7 +19,7 @@ public class controladorPrincipal {
     private final controladorCatalogoMezicuil controlTiendaLinea;
     private final vistaPrincipal ventanaPrincipal;
     private final ControlFormularioMarketing controlFormularioMarketing;
-    private final controlAgendarNuevoEvento controlAgendarNuevoEvento;
+    private final ControlEventos controlEventos;
     private final ControladorOrdenesPendientes controladorOrdenes;
 
     private Cliente sesionActiva;
@@ -28,12 +27,12 @@ public class controladorPrincipal {
     @Autowired
     public controladorPrincipal(controladorCatalogoMezicuil controlTiendaLinea, vistaPrincipal ventanPrincipal,
             ServicioCliente servicioCliente, ControlFormularioMarketing controlFormularioMarketing,
-            controlAgendarNuevoEvento controlAgendarNuevoEvento, ControladorOrdenesPendientes controladorOrdenes) {
+            ControlEventos controlEventos, ControladorOrdenesPendientes controladorOrdenes) {
         this.controlTiendaLinea = controlTiendaLinea;
         this.ventanaPrincipal = ventanPrincipal;
         this.servicioCliente = servicioCliente;
         this.controlFormularioMarketing = controlFormularioMarketing;
-        this.controlAgendarNuevoEvento = controlAgendarNuevoEvento;
+        this.controlEventos = controlEventos;
         this.controladorOrdenes = controladorOrdenes;
     }
 
@@ -51,8 +50,8 @@ public class controladorPrincipal {
         controlTiendaLinea.inicia();
     }
 
-    public void agendaNuevoEvento() {
-        controlAgendarNuevoEvento.iniciaVentanaAgendarNuevoEvento();
+    public void Eventos() {
+        controlEventos.inicia();
     }
 
     public void abreFormularioMarketing() {
@@ -61,8 +60,7 @@ public class controladorPrincipal {
 
     // control hacia HU_6 de Jean
 
-    public void irAVentanaOrdenesCreadas()
-    {
+    public void irAVentanaOrdenesCreadas() {
         controladorOrdenes.iniciaVentanaOrdenesCreadas();
     }
 
@@ -74,7 +72,8 @@ public class controladorPrincipal {
         if (sesionActiva != null) {
             // establecemos el id del usuario en el gestionCliente
             gestionCliente.getInstance().iniciarSesion(sesionActiva.getidCliente());
-            System.out.println("EL id del usuaario que ingreso al sistema es: " + gestionCliente.getInstance().getIdActivo());
+            System.out.println(
+                    "EL id del usuaario que ingreso al sistema es: " + gestionCliente.getInstance().getIdActivo());
             ventanaPrincipal.muestra(sesionActiva.getNombre());
         } else {
             ventanaPrincipal.mostrarMensaje("Ingresa un usuario registrado.");
