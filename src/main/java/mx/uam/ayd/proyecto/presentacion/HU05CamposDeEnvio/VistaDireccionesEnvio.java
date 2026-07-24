@@ -28,14 +28,7 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio.DatosDireccion;
 
 /**
- * Vista de HU-05 (Direcciones de envío). Usa dos FXML (seleccionar
- * dirección y formulario) — un Stage, dos Scene, se alterna con
- * stage.setScene(...), mismo patrón que HU-04.
- *
- * La pantalla "vacía" (sin direcciones) y la de "ya hay direcciones"
- * de tu mockup son la MISMA escena, no dos separadas: la diferencia
- * es solo cuántas tarjetas trae el FlowPane y qué botón de abajo se
- * muestra (Regresar vs Continuar al pago).
+ * Vista de HU-05 (Direcciones de envío).
  */
 @Component
 public class VistaDireccionesEnvio {
@@ -54,6 +47,9 @@ public class VistaDireccionesEnvio {
     private Stage stage;
     private Scene sceneSeleccionar;
     private Scene sceneFormulario;
+
+    // Estado local para rastrear la dirección activa seleccionada por el usuario
+    private DireccionEnvio direccionSeleccionada = null;
 
     // ===== Campos del FXML "Seleccionar Dirección" =====
 
@@ -131,15 +127,6 @@ public class VistaDireccionesEnvio {
         }
     }
 
-    /**
-     * Muestra la lista de direcciones del cliente (muestraDirecciones()
-     * en el diagrama). También sirve para refrescar la pantalla
-     * después de registrar, marcar predeterminada o eliminar — el
-     * diagrama usa 3 nombres distintos para eso (actualizarVista,
-     * refrescarInterfaz, removerDireccionDePantalla), pero aquí se
-     * unificó en un solo método porque las 3 hacen lo mismo: volver
-     * a pintar la lista actual.
-     */
     public void muestraDirecciones(List<DireccionEnvio> direcciones, Cliente cliente) {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(() -> this.muestraDirecciones(direcciones, cliente));
@@ -147,6 +134,9 @@ public class VistaDireccionesEnvio {
         }
 
         inicializarUI();
+
+        // 1. Asignamos la dirección predeterminada actual si existe
+        this.direccionSeleccionada = cliente.getDireccionPredeterminada();
 
         contenedorDirecciones.getChildren().clear();
 
@@ -160,6 +150,10 @@ public class VistaDireccionesEnvio {
         boolean hayDirecciones = !direcciones.isEmpty();
         botonContinuarPago.setVisible(hayDirecciones);
         botonContinuarPago.setManaged(hayDirecciones);
+
+        // 2. El botón de pago estará deshabilitado a menos que ya exista una dirección seleccionada/predeterminada
+        botonContinuarPago.setDisable(this.direccionSeleccionada == null);
+
         botonRegresar.setVisible(!hayDirecciones);
         botonRegresar.setManaged(!hayDirecciones);
 
@@ -195,7 +189,12 @@ public class VistaDireccionesEnvio {
         if (esPredeterminada) {
             botonSeleccionar.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         }
+        
         botonSeleccionar.setOnAction(evento -> {
+            // 3. Guardamos cuál fue seleccionada y habilitamos de inmediato el botón de continuar
+            this.direccionSeleccionada = direccion;
+            botonContinuarPago.setDisable(false);
+
             if (control != null) {
                 control.establecerPredeterminada(direccion.getIdDireccion());
             }
@@ -242,7 +241,6 @@ public class VistaDireccionesEnvio {
         return tarjeta;
     }
 
-    /** Abre el formulario para capturar una nueva dirección. */
     public void mostrarFormulario() {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(this::mostrarFormulario);
@@ -291,7 +289,12 @@ public class VistaDireccionesEnvio {
 
     @FXML
     private void handleContinuarPago() {
-        // TODO: cuando exista la HU de checkout/pago, aquí se navega a esa pantalla.
+        // 4. Validación de seguridad en el handler
+        if (direccionSeleccionada == null) {
+            mostrarMensaje("Por favor selecciona una dirección antes de continuar.");
+            return;
+        }
+        
         mostrarMensaje("Continuando al pago (pendiente conectar con la HU de pago).");
     }
 
@@ -300,10 +303,6 @@ public class VistaDireccionesEnvio {
         stage.close();
     }
 
-    /**
-     * Valida que los campos obligatorios estén completos
-     * (validarCamposObligatorios() en el diagrama de secuencia).
-     */
     private boolean validarCamposObligatorios() {
         if (campoNombreCompleto.getText().trim().isEmpty()
                 || campoCalle.getText().trim().isEmpty()

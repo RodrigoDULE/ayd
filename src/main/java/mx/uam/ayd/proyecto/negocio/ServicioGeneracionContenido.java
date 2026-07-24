@@ -68,11 +68,11 @@ public class ServicioGeneracionContenido {
             if (tipoContenido == TipoContenido.SOLO_TEXTO) {
                 // Para SOLO_TEXTO asignamos un copy persuasivo al campo 'nombre' (que es el que se muestra al centro)
                 nombre = textosMarketing[i % textosMarketing.length];
-                descripcion = "Opción " + letra + ": Copy promocional orientado a conversión.";
+                descripcion = "            VARIACIÓN " + letra ;
             } else {
                 // Para IMAGEN_ESTATICA u otros tipos visuales
                 nombre = "Variación " + letra;
-                descripcion = "Diseño gráfico adaptado para plataformas de marketing.";
+                descripcion = "            VARIACIÓN " + letra;
             }
 
             variaciones.add(new VariacionContenido(nombre, descripcion));
