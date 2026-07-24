@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" prefHeight="79.0" prefWidth="363.0" VBox.vgrow="SOMETIMES">
@@ -140,13 +139,13 @@
                       <TableColumn fx:id="colProducto" prefWidth="93.0" text="Producto" />
                       <TableColumn fx:id="colSKU" prefWidth="79.0" text="U/Medida" />
                         <TableColumn fx:id="colCantidad" prefWidth="75.0" text="Cantidad" />
-                        <TableColumn fx:id="colPrecioUnitario" prefWidth="105.0" text="Precio Unitario" />
+                        <TableColumn fx:id="colPrecio" prefWidth="105.0" text="Precio Unitario" />
                         <TableColumn fx:id="colTotal" prefWidth="82.0" text="Total" />
                     </columns>
                   </TableView>
                   <HBox prefHeight="44.0" prefWidth="435.0">
                      <children>
-                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="25.0" prefWidth="297.0" text="TOTAL $">
+                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="25.0" prefWidth="297.0" text="TOTAL ">
                            <font>
                               <Font name="Serif Bold" size="18.0" />
                            </font>

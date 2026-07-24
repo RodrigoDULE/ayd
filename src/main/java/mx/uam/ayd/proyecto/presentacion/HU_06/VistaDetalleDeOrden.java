@@ -26,7 +26,7 @@ public class VistaDetalleDeOrden {
 
     @FXML private TableView<DetalleOrden> tablaProductos;
     @FXML private TableColumn<DetalleOrden, String> colProducto;
-    @FXML private TableColumn<DetalleOrden, String> colSku;
+    @FXML private TableColumn<DetalleOrden, String> colSKU;
     @FXML private TableColumn<DetalleOrden, Integer> colCantidad;
     @FXML private TableColumn<DetalleOrden, Double> colPrecio;
     @FXML private TableColumn<DetalleOrden, Double> colTotal;
@@ -56,11 +56,11 @@ public class VistaDetalleDeOrden {
 
         // Entramos al Detalle -> sacamos el Insumo -> sacamos el Nombre
         colProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInsumo().getNombre()));
-        colSku.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInsumo().getUnidadDeMedida()));
+        colSKU.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInsumo().getUnidadDeMedida()));
         colPrecio.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getInsumo().getPrecio()));
 
         // Finalmente, le inyectamos la lista completa a la tabla
-        tablaProductos.getItems().clear(); // Limpiamos por si había datos viejos
+        //tablaProductos.getItems().clear(); // Limpiamos por si había datos viejos
         tablaProductos.getItems().setAll(listaDetalles);
     }
 
@@ -87,13 +87,15 @@ public class VistaDetalleDeOrden {
             stageActual.setTitle("Autorizar Orden");
 
             
-            List<DetalleOrden> listaDeEstaOrden = orden.getDetalles();
-            configurarTabla(listaDeEstaOrden);
+            
 
             lblTotal.setText("$" + orden.getTotal() + " MXN");
             lblOrdenId.setText("PO-2026-" + orden.getId());
             lblFechaCreacion.setText(String.valueOf(orden.getFechaCreacion()));
-            lblNombreProveedor.setText(nombreProveedor);
+            lblNombreProveedor.setText("  " + nombreProveedor);
+
+            List<DetalleOrden> listaDeEstaOrden = orden.getDetalles();
+            configurarTabla(listaDeEstaOrden);
 
             stageActual.show();
 
