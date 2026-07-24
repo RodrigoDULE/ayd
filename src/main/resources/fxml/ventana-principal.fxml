@@ -11,7 +11,7 @@
 
 <Pane id="ingresarUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="textoPrincipal" fill="#949494" layoutX="47.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido">
+      <Text fx:id="textoPrincipal" fill="#949494" layoutX="47.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido, Usuario">
          <font>
             <Font name="Serif Bold" size="26.0" />
          </font>
