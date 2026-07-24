@@ -62,6 +62,7 @@ public class vistaCatalogoMezicuil {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana-catalogo-Mezicuil.fxml"));
             loader.setController(this); // le estamos diciendo a javafx que esta clase es la que controla el fxml
             Scene scene = new Scene(loader.load(), 650, 430);
+            scene.getStylesheets().add(getClass().getResource("/css/estilos-mezicuil.css").toExternalForm());
             stage.setScene(scene);
 
             inicializado = true;
@@ -88,12 +89,19 @@ public class vistaCatalogoMezicuil {
 
         for (Producto p : prod) {
             VBox tarjeta = new VBox();
+            tarjeta.getStyleClass().add("product-card");
+
             Label nombre = new Label(p.getnombre());
+            nombre.getStyleClass().add("product-name");
+
             Label precio = new Label("$" + p.getPrecio());
+            precio.getStyleClass().add("product-price");
+
             ImageView imagen = new ImageView(new Image(getClass().getResourceAsStream(p.getRutaImagen())));
             // Le damos un tamaño bonito a la imagen
-            imagen.setFitHeight(150);
-            imagen.setFitWidth(130);
+            imagen.setFitHeight(140);
+            imagen.setFitWidth(120);
+            imagen.setPreserveRatio(true);
             tarjeta.getChildren().addAll(imagen, nombre, precio);
 
             // Aqui agregamos los productos en el contenedor

@@ -58,13 +58,14 @@ public class controladorPrincipal {
     public void buscaCliente(String Nombre) {
 
         sesionActiva = servicioCliente.dameCliente(Nombre);
-        // establecemos el id del usuario en el gestionCliente
-        gestionCliente.getInstance().iniciarSesion(sesionActiva.getidCliente());
-        System.out.println("EL id del usuaario que ingreso al sistema es: " + gestionCliente.getInstance().getIdActivo());
         if (sesionActiva != null) {
+            // establecemos el id del usuario en el gestionCliente
+            gestionCliente.getInstance().iniciarSesion(sesionActiva.getidCliente());
+            System.out.println("EL id del usuaario que ingreso al sistema es: " + gestionCliente.getInstance().getIdActivo());
             ventanaPrincipal.muestra(sesionActiva.getNombre());
         } else {
             ventanaPrincipal.mostrarMensaje("Ingresa un usuario registrado.");
+            ventanaPrincipal.muestra(null);
         }
     }
 }

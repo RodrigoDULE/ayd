@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -26,8 +27,9 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.carritoCompra;
 
 @Component
 public class vistaCarritoPrincipal {
-    
-    //Añadimos todos los atributos que estan dentro del archivo FXM que cambiaran su valor
+
+    // Añadimos todos los atributos que estan dentro del archivo FXM que cambiaran
+    // su valor
     @FXML
     private Text cantidadTotalcarrito;
     @FXML
@@ -70,6 +72,7 @@ public class vistaCarritoPrincipal {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana-carrito-principal.fxml"));
             loader.setController(this); // le estamos diciendo a javafx que esta clase es la que controla el fxml
             Scene scene = new Scene(loader.load(), 600, 410);
+            scene.getStylesheets().add(getClass().getResource("/css/estilos-mezicuil.css").toExternalForm());//Estilo css
             stage.setScene(scene);
 
             inicializado = true;
@@ -87,79 +90,103 @@ public class vistaCarritoPrincipal {
             Platform.runLater(() -> muestraCarrito(carrito));
             return;
         }
-        
+
         inicializarUI();
-        //borramos todo lo que ente dentro de la ventana
+        // borramos todo lo que ente dentro de la ventana
         contenedorProductoscarrito.getChildren().clear();
-        
-        cantidadTotalcarrito.setText("$"+carrito.getTotalCalculado()+"MXN");
+
+        cantidadTotalcarrito.setText("$" + carrito.getTotalCalculado() + "MXN");
 
         if (carrito.getenvioGratis()) {
             costoEnvioCarrito.setText("Envio Gratis");
-            costoTotal.setText(""+carrito.getTotalCalculado()+"MXN");
-        }  else{
+            costoTotal.setText("" + carrito.getTotalCalculado() + "MXN");
+        } else {
             costoEnvioCarrito.setText("$320 MXN");
-            costoTotal.setText(""+ (carrito.getTotalCalculado() + 320) +"MXN");
-            carrito.setTotalCalculado(carrito.getTotalCalculado() + 320); //Le añadimos el costo de envio
+            costoTotal.setText("" + (carrito.getTotalCalculado() + 320) + "MXN");
+            carrito.setTotalCalculado(carrito.getTotalCalculado() + 320); // Le añadimos el costo de envio
         }
 
-        //contenedor siempre va a estar vacio, por eso es mejor si la lista esta vacia
-        if(listaProd.isEmpty()){
-                Button itCatalogo = new Button("Explora nuestros productos disponibles");
-                contenedorProductoscarrito.getChildren().add(itCatalogo);
+        // contenedor siempre va a estar vacio, por eso es mejor si la lista esta vacia
+        if (listaProd.isEmpty()) {
+            //genero **IA**
+            VBox emptyCartCard = new VBox();
+            emptyCartCard.getStyleClass().add("empty-cart-container");
 
-        }else{
-            for(Producto dentro : listaProd){
+            Text icon = new Text("\uD83D\uDED1");
+            icon.getStyleClass().add("empty-cart-icon");
+            icon.setStyle("-fx-font-size: 48px;");
+
+            Text title = new Text("Tu carrito está vacío");
+            title.getStyleClass().add("empty-cart-title");
+
+            Text description = new Text("Explora nuestros productos disponibles\ny agrega lo que te guste a tu carrito.");
+            description.getStyleClass().add("empty-cart-description");
+            description.setStyle("-fx-text-alignment: center;");
+            description.setWrappingWidth(250);
+
+            emptyCartCard.getChildren().addAll(icon, title, description);
+            contenedorProductoscarrito.getChildren().add(emptyCartCard);
+            //genero **IA**
+        } else {
+            for (Producto dentro : listaProd) {
                 VBox tarjeta = new VBox();
+                tarjeta.getStyleClass().add("product-card");//Estilo css
+
                 Label nombre = new Label(dentro.getnombre());
+                nombre.getStyleClass().add("product-name");//Estilo css
+                
                 Button eliminarProd = new Button("Eliminar");
-                Label precioUnitario = new Label("Precio Unitario: \n"+dentro.getPrecio());
+                eliminarProd.getStyleClass().add("primary-button");//Estilo css
+                Label precioUnitario = new Label("$" + dentro.getPrecio()+"MXN");
+                precioUnitario.getStyleClass().add("product-price");//Estilo css
+
                 ImageView imagenProd = new ImageView(new Image(getClass().getResourceAsStream(dentro.getRutaImagen())));
                 imagenProd.setFitHeight(150);
                 imagenProd.setFitWidth(130);
                 tarjeta.getChildren().addAll(imagenProd, nombre, precioUnitario, eliminarProd);
-                
+
                 // Aqui agregamos los productos en el contenedor
                 contenedorProductoscarrito.getChildren().add(tarjeta);
-                
+
                 // Le agregamos un escuchador a las tarjetas
                 eliminarProd.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent evento) {
                         handleEliminarProd(dentro);
-                        contenedorProductoscarrito.getChildren().remove(tarjeta); //Eliminamos la tarjeta del producto
+                        contenedorProductoscarrito.getChildren().remove(tarjeta); // Eliminamos la tarjeta del producto
                     }
                 });
             }
         }
-            stage.show();
+        stage.show();
     }
 
-    private void handleEliminarProd(Producto p){
-        if(controlcarritoPrincipal != null){
+    private void handleEliminarProd(Producto p) {
+        if (controlcarritoPrincipal != null) {
             controlcarritoPrincipal.EliminarProd(p);
         }
     }
-    
+
     @FXML
-    private void handleDireccionEnvio(){
-        if(controlcarritoPrincipal != null){
+    private void handleDireccionEnvio() {
+        if (controlcarritoPrincipal != null) {
             controlcarritoPrincipal.irDireccionEnvio();
         }
-        
+
     }
-    //Metodo para mostrar mensajes de error o advertencia
-    public void mostrarMensaje(String mensaje){
+
+    // Metodo para mostrar mensajes de error o advertencia
+    public void mostrarMensaje(String mensaje) {
         if (!Platform.isFxApplicationThread()) {
-			Platform.runLater(() -> this.mostrarMensaje(mensaje));
-			return;
-		}
-		
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Información");
-		alert.setHeaderText(null);
-		alert.setContentText(mensaje);
-		alert.showAndWait();
+            Platform.runLater(() -> this.mostrarMensaje(mensaje));
+            return;
+        }
+
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
 }

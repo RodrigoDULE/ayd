@@ -8,27 +8,27 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane id="ingresarUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<Pane id="ingresarUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root-pane" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="textoPrincipal" layoutX="48.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido, Usuario">
+      <Text fx:id="textoPrincipal" layoutX="48.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-title" text="Bienvenido, Usuario">
          <font>
             <Font name="Gabriola" size="34.0" />
          </font>
       </Text>
-      <Button fx:id="IngresarTienda" layoutX="100.0" layoutY="201.0" mnemonicParsing="false" onAction="#handleVisitarTiendaLinea" prefHeight="34.0" prefWidth="107.0" text="TiendaLinea" textAlignment="CENTER">
+      <Button fx:id="IngresarTienda" layoutX="100.0" layoutY="201.0" mnemonicParsing="false" onAction="#handleVisitarTiendaLinea" prefHeight="34.0" prefWidth="107.0" styleClass="primary-button" text="TiendaLinea" textAlignment="CENTER">
          <font>
             <Font name="Cambria" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="AgregarEvento" layoutX="100.0" layoutY="253.0" mnemonicParsing="false" onAction="#agendarEvento" prefHeight="34.0" prefWidth="107.0" text="Evento" />
+      <Button fx:id="AgregarEvento" layoutX="100.0" layoutY="253.0" mnemonicParsing="false" onAction="#agendarEvento" prefHeight="34.0" prefWidth="107.0" styleClass="primary-button" text="Evento" />
       <ImageView fitHeight="293.0" fitWidth="240.0" layoutX="324.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/imagenPrincipal.jpeg" />
          </image>
       </ImageView>
       <Text layoutX="80.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresa tu Nombre, Usuario" />
-      <TextField fx:id="ingresarUsuario" layoutX="77.0" layoutY="88.0" />
-      <Button layoutX="124.0" layoutY="128.0" mnemonicParsing="false" onAction="#ingresarUsuario" text="Ingresar" />
-      <Button fx:id="ingresarFormularioMarketing" layoutX="79.0" layoutY="306.0" mnemonicParsing="false" onAction="#handleAbrirMarketing" prefHeight="34.0" prefWidth="147.0" text="Formulario de Marketing" />
+      <TextField fx:id="ingresarUsuario" layoutX="77.0" layoutY="88.0" styleClass="search-field" />
+      <Button layoutX="124.0" layoutY="128.0" mnemonicParsing="false" onAction="#ingresarUsuario" styleClass="primary-button" text="Ingresar" />
+      <Button fx:id="ingresarFormularioMarketing" layoutX="79.0" layoutY="306.0" mnemonicParsing="false" onAction="#handleAbrirMarketing" prefHeight="34.0" prefWidth="147.0" styleClass="primary-button" text="Formulario de Marketing" />
    </children>
 </Pane>

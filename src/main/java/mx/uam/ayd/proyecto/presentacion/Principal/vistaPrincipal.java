@@ -29,6 +29,9 @@ public class vistaPrincipal {
 
     @FXML
     private Button ingresarFormularioMarketing;
+    
+    @FXML
+    private Button AgregarEvento;
 
     @FXML
     private TextField ingresarUsuario;
@@ -59,6 +62,7 @@ public class vistaPrincipal {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ventana-principal.fxml"));
             loader.setController(this);
             Scene scene = new Scene(loader.load(), 600, 450);
+            scene.getStylesheets().add(getClass().getResource("/css/estilos-mezicuil.css").toExternalForm());
             stage.setScene(scene);
 
             Initialized = true;
@@ -88,7 +92,10 @@ public class vistaPrincipal {
 
             // Deshabilitamos los botones al inicio del mundo
             IngresarTienda.setDisable(true);
-            ingresarUsuario.setText("Rodrigo");
+            AgregarEvento.setDisable(true);
+            ingresarFormularioMarketing.setDisable(true);
+            
+            ingresarUsuario.setText("");
             stage.show();
         } else {
             System.out.println("Intentando abrir la ventana principal");
@@ -96,10 +103,12 @@ public class vistaPrincipal {
                 Platform.runLater(() -> this.muestra(NombreUsuario));
                 return;
             }
-
+            
             inicializarUI();
             // Deshabilitamos los botones al inicio del mundo
             IngresarTienda.setDisable(false);
+            AgregarEvento.setDisable(false);
+            ingresarFormularioMarketing.setDisable(false);
             ingresarUsuario.setDisable(false);
             textoPrincipal.setText("Bienvenido, " + NombreUsuario);
             System.out.println(NombreUsuario);

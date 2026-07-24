@@ -8,16 +8,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root-pane" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Line endX="465.0" layoutX="115.0" layoutY="64.0" startX="-100.0" stroke="#99a89b" />
-      <Text fill="#0b522b" layoutX="15.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mezicuil">
+      <Text fill="#0b522b" layoutX="15.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-title" text="Mezicuil">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
       </Text>
       <Line endX="-100.0" endY="309.0" layoutX="453.0" layoutY="77.0" startX="-100.0" startY="-13.5" stroke="#99a89b" />
-      <Text fill="#0b522b" layoutX="364.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Resumen de pedido" wrappingWidth="221.61328125">
+      <Text fill="#0b522b" layoutX="364.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section-title" text="Resumen de pedido" wrappingWidth="221.61328125">
          <font>
             <Font name="Cambria Bold" size="18.0" />
          </font>
@@ -43,7 +43,7 @@
             <Font name="System Bold Italic" size="12.0" />
          </font>
       </Text>
-      <Button layoutX="394.0" onAction="#handleDireccionEnvio" layoutY="279.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="162.0" text="Continuar" />
+      <Button layoutX="394.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleDireccionEnvio" prefHeight="40.0" prefWidth="162.0" styleClass="primary-button" text="Continuar" />
       <Line endX="454.0" layoutX="125.0" layoutY="216.0" startX="228.5" stroke="#99a89b" />
       <Text fill="#005110" layoutX="364.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total">
          <font>
@@ -55,7 +55,7 @@
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Text>
-      <ScrollPane layoutX="15.0" layoutY="72.0" prefHeight="314.0" prefWidth="330.0">
+      <ScrollPane layoutX="15.0" layoutY="72.0" prefHeight="314.0" prefWidth="330.0" styleClass="panel-card">
          <content>
             <FlowPane fx:id="contenedorProductoscarrito" prefHeight="120.0" prefWidth="329.0" />
          </content></ScrollPane>
