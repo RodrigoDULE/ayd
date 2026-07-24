@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface RepositorioOrdenDeCompra extends CrudRepository<OrdenDeCompra, Long>
 {
-    //public OrdenDeCompra findById(long id);
     public List<OrdenDeCompra> findByEstado(OrdenDeCompra.EstadoOrden estado);
 }
 

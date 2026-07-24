@@ -12,7 +12,6 @@ public class ServicioOrdenDeCompra {
 
     private final RepositorioOrdenDeCompra repositorioOrden;
 
-    // Inyección de dependencias (igual que hizo tu compañero)
     public ServicioOrdenDeCompra(RepositorioOrdenDeCompra repositorioOrden) {
         this.repositorioOrden = repositorioOrden;
     }
@@ -37,7 +36,8 @@ public class ServicioOrdenDeCompra {
     
     // Autorizamos la orden, cambiamos su estado y se calcula la fecha de entrega.
 
-    public OrdenDeCompra autorizarOrden(Long idOrden) {
+    public OrdenDeCompra autorizarOrden(Long idOrden) 
+    {
 
         // Buscamos la orden
         OrdenDeCompra orden = obtenerDetallesDeOrden(idOrden);

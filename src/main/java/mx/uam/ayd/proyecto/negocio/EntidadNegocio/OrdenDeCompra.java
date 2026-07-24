@@ -29,15 +29,17 @@ public class OrdenDeCompra {
     private double total;
     private LocalDate fechaEnvio;
     private LocalDate fechaRecepcion;
+    private LocalDate fechaCreacion;
     private String factura; 
 
     // Relacion uno a muchos de OrdenDeCompra a DetalleOrden
-    @OneToMany(mappedBy = "ordenDeCompra", cascade = CascadeType.ALL)
+    //@OneToMany(mappedBy = "ordenDeCompra", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ordenDeCompra", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<DetalleOrden> detalles = new ArrayList<>();
 
     public OrdenDeCompra() {}
 
-    public OrdenDeCompra(EstadoOrden estado, double total, LocalDate fechaEnvio, LocalDate fechaRecepcion, String factura)
+    public OrdenDeCompra(EstadoOrden estado, double total, LocalDate fechaEnvio, LocalDate fechaRecepcion, LocalDate fechaCreacion,String factura)
     {
 
         this.estado = estado;
@@ -45,6 +47,7 @@ public class OrdenDeCompra {
         this.fechaEnvio = fechaEnvio;
         this.fechaRecepcion = fechaRecepcion;
         this.factura = factura;
+        this.fechaCreacion = fechaCreacion;
 
     }
 
@@ -55,7 +58,9 @@ public class OrdenDeCompra {
     public double getTotal(){return total;}
     public LocalDate getFechaEnvio(){return fechaEnvio;}
     public LocalDate getFechaRecepcion(){return fechaRecepcion;}
+    public LocalDate getFechaCreacion(){return fechaCreacion;}
     public String getFactura(){return factura;}
+
 
     public List<DetalleOrden> getDetalles() 
     {
@@ -70,6 +75,7 @@ public class OrdenDeCompra {
     public void setTotalOrdenCompra(double total){this.total = total;}
     public void setFechaEnvio(LocalDate fechaEnvio){this.fechaEnvio = fechaEnvio;}
     public void setFechaRecepcion(LocalDate fechaRecepcion){this.fechaRecepcion = fechaRecepcion;}
+    public void setFechaCreacion(LocalDate fechaCreacion){this.fechaCreacion = fechaCreacion;}
     public void setFactura(String factura){this.factura = factura;}
 
     public void agregarDetalle(DetalleOrden detalle) {

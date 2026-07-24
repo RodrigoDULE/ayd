@@ -1,5 +1,7 @@
 package mx.uam.ayd.proyecto.negocio;
 
+import java.time.LocalDate;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +31,7 @@ public class DatosPruebaInitializer implements CommandLineRunner {
 
             // Creamos los Insumos
             Insumo mezcalEspadin = new Insumo("Mezcal Espadin Joven a Granel", 180.00, "Destilería Los Abuelos S.A. de C.V.", "Litros");
-            Insumo botellasVidrio = new Insumo("Botellas de Vidrio 750ml Tipo B", 15.50, "Vidrios Oaxaqueños S.A.", "Unidades");
+            Insumo botellasVidrio = new Insumo("Botellas de Vidrio 750ml Tipo B", 15.50, "Destilería Los Abuelos S.A.", "Unidades");
             Insumo etiquetasFinas = new Insumo("Etiquetas Finas de México", 3.15, "Etiquetas Finas S.A.", "Unidades");
 
             repositorioInsumo.save(mezcalEspadin);
@@ -40,6 +42,7 @@ public class DatosPruebaInitializer implements CommandLineRunner {
             OrdenDeCompra ordenAbuelos = new OrdenDeCompra();
             ordenAbuelos.setEstadoOrden(EstadoOrden.REVISION_PENDIENTE);
             ordenAbuelos.setFactura("PO-2023-089"); 
+            ordenAbuelos.setFechaCreacion(LocalDate.now());
             
             DetalleOrden detalle1 = new DetalleOrden();
             detalle1.setCantidad(500); 
@@ -49,13 +52,13 @@ public class DatosPruebaInitializer implements CommandLineRunner {
             DetalleOrden detalle2 = new DetalleOrden();
             detalle2.setCantidad(700); 
             detalle2.setInsumo(botellasVidrio);
-            detalle2.setSubTotalLote(700 * botellasVidrio.getPrecio()); // <-- Corregido con 'S' mayúscula
+            detalle2.setSubTotalLote(700 * botellasVidrio.getPrecio()); 
 
             ordenAbuelos.agregarDetalle(detalle1);
             ordenAbuelos.agregarDetalle(detalle2);
 
             // Calculamos el total de la orden 
-            double totalOrden1 = detalle1.getSubTotalLote() + detalle2.getSubTotalLote(); // <-- Corregido con 'S' mayúscula
+            double totalOrden1 = detalle1.getSubTotalLote() + detalle2.getSubTotalLote(); 
             ordenAbuelos.setTotalOrdenCompra(totalOrden1); 
 
             repositorioOrden.save(ordenAbuelos);
@@ -64,14 +67,15 @@ public class DatosPruebaInitializer implements CommandLineRunner {
             OrdenDeCompra ordenEtiquetas = new OrdenDeCompra();
             ordenEtiquetas.setEstadoOrden(EstadoOrden.REVISION_PENDIENTE);
             ordenEtiquetas.setFactura("PO-2023-044");
+            ordenEtiquetas.setFechaCreacion(LocalDate.now());
             
             DetalleOrden detalle3 = new DetalleOrden();
             detalle3.setCantidad(1000); 
             detalle3.setInsumo(etiquetasFinas);
-            detalle3.setSubTotalLote(1000 * etiquetasFinas.getPrecio()); // <-- Corregido con 'S' mayúscula
+            detalle3.setSubTotalLote(1000 * etiquetasFinas.getPrecio()); 
 
             ordenEtiquetas.agregarDetalle(detalle3);
-            ordenEtiquetas.setTotalOrdenCompra(detalle3.getSubTotalLote()); // <-- Corregido con 'S' mayúscula
+            ordenEtiquetas.setTotalOrdenCompra(detalle3.getSubTotalLote()); 
 
             repositorioOrden.save(ordenEtiquetas);
 

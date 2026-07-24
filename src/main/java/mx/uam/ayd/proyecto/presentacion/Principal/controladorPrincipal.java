@@ -10,6 +10,8 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
 import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.catalogoMezicuil.controladorCatalogoMezicuil;
 import mx.uam.ayd.proyecto.presentacion.HU04FormularioMarketing.ControlFormularioMarketing;
 import mx.uam.ayd.proyecto.presentacion.HU08AgendarNuevoEvento.controlAgendarNuevoEvento;
+import mx.uam.ayd.proyecto.presentacion.HU_06.ControladorOrdenesPendientes;
+
 
 @Component
 public class controladorPrincipal {
@@ -19,18 +21,20 @@ public class controladorPrincipal {
     private final vistaPrincipal ventanaPrincipal;
     private final ControlFormularioMarketing controlFormularioMarketing;
     private final controlAgendarNuevoEvento controlAgendarNuevoEvento;
+    private final ControladorOrdenesPendientes controladorOrdenes;
 
     private Cliente sesionActiva;
 
     @Autowired
     public controladorPrincipal(controladorCatalogoMezicuil controlTiendaLinea, vistaPrincipal ventanPrincipal,
             ServicioCliente servicioCliente, ControlFormularioMarketing controlFormularioMarketing,
-            controlAgendarNuevoEvento controlAgendarNuevoEvento) {
+            controlAgendarNuevoEvento controlAgendarNuevoEvento, ControladorOrdenesPendientes controladorOrdenes) {
         this.controlTiendaLinea = controlTiendaLinea;
         this.ventanaPrincipal = ventanPrincipal;
         this.servicioCliente = servicioCliente;
         this.controlFormularioMarketing = controlFormularioMarketing;
         this.controlAgendarNuevoEvento = controlAgendarNuevoEvento;
+        this.controladorOrdenes = controladorOrdenes;
     }
 
     // inicializamos la ventana
@@ -54,6 +58,15 @@ public class controladorPrincipal {
     public void abreFormularioMarketing() {
         controlFormularioMarketing.iniciaVentanaFormularioMarketing();
     }
+
+    // control hacia HU_6 de Jean
+
+    public void irAVentanaOrdenesCreadas()
+    {
+        controladorOrdenes.iniciaVentanaOrdenesCreadas();
+    }
+
+    // fin
 
     public void buscaCliente(String Nombre) {
 
