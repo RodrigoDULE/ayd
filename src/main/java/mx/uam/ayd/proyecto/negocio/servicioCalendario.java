@@ -12,4 +12,8 @@ import mx.uam.ayd.proyecto.datos.RepositorioEmpleado;
 @Service
 public class servicioCalendario {
     
+    
+
+    //metodo para recuperar eventos por fecha
+    //public Recupera 
 }
