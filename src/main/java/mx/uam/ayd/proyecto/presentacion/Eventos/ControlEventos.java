@@ -1,29 +1,38 @@
 package mx.uam.ayd.proyecto.presentacion.Eventos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import mx.uam.ayd.proyecto.presentacion.HU08AgendarNuevoEvento.controlAgendarNuevoEvento;
+import mx.uam.ayd.proyecto.negocio.ServicioEvento;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Evento;
 
 @Component
 public class ControlEventos {
 
     private VistaEventos vista;
     private controlAgendarNuevoEvento controlAgendarNuevoEvento;
+    private ServicioEvento servicioEvento;
 
     @Autowired
-    public ControlEventos(VistaEventos vista, controlAgendarNuevoEvento controlAgendarNuevoEvento) {
+    public ControlEventos(VistaEventos vista, controlAgendarNuevoEvento controlAgendarNuevoEvento,
+            ServicioEvento servicioEvento) {
         this.vista = vista;
         this.controlAgendarNuevoEvento = controlAgendarNuevoEvento;
+        this.servicioEvento = servicioEvento;
     }
 
     @PostConstruct
-    public void init() {
+    public void inicializar() {
         vista.setControlador(this);
     }
 
     public void inicia() {
-        vista.inicia();
+        List<Evento> listaEventos = servicioEvento.obtenerEventos();
+        vista.inicia(listaEventos);
     }
 
     public void abrirAgendarEvento() {

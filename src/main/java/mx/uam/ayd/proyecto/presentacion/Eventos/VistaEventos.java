@@ -1,7 +1,10 @@
 package mx.uam.ayd.proyecto.presentacion.Eventos;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
+import javafx.scene.control.Label;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +12,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Evento;
 
 @Component
 public class VistaEventos {
@@ -34,42 +40,87 @@ public class VistaEventos {
         this.controlador = controlador;
     }
 
-    public void inicia() {
-        if (!initialized) {
-            inicializarUI();
+    public void inicia(List<Evento> event) {
+        if (!Platform.isFxApplicationThread()) {
+            Platform.runLater(() -> inicia(event));
+            return;
         }
-        stage.show();
+
+        inicializarUI();
+
+        if (contenedorEventos != null) {
+            contenedorEventos.getChildren().clear();
+
+            if (event != null) {
+                for (Evento e : event) {
+
+                    VBox tarjeta = new VBox(5);
+                    tarjeta.getStyleClass().add("event-card");
+
+                    Label nombre = new Label(e.getNombreEvento());
+                    nombre.getStyleClass().add("titulo-evento");
+
+                    Label lugar = new Label("Lugar: " + e.getLugar());
+
+                    Label asistentes = new Label("Asistentes: " + e.getNoAsistentes());
+
+                    Label comision = new Label("Comisión: $" + e.getComision());
+
+                    Label fecha = new Label("Fecha: " + e.getFechaE());
+
+                    Label horario = new Label(
+                            "Horario: " + e.getHoraIn() + " - " + e.getHoraFin());
+
+                    Label notificacion = new Label(
+                            "Notificación: " + e.getNotificacion());
+
+                    tarjeta.getChildren().addAll(
+                            nombre,
+                            lugar,
+                            asistentes,
+                            comision,
+                            fecha,
+                            horario,
+                            notificacion);
+
+                    contenedorEventos.getChildren().add(tarjeta);
+                }
+            }
+        }
+
+        if (stage != null) {
+            stage.show();
+        }
     }
 
     private void inicializarUI() {
+        if (initialized) {
+            return;
+        }
 
-        Runnable tarea = () -> {
-            try {
+        if (!Platform.isFxApplicationThread()) {
+            Platform.runLater(this::inicializarUI);
+            return;
+        }
 
-                FXMLLoader loader = new FXMLLoader(
-                        getClass().getResource("/fxml/ventana-eventos.fxml"));
+        try {
+            stage = new Stage();
+            stage.setTitle("Eventos");
 
-                loader.setController(this);
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/fxml/ventana-Eventos.fxml"));
 
-                Pane root = loader.load();
+            loader.setController(this);
 
-                scene = new Scene(root);
+            Pane root = loader.load();
 
-                stage = new Stage();
-                stage.setTitle("Eventos");
-                stage.setScene(scene);
+            scene = new Scene(root);
+            stage.setScene(scene);
 
-                initialized = true;
+            initialized = true;
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        };
-
-        if (Platform.isFxApplicationThread()) {
-            tarea.run();
-        } else {
-            Platform.runLater(tarea);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
