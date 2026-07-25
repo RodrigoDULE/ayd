@@ -1,22 +1,26 @@
 package mx.uam.ayd.proyecto.negocio;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 import mx.uam.ayd.proyecto.datos.RepositorioEvento;
+import mx.uam.ayd.proyecto.datos.RepositorioEmpleado;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Evento;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ServicioEvento {
     // repo para tener acceso a la base de datos
     private final RepositorioEvento repoEvento;
+    private final RepositorioEmpleado repoEmpleado;
 
     // Constructor para inyectar dependencias
-    public ServicioEvento(RepositorioEvento repoEvento) {
+    public ServicioEvento(RepositorioEvento repoEvento, RepositorioEmpleado repoEmpleado) {
         this.repoEvento = repoEvento;
+        this.repoEmpleado = repoEmpleado;
     }
 
     // Metodo para obtener todos los eventos
@@ -53,5 +57,9 @@ public class ServicioEvento {
         evento.setNotasAdicionales(notas);
 
         repoEvento.save(evento);
+    }
+
+    public List<String> obtenerNombreEmpleados() {
+        return repoEmpleado.findAllNombres();
     }
 }

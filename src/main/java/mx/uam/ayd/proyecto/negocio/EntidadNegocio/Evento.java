@@ -2,15 +2,21 @@ package mx.uam.ayd.proyecto.negocio.EntidadNegocio;
 
 //Leo_D_Gar
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.CascadeType;
 
 //imports para la fecha y hora de un evento
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity // entidad
@@ -59,8 +65,9 @@ public class Evento {
 
     // cardinalidad con empleado desde la perspectica de evento, cada evento tiene
     // multiples empleados
-    @OneToMany
-    private List<Empleado> empleados_asig;
+    @ManyToMany(targetEntity = Empleado.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "evento_empleado", joinColumns = @JoinColumn(name = "idEvento"), inverseJoinColumns = @JoinColumn(name = "idEmpleado"))
+    private final List<Empleado> empleados = new ArrayList<>();
 
     // cardinalidad con producto
     // desde la perspectica de evento, cada evento tiene varios porductos asignados

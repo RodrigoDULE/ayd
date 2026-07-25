@@ -14,9 +14,11 @@ import javafx.stage.Stage;
 import mx.uam.ayd.proyecto.datos.repositorioCliente;
 import mx.uam.ayd.proyecto.datos.repositorioProducto;
 import mx.uam.ayd.proyecto.datos.RepositorioEvento;
+import mx.uam.ayd.proyecto.datos.RepositorioEmpleado;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Evento;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Empleado;
 import mx.uam.ayd.proyecto.presentacion.Principal.controladorPrincipal;
 
 /**
@@ -35,14 +37,17 @@ public class ProyectoApplication {
 	private final repositorioProducto repositorioProd;
 	private final repositorioCliente repositorioCliente;
 	private final RepositorioEvento repositorioEvento;
+	private final RepositorioEmpleado repositorioEmpleado;
 
 	@Autowired
 	public ProyectoApplication(controladorPrincipal controlPrincipal, repositorioProducto repositorioProd,
-			repositorioCliente repositorioCliente, RepositorioEvento repositorioEvento) {
+			repositorioCliente repositorioCliente, RepositorioEvento repositorioEvento,
+			RepositorioEmpleado repositorioEmpleado) {
 		this.controlPrincipal = controlPrincipal;
 		this.repositorioProd = repositorioProd;
 		this.repositorioCliente = repositorioCliente;
 		this.repositorioEvento = repositorioEvento;
+		this.repositorioEmpleado = repositorioEmpleado;
 	}
 
 	/**
@@ -190,5 +195,14 @@ public class ProyectoApplication {
 		repositorioProd.save(new Producto("Adorno Alebrije Serpiente Alada", 400.0f,
 				"Alebrije multicolor de serpiente alada diseñado para sujetarse al cuello de la botella",
 				15, 750, 0.0f, "Complementos", "/Imagenes/Complementos/ct6.png"));
+
+		// Empleados
+		repositorioEmpleado.save(new Empleado("Jorge Medina", "555-555-5555"));
+		repositorioEmpleado.save(new Empleado("Luis Angel", "555-555-5555"));
+		repositorioEmpleado.save(new Empleado("Diego Reyes", "555-555-5555"));
+		repositorioEmpleado.save(new Empleado("Saul Lopez", "555-555-5555"));
+		repositorioEmpleado.save(new Empleado("Jose Maya", "555-555-5555"));
+		repositorioEmpleado.save(new Empleado("Juan Perez", "555-555-5555"));
+		repositorioEmpleado.save(new Empleado("Pedro Mendoza", "555-555-5555"));
 	}
 }

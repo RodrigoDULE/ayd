@@ -2,6 +2,7 @@ package mx.uam.ayd.proyecto.presentacion.HU08AgendarNuevoEvento;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -58,11 +59,15 @@ public class vistaAgendarNuevoEvento {
                 "Gratis",
                 "Pago");
 
-        cmbEmpleado.getItems().addAll(
-                "Empleado 1",
-                "Empleado 2",
-                "Empleado 3");
+        // Los empleados se cargan desde la BD al abrir la ventana (ver
+        // cargarEmpleados())
+    }
 
+    // Carga los nombres de empleados en el ComboBox desde la base de datos
+    public void cargarEmpleados() {
+        List<String> nombres = controlAgendarNuevoEvento.obtenerNombresEmpleados();
+        cmbEmpleado.getItems().clear();
+        cmbEmpleado.getItems().addAll(nombres);
     }
 
     // constructor sin parametos
@@ -108,6 +113,8 @@ public class vistaAgendarNuevoEvento {
         }
         // Inicializar la UI si no lo está
         inicializarUI();
+        // Cargar empleados desde la BD cada vez que se abre la ventana
+        cargarEmpleados();
         // Establecer la escena principal
         stage.setScene(scenePrincipal);
         // Mostrar la ventana

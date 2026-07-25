@@ -1,4 +1,6 @@
 package mx.uam.ayd.proyecto.negocio.EntidadNegocio;
+
+import java.util.ArrayList;
 import java.util.List;
 
 //Leo_d
@@ -6,9 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-
-
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Empleado {
@@ -19,43 +19,41 @@ public class Empleado {
     private String nombreEmpleado;
     private String telefono;
 
-    public Empleado(String nombreEmpleado, String telefono){
-        this.nombreEmpleado=nombreEmpleado;
-        this.telefono=telefono;
+    public Empleado(String nombreEmpleado, String telefono) {
+        this.nombreEmpleado = nombreEmpleado;
+        this.telefono = telefono;
     }
-    
-    //constructor vacio
-    public Empleado(){
+
+    // constructor vacio
+    public Empleado() {
 
     }
 
-    
-    //cardinalidad con evento
-    //desde la perspectiva de empleado, un empleado tiene varios eventos asignado
-    @OneToMany
-    private List<Evento> eventos_asig;
-    
-     
-    //getters y setters
-    public long getidEmpleado(){
+    // cardinalidad con evento
+    // desde la perspectiva de empleado, un empleado tiene varios eventos asignado
+    @ManyToMany(mappedBy = "empleados")
+    private List<Evento> eventos = new ArrayList<>();
+
+    // getters y setters
+    public long getidEmpleado() {
 
         return idEmpleado;
     }
 
-    public String getNombreEmpleado(){
+    public String getNombreEmpleado() {
         return nombreEmpleado;
     }
 
-    public String getTelefono(){
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setNombreEmpleado(String nombreEmpleado){
-        this.nombreEmpleado=nombreEmpleado;
-    }
-    public void setTelefono(String telefono){
-        this.telefono=telefono;
+    public void setNombreEmpleado(String nombreEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
     }
 
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
 }
