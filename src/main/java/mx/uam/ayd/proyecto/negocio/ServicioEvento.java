@@ -30,4 +30,8 @@ public class ServicioEvento {
         // Retornamos la lista de eventos
         return listaEventos;
     }
+
+    public void agregarEvento(Evento evento) {
+        repoEvento.save(evento);
+    }
 }

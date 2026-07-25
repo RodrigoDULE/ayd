@@ -1,6 +1,5 @@
 package mx.uam.ayd.proyecto.presentacion.Eventos;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.annotation.PostConstruct;

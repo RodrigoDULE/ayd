@@ -119,13 +119,16 @@ public class ProyectoApplication {
 
 		repositorioEvento
 				.save(new Evento("Mezcaleria Coapa", "Casa Mezcal", 500, 4, LocalDate.of(2026, 9, 24),
-						LocalTime.of(10, 0), LocalTime.of(14, 0), LocalDate.of(2026, 7, 20)));
+						LocalTime.of(10, 0), LocalTime.of(14, 0), LocalDate.of(2026, 7, 20), "Conferencia", "pago",
+						"Lluvia de ideas sobre mezcal"));
 		repositorioEvento
 				.save(new Evento("San Martin", "Casa Mezcal", 500, 3, LocalDate.of(2026, 8, 25),
-						LocalTime.of(10, 0), LocalTime.of(14, 0), LocalDate.of(2026, 7, 20)));
+						LocalTime.of(10, 0), LocalTime.of(14, 0), LocalDate.of(2026, 7, 20), "Reunion", "pago",
+						"Lluvia de ideas sobre mezcal"));
 		repositorioEvento
 				.save(new Evento("Cumpleaños", "Casa Mezcal", 500, 2, LocalDate.of(2026, 7, 29),
-						LocalTime.of(10, 0), LocalTime.of(14, 0), LocalDate.of(2026, 7, 20)));
+						LocalTime.of(10, 0), LocalTime.of(14, 0), LocalDate.of(2026, 7, 20), "Taller", "pago",
+						"Lluvia de ideas sobre mezcal"));
 
 		repositorioProd
 				.save(new Producto("Mezcal Espadin Joven", 450.0f, "Mezcal artesanal notas citricas y ahumado suave",

@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 public class vistaAgendarNuevoEvento {
 
     private boolean initialized = false;
+    private controlAgendarNuevoEvento controlAgendarNuevoEvento;
     private Stage stage;
     private Scene scenePrincipal;
 
@@ -37,6 +38,8 @@ public class vistaAgendarNuevoEvento {
     private TextField txtHoraFin;
     @FXML
     private ComboBox<String> cmbAcuerdo;
+    @FXML
+    private TextField txtLugar;
     @FXML
     private TextArea txtNotas;
     @FXML
@@ -63,6 +66,10 @@ public class vistaAgendarNuevoEvento {
 
     // constructor sin parametos
     public vistaAgendarNuevoEvento() {
+    }
+
+    public void setControladorAgendarNuevoEvento(controlAgendarNuevoEvento controlador) {
+        this.controlAgendarNuevoEvento = controlador;
     }
 
     // método inicializar UI
@@ -152,14 +159,20 @@ public class vistaAgendarNuevoEvento {
         }
     }
 
+    @FXML
     public void cancelarEvento() {
         limpiarCampos();
         stage.close();
     }
 
+    @FXML
     public void guardarEvento() {
         if (verificarCampos()) {
             mostrarMensaje("Evento guardado exitosamente");
+            controlAgendarNuevoEvento.agregarEvento(txtNombreEvento.getText(), cmbTipoEvento.getValue(),
+                    dpFecha.getValue(),
+                    txtHoraInicio.getText(), txtHoraFin.getText(), cmbAcuerdo.getValue(),
+                    txtLugar.getText(), txtNotas.getText());
             limpiarCampos();
             stage.close();
         }

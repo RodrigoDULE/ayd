@@ -62,9 +62,9 @@ public class VistaEventos {
 
                     Label lugar = new Label("Lugar: " + e.getLugar());
 
-                    Label asistentes = new Label("Asistentes: " + e.getNoAsistentes());
-
                     Label comision = new Label("Comisión: $" + e.getComision());
+
+                    Label asistentes = new Label("Asistentes: " + e.getNoAsistentes());
 
                     Label fecha = new Label("Fecha: " + e.getFechaE());
 
@@ -74,14 +74,20 @@ public class VistaEventos {
                     Label notificacion = new Label(
                             "Notificación: " + e.getNotificacion());
 
+                    Label tipoEvento = new Label("Tipo de Evento: " + e.getTipoEvento());
+
+                    Label acuerdoEconomico = new Label("Acuerdo Económico: " + e.getAcuerdoEconomico());
+
                     tarjeta.getChildren().addAll(
                             nombre,
                             lugar,
-                            asistentes,
                             comision,
+                            asistentes,
                             fecha,
                             horario,
-                            notificacion);
+                            notificacion,
+                            tipoEvento,
+                            acuerdoEconomico);
 
                     contenedorEventos.getChildren().add(tarjeta);
                 }
