@@ -154,6 +154,14 @@ public class vistaAgendarNuevoEvento {
             mostrarMensaje("Debe seleccionar un acuerdo");
             return false;
         }
+        if (txtLugar.getText().isEmpty()) {
+            mostrarMensaje("Debe ingresar un lugar");
+            return false;
+        }
+        if (lvEmpleados.getItems().isEmpty()) {
+            mostrarMensaje("Debe seleccionar al menos un empleado");
+            return false;
+        }
 
         return true;
     }
@@ -162,8 +170,12 @@ public class vistaAgendarNuevoEvento {
     public void agregarEmpleado() {
         String empleado = cmbEmpleado.getValue();
         if (empleado != null) {
-            lvEmpleados.getItems().add(empleado);
-            cmbEmpleado.setValue(null);
+            if (lvEmpleados.getItems().contains(empleado)) {
+                mostrarMensaje("El empleado \"" + empleado + "\" ya fue agregado.");
+            } else {
+                lvEmpleados.getItems().add(empleado);
+                cmbEmpleado.setValue(null);
+            }
         }
     }
 
@@ -176,13 +188,19 @@ public class vistaAgendarNuevoEvento {
     @FXML
     public void guardarEvento() {
         if (verificarCampos()) {
-            mostrarMensaje("Evento guardado exitosamente");
-            controlAgendarNuevoEvento.agregarEvento(txtNombreEvento.getText(), cmbTipoEvento.getValue(),
-                    dpFecha.getValue(),
-                    txtHoraInicio.getText(), txtHoraFin.getText(), cmbAcuerdo.getValue(),
-                    txtLugar.getText(), txtNotas.getText());
-            limpiarCampos();
-            stage.close();
+            if (controlAgendarNuevoEvento.verificarDisponibilidad(dpFecha.getValue(),
+                    LocalTime.parse(txtHoraInicio.getText()), LocalTime.parse(txtHoraFin.getText()))) {
+                mostrarMensaje("Evento guardado exitosamente");
+                controlAgendarNuevoEvento.agregarEvento(txtNombreEvento.getText(), cmbTipoEvento.getValue(),
+                        dpFecha.getValue(),
+                        txtHoraInicio.getText(), txtHoraFin.getText(), cmbAcuerdo.getValue(),
+                        txtLugar.getText(), txtNotas.getText(), lvEmpleados.getItems().size(),
+                        (lvEmpleados.getItems().size() * 50) + 2500);
+                limpiarCampos();
+                stage.close();
+            } else {
+                mostrarMensaje("El horario seleccionado ya está ocupado. Elija otra fecha u horario.");
+            }
         }
     }
 
@@ -201,8 +219,10 @@ public class vistaAgendarNuevoEvento {
 
     private void limpiarCampos() {
         txtNombreEvento.clear();
+        dpFecha.setValue(null);
         txtHoraInicio.clear();
         txtHoraFin.clear();
+        txtLugar.clear();
         txtNotas.clear();
         lvEmpleados.getItems().clear();
     }

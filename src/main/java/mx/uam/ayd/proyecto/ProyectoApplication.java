@@ -19,6 +19,7 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Evento;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Empleado;
+
 import mx.uam.ayd.proyecto.presentacion.Principal.controladorPrincipal;
 
 /**
@@ -204,5 +205,6 @@ public class ProyectoApplication {
 		repositorioEmpleado.save(new Empleado("Jose Maya", "555-555-5555"));
 		repositorioEmpleado.save(new Empleado("Juan Perez", "555-555-5555"));
 		repositorioEmpleado.save(new Empleado("Pedro Mendoza", "555-555-5555"));
+
 	}
 }

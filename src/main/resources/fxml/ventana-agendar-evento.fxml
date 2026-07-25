@@ -18,7 +18,7 @@
             <Label text="Registro de Evento"
                    style="-fx-font-size:22px; -fx-font-weight:bold;" />
 
-              <GridPane hgap="15" vgap="15">
+              <GridPane hgap="15" vgap="15" alignment="CENTER">
 
                   <!-- Nombre -->
                   <Label text="Nombre del evento:"
