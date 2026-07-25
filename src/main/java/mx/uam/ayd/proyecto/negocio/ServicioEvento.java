@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import mx.uam.ayd.proyecto.datos.RepositorioEvento;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Evento;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +33,25 @@ public class ServicioEvento {
         return listaEventos;
     }
 
-    public void agregarEvento(Evento evento) {
+    public void agregarEvento(String nombre, String tipo, LocalDate fecha,
+            String horaInicio, String horaFin, String acuerdo,
+            String lugar, String notas) {
+
+        LocalTime horaIn = LocalTime.parse(horaInicio);
+        LocalTime horaFin_ = LocalTime.parse(horaFin);
+
+        // Crear el evento usando setters (campos no capturados en FXML quedan en
+        // default)
+        Evento evento = new Evento();
+        evento.setNombreEvento(nombre);
+        evento.setTipoEvento(tipo);
+        evento.setFechaE(fecha);
+        evento.setHoraIn(horaIn);
+        evento.setHoraFin(horaFin_);
+        evento.setAcuerdoEconomico(acuerdo);
+        evento.setLugar(lugar);
+        evento.setNotasAdicionales(notas);
+
         repoEvento.save(evento);
     }
 }

@@ -37,25 +37,21 @@ public class controlAgendarNuevoEvento {
     public void agregarEvento(String nombre, String tipo, LocalDate fecha,
             String horaInicio, String horaFin, String acuerdo, String lugar, String notas) {
 
-        LocalTime horaIn = LocalTime.parse(horaInicio);
-        LocalTime horaFin_ = LocalTime.parse(horaFin);
-
-        // Crear el evento usando setters (campos no capturados en FXML quedan en
-        // default)
-        Evento evento = new Evento();
-        evento.setNombreEvento(nombre);
-        evento.setTipoEvento(tipo);
-        evento.setFechaE(fecha);
-        evento.setHoraIn(horaIn);
-        evento.setHoraFin(horaFin_);
-        evento.setAcuerdoEconomico(acuerdo);
-        evento.setLugar(lugar);
-        evento.setNotasAdicionales(notas);
-
-        // Guardar el evento en la base de datos
-        servicioEvento.agregarEvento(evento);
+        servicioEvento.agregarEvento(
+                nombre,
+                tipo,
+                fecha,
+                horaInicio,
+                horaFin,
+                acuerdo,
+                lugar,
+                notas);
 
         // Refrescar la ventana de Eventos con los datos actualizados
         controlEventos.inicia();
+    }
+
+    public void agregarEvento() {
+
     }
 }
