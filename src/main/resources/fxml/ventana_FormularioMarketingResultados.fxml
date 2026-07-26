@@ -74,7 +74,9 @@
                </font>
             </Label>
             <Button fx:id="botonGenerarDeNuevo" layoutX="163.0" layoutY="492.0" mnemonicParsing="false" onAction="#handleGenerarDeNuevo" text="Generar de nuevo" />
-            <Button fx:id="botonFinalizar" layoutX="340.0" layoutY="492.0" mnemonicParsing="false" onAction="#handleFinalizar" text="Finalizar " />
+            <Button fx:id="botonElegirVariacion1" layoutX="27.0" layoutY="455.0" mnemonicParsing="false" prefWidth="152.0" text="Elegir" />
+            <Button fx:id="botonElegirVariacion2" layoutX="219.0" layoutY="455.0" mnemonicParsing="false" prefWidth="152.0" text="Elegir" />
+            <Button fx:id="botonElegirVariacion3" layoutX="414.0" layoutY="455.0" mnemonicParsing="false" prefWidth="152.0" text="Elegir" />
          </children></AnchorPane>
   </content>
 </ScrollPane>

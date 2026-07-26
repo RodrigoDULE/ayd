@@ -16,6 +16,9 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing.DatosFormu
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing.TipoContenido;
 import mx.uam.ayd.proyecto.negocio.ServicioGeneracionContenido.VariacionContenido;
 
+// TODO: Paso 1. Cuando crees la siguiente HU, importa su controlador aquí.
+// import mx.uam.ayd.proyecto.presentacion.HUNueva.ControlNuevaHU;
+
 /**
  * Controlador de HU-04 (Formulario de Marketing). Orquesta el flujo
  * completo descrito en el diagrama de secuencia: registrar el
@@ -28,14 +31,23 @@ public class ControlFormularioMarketing {
     private final VistaFormularioMarketing vistaFormularioMarketing;
     private final ServicioFormularioMarketing servicioFormularioMarketing;
     private final ServicioGeneracionContenido servicioGeneracionContenido;
+    
+    // TODO: Paso 2. Declara la variable del nuevo controlador.
+    // private final ControlNuevaHU controlNuevaHU;
 
     @Autowired
     public ControlFormularioMarketing(VistaFormularioMarketing vistaFormularioMarketing,
             ServicioFormularioMarketing servicioFormularioMarketing,
-            ServicioGeneracionContenido servicioGeneracionContenido) {
+            ServicioGeneracionContenido servicioGeneracionContenido
+            /* TODO: Paso 3. Agrega el controlador al constructor */
+            /* , ControlNuevaHU controlNuevaHU */) {
+        
         this.vistaFormularioMarketing = vistaFormularioMarketing;
         this.servicioFormularioMarketing = servicioFormularioMarketing;
         this.servicioGeneracionContenido = servicioGeneracionContenido;
+        
+        // TODO: Paso 4. Inicializa la variable.
+        // this.controlNuevaHU = controlNuevaHU;
     }
 
     @PostConstruct
@@ -50,10 +62,7 @@ public class ControlFormularioMarketing {
 
     /**
      * procesarGeneracion(datosFormulario, archivo) del diagrama de
-     * secuencia. Aquí "datosFormulario" llega desarmado en variables
-     * sueltas porque así las captura la vista de los controles de
-     * JavaFX; aquí mismo se empaquetan en el DatosFormulario que
-     * espera el servicio.
+     * secuencia.
      */
     public void procesarGeneracion(TipoContenido tipoContenido, List<String> plataformasDestino,
             Integer cantidadVariaciones, LocalDate fechaEstimadaPublicacion, List<File> archivos) {
@@ -71,16 +80,19 @@ public class ControlFormularioMarketing {
     }
 
     /**
-     * Se ejecuta cuando el usuario da clic en "Finalizar" en la
-     * pantalla de resultados. Según lo que me dijiste, ahí debería
-     * abrirse la pantalla de HU-10 — pero esa HU todavía no existe
-     * en el proyecto, así que por ahora solo cierra esta ventana.
-     *
-     * Cuando construyas HU-10, aquí es donde reemplazas esta línea
-     * por la llamada a su controlador, por ejemplo algo como:
-     *   controlHU10.iniciaVentana(formularioGuardado);
+     * Se ejecuta cuando el usuario da clic en "Elegir" sobre una
+     * variación específica (imagen o texto). Pasa la referencia exacta 
+     * a la siguiente historia de usuario.
      */
-    public void finalizar() {
-        vistaFormularioMarketing.cerrarVentana();
+    public void seleccionarVariacion(VariacionContenido variacionElegida) {
+        
+        // Acción temporal para que puedas probar que los botones de la vista funcionan
+        vistaFormularioMarketing.mostrarMensaje("Elegiste: " + variacionElegida.getNombre());
+        
+        // TODO: Paso 5. Cuando construyas la otra HU, borra el 'mostrarMensaje' de arriba
+        // y descomenta estas dos líneas para hacer el cambio de pantalla:
+        
+        // vistaFormularioMarketing.cerrarVentana();
+        // controlNuevaHU.iniciaVentana(variacionElegida);
     }
 }

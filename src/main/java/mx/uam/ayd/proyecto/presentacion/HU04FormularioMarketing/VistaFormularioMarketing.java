@@ -32,7 +32,6 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing.TipoContenido;
 import mx.uam.ayd.proyecto.negocio.ServicioGeneracionContenido.VariacionContenido;
 
-
 @Component
 public class VistaFormularioMarketing {
 
@@ -51,70 +50,37 @@ public class VistaFormularioMarketing {
 
     // ===== Campos del FXML "Principal" =====
 
-    @FXML
-    private RadioButton radioSoloTexto;
-
-    @FXML
-    private RadioButton radioImagenEstatica;
-
-    @FXML
-    private CheckBox checkInstagramPost;
-
-    @FXML
-    private CheckBox checkFacebookPost;
-
-    @FXML
-    private CheckBox checkLinkedin;
-
-    @FXML
-    private CheckBox checkEmail;
-
-    @FXML
-    private Button botonSeleccionarArchivos;
-
-    @FXML
-    private TextField campoCantidadVariaciones;
-
-    @FXML
-    private TextField selectorFechaPublicacion;
-
-    @FXML
-    private Button botonIniciarGeneracion;
+    @FXML private RadioButton radioSoloTexto;
+    @FXML private RadioButton radioImagenEstatica;
+    @FXML private CheckBox checkInstagramPost;
+    @FXML private CheckBox checkFacebookPost;
+    @FXML private CheckBox checkLinkedin;
+    @FXML private CheckBox checkEmail;
+    @FXML private Button botonSeleccionarArchivos;
+    @FXML private TextField campoCantidadVariaciones;
+    @FXML private TextField selectorFechaPublicacion;
+    @FXML private Button botonIniciarGeneracion;
 
     // ===== Campos del FXML "Resultados" =====
 
-    @FXML
-    private Label etiquetaResumenTipoContenido;
+    @FXML private Label etiquetaResumenTipoContenido;
+    @FXML private Label etiquetaResumenPlataformas;
+    @FXML private Label etiquetaResumenFecha;
 
-    @FXML
-    private Label etiquetaResumenPlataformas;
+    @FXML private Label contenidoVariacion1;
+    @FXML private Label contenidoVariacion2;
+    @FXML private Label contenidoVariacion3;
 
-    @FXML
-    private Label etiquetaResumenFecha;
+    @FXML private Label descripcionVariacion1;
+    @FXML private Label descripcionVariacion2;
+    @FXML private Label descripcionVariacion3;
 
-    @FXML
-    private Label contenidoVariacion1;
+    @FXML private Button botonGenerarDeNuevo;
 
-    @FXML
-    private Label contenidoVariacion2;
-
-    @FXML
-    private Label contenidoVariacion3;
-
-    @FXML
-    private Label descripcionVariacion1;
-
-    @FXML
-    private Label descripcionVariacion2;
-
-    @FXML
-    private Label descripcionVariacion3;
-
-    @FXML
-    private Button botonGenerarDeNuevo;
-
-    @FXML
-    private Button botonFinalizar;
+    // Botones dinámicos de elección
+    @FXML private Button botonElegirVariacion1;
+    @FXML private Button botonElegirVariacion2;
+    @FXML private Button botonElegirVariacion3;
 
     public VistaFormularioMarketing() {
     }
@@ -164,6 +130,13 @@ public class VistaFormularioMarketing {
         stage.setScene(scenePrincipal);
         stage.show();
     }
+    
+    /** Cierra la ventana actual (usado por el controlador al cambiar de HU) */
+    public void cerrarVentana() {
+        if (stage != null) {
+            stage.close();
+        }
+    }
 
     @FXML
     private void handleSeleccionarArchivos() {
@@ -199,22 +172,7 @@ public class VistaFormularioMarketing {
         stage.setScene(scenePrincipal);
     }
 
-    @FXML
-    private void handleFinalizar() {
-        if (control != null) {
-            control.finalizar();
-        }
-    }
-
-    /** Cierra la ventana del formulario. La usa el controlador al finalizar. */
-    public void cerrarVentana() {
-        if (stage != null) {
-            stage.close();
-        }
-    }
-
-    //Valida los campos obligatorios Como la pantalla de resultados solo tiene 
-    // 3 tarjetas fijas (no es una lista dinámica)
+    // Valida los campos obligatorios
     private boolean validarFormulario() {
         if (obtenerTipoContenido() == null) {
             mostrarMensaje("Selecciona un tipo de contenido.");
@@ -280,10 +238,7 @@ public class VistaFormularioMarketing {
         }
     }
 
-    /**
-     * Habilita de nuevo el botón de generar para cuando el usuario regrese al
-     * formulario con "Generar de nuevo".
-     */
+    /** Habilita de nuevo el botón de generar. */
     public void habilitarBotonGenerar() {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(this::habilitarBotonGenerar);
@@ -293,9 +248,7 @@ public class VistaFormularioMarketing {
     }
 
     /**
-     * Muestra las variaciones generadas. Llena las 3 tarjetas fijas de la pantalla de
-     * resultados; si se pidieron menos de 3, las tarjetas sobrantes
-     * quedan vacías.
+     * Muestra las variaciones generadas y habilita dinámicamente los botones "Elegir".
      */
     public void mostrarListaVariaciones(FormularioMarketing formulario, List<VariacionContenido> variaciones) {
         if (!Platform.isFxApplicationThread()) {
@@ -309,6 +262,7 @@ public class VistaFormularioMarketing {
 
         Label[] cajasContenido = { contenidoVariacion1, contenidoVariacion2, contenidoVariacion3 };
         Label[] cajasDescripcion = { descripcionVariacion1, descripcionVariacion2, descripcionVariacion3 };
+        Button[] botonesElegir = { botonElegirVariacion1, botonElegirVariacion2, botonElegirVariacion3 };
 
         // Preparar las rutas de imágenes y mezclarlas aleatoriamente
         List<String> rutasImagenes = Arrays.asList(
@@ -323,6 +277,7 @@ public class VistaFormularioMarketing {
             cajasContenido[i].setGraphic(null); 
             cajasContenido[i].setText("");
             cajasContenido[i].setStyle("");
+            botonesElegir[i].setOnAction(null); // Evita duplicar eventos si se genera de nuevo
 
             if (i < variaciones.size()) {
                 VariacionContenido variacion = variaciones.get(i);
@@ -347,7 +302,7 @@ public class VistaFormularioMarketing {
                 } else {
                     
                     // ================= CASO SOLO TEXTO =================
-                    cajasContenido[i].setWrapText(true); // Permite salto de línea si la frase es larga
+                    cajasContenido[i].setWrapText(true); 
                     cajasContenido[i].setText(variacion.getNombre());
                     cajasContenido[i].setStyle(
                         "-fx-alignment: center; " +
@@ -360,10 +315,21 @@ public class VistaFormularioMarketing {
 
                 cajasDescripcion[i].setText(variacion.getDescripcion());
 
+                // Muestra el botón de este slot y lo conecta al controlador
+                botonesElegir[i].setVisible(true);
+                botonesElegir[i].setManaged(true);
+                botonesElegir[i].setOnAction(evento -> {
+                    if (control != null) {
+                        control.seleccionarVariacion(variacion); // CORREGIDO AQUÍ
+                    }
+                });
+
             } else {
-                // Si el usuario pidió menos de 3 variaciones, limpiar completamente la tarjeta restante
+                // Si el usuario pidió menos variaciones, limpia y oculta el slot restante
                 cajasContenido[i].setText("");
                 cajasDescripcion[i].setText("");
+                botonesElegir[i].setVisible(false);
+                botonesElegir[i].setManaged(false);
             }
         }
 
