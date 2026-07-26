@@ -1,15 +1,17 @@
 package mx.uam.ayd.proyecto.negocio;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import mx.uam.ayd.proyecto.datos.RepositorioEvento;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Empleado;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Evento;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Duration;
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ServicioEvento {
@@ -35,9 +37,11 @@ public class ServicioEvento {
         return listaEventos;
     }
 
-    public void agregarEvento(String nombre, String tipo, LocalDate fecha,
+        @Transactional
+        public void agregarEvento(String nombre, String tipo, LocalDate fecha,
             String horaInicio, String horaFin, String acuerdo,
-            String lugar, String notas, int noAsistentes, int comision, LocalDate notificacion) {
+            String lugar, String notas, int noAsistentes, int comision, LocalDate notificacion,
+            List<Empleado> empleados) {
 
         LocalTime horaIn = LocalTime.parse(horaInicio);
         LocalTime horaFin_ = LocalTime.parse(horaFin);
@@ -56,16 +60,21 @@ public class ServicioEvento {
         evento.setNoAsistentes(noAsistentes);
         evento.setComision(comision);
         evento.setNotificacion(notificacion);
+        evento.getEmpleados().addAll(empleados);
 
         repoEvento.save(evento);
     }
 
     // Regla de negocio
     public boolean verificarDisponibilidad(LocalDate fecha, LocalTime horaInicio, LocalTime horaFin) {
+        // Regla de negocio: El evento debe durar al menos 2 horas
         Duration duracion = Duration.between(horaInicio, horaFin);
         if (duracion.toMinutes() < 120) {
             return false;
         }
+
+        // Regla de negocio: El evento debe tener al menos 6 horas de diferencia con
+        // otro evento
         for (Evento evento : repoEvento.findAll()) {
             if (!fecha.equals(evento.getFechaE())) {
                 continue; // distinto día, no compite

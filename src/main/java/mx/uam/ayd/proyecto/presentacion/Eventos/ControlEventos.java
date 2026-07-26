@@ -40,6 +40,7 @@ public class ControlEventos {
     public void abrirAgendarEvento() {
         // Lógica para abrir la vista de agendar evento
         System.out.println("Abrir Agendar Evento");
+        controlAgendarNuevoEvento.setRefrescarEventosCallback(this::inicia);
         controlAgendarNuevoEvento.iniciaVentanaAgendarNuevoEvento();
     }
 

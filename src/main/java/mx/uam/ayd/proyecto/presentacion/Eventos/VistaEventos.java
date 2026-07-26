@@ -96,6 +96,8 @@ public class VistaEventos {
 
         if (stage != null) {
             stage.show();
+            stage.toFront();
+            stage.requestFocus();
         }
     }
 

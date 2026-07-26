@@ -202,8 +202,9 @@ public class vistaAgendarNuevoEvento {
                 controlAgendarNuevoEvento.agregarEvento(txtNombreEvento.getText(), cmbTipoEvento.getValue(),
                         dpFecha.getValue(),
                         txtHoraInicio.getText(), txtHoraFin.getText(), cmbAcuerdo.getValue(),
-                        txtLugar.getText(), txtNotas.getText(), lvEmpleados.getItems().size(),
-                        (lvEmpleados.getItems().size() * 50) + 2500);
+                    txtLugar.getText(), txtNotas.getText(), lvEmpleados.getItems().size(),
+                    (lvEmpleados.getItems().size() * 50) + 2500,
+                    lvEmpleados.getItems());
                 limpiarCampos();
                 stage.close();
             } else {

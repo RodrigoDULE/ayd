@@ -9,6 +9,8 @@ public interface RepositorioEmpleado extends CrudRepository<Empleado, Long> {
 
     public Empleado findByIdEmpleado(long idEmpleado);
 
+    public List<Empleado> findByNombreEmpleadoIn(List<String> nombresEmpleado);
+
     @Query("SELECT e.nombreEmpleado FROM Empleado e")
     public List<String> findAllNombres();
 

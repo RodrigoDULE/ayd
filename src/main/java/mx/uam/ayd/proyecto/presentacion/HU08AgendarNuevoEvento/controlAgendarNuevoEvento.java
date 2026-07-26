@@ -5,27 +5,24 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Empleado;
 import mx.uam.ayd.proyecto.negocio.ServicioEvento;
 import mx.uam.ayd.proyecto.negocio.servicioEmpleado;
-import mx.uam.ayd.proyecto.presentacion.Eventos.ControlEventos;
 
 @Component
 public class controlAgendarNuevoEvento {
     private final vistaAgendarNuevoEvento vistaAgendarNuevoEvento;
     private final ServicioEvento servicioEvento;
     private final servicioEmpleado servicioEmpleado;
-    private final ControlEventos controlEventos;
+    private Runnable refrescarEventosCallback;
 
     @Autowired
     public controlAgendarNuevoEvento(vistaAgendarNuevoEvento vistaAgendarNuevoEvento,
-            ServicioEvento servicioEvento, servicioEmpleado servicioEmpleado,
-            @Lazy ControlEventos controlEventos) {
+            ServicioEvento servicioEvento, servicioEmpleado servicioEmpleado) {
         this.vistaAgendarNuevoEvento = vistaAgendarNuevoEvento;
         this.servicioEvento = servicioEvento;
         this.servicioEmpleado = servicioEmpleado;
-        this.controlEventos = controlEventos;
     }
 
     public void iniciaVentanaAgendarNuevoEvento() {
@@ -37,16 +34,25 @@ public class controlAgendarNuevoEvento {
         vistaAgendarNuevoEvento.setControladorAgendarNuevoEvento(this);
     }
 
+    public void setRefrescarEventosCallback(Runnable refrescarEventosCallback) {
+        this.refrescarEventosCallback = refrescarEventosCallback;
+    }
+
     // Retorna los nombres de los empleados desde el servicio
     public List<String> obtenerNombresEmpleados() {
         return servicioEmpleado.obtenerNombreEmpleados();
     }
 
+    public List<Empleado> obtenerEmpleadosSeleccionados(List<String> nombresEmpleados) {
+        return servicioEmpleado.obtenerEmpleadosPorNombre(nombresEmpleados);
+    }
+
     public void agregarEvento(String nombre, String tipo, LocalDate fecha,
             String horaInicio, String horaFin, String acuerdo, String lugar, String notas, int noAsistentes,
-            int comision) {
+            int comision, List<String> nombresEmpleados) {
 
         LocalDate notificacion = servicioEvento.calcularUnaSemanaAntes(fecha);
+        List<Empleado> empleados = obtenerEmpleadosSeleccionados(nombresEmpleados);
         servicioEvento.agregarEvento(
                 nombre,
                 tipo,
@@ -58,10 +64,12 @@ public class controlAgendarNuevoEvento {
                 notas,
                 noAsistentes,
                 comision,
-                notificacion);
+                notificacion,
+                empleados);
 
-        // Refrescar la ventana de Eventos con los datos actualizados
-        controlEventos.inicia();
+        if (refrescarEventosCallback != null) {
+            refrescarEventosCallback.run();
+        }
     }
 
     // Regla de negocio

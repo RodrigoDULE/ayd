@@ -1,6 +1,7 @@
 package mx.uam.ayd.proyecto.negocio;
 
 import mx.uam.ayd.proyecto.datos.RepositorioEmpleado;
+import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Empleado;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,5 +18,9 @@ public class servicioEmpleado {
 
     public List<String> obtenerNombreEmpleados() {
         return repoEmpleado.findAllNombres();
+    }
+
+    public List<Empleado> obtenerEmpleadosPorNombre(List<String> nombresEmpleado) {
+        return repoEmpleado.findByNombreEmpleadoIn(nombresEmpleado);
     }
 }
