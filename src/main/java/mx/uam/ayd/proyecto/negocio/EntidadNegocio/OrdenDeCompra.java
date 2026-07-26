@@ -20,7 +20,8 @@ public class OrdenDeCompra {
     {
         REVISION_PENDIENTE,
         AUTORIZADA,
-        ENVIADA
+        ENVIADA,
+        RECIBIDA
     }
 
     @Enumerated(EnumType.STRING)
