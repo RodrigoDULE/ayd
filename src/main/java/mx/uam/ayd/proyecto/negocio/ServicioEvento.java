@@ -62,6 +62,10 @@ public class ServicioEvento {
 
     // Regla de negocio
     public boolean verificarDisponibilidad(LocalDate fecha, LocalTime horaInicio, LocalTime horaFin) {
+        Duration duracion = Duration.between(horaInicio, horaFin);
+        if (duracion.toMinutes() < 120) {
+            return false;
+        }
         for (Evento evento : repoEvento.findAll()) {
             if (!fecha.equals(evento.getFechaE())) {
                 continue; // distinto día, no compite
@@ -84,9 +88,11 @@ public class ServicioEvento {
                 diferencia = Duration.between(horaFin, evento.getHoraIn());
             }
 
+            // Checamos que no haya menos de 6 horas de diferencia entre eventos
             if (diferencia.toHours() < 6) {
                 return false;
             }
+
         }
         return true;
     }

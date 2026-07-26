@@ -12,38 +12,39 @@ import mx.uam.ayd.proyecto.presentacion.HU05CamposDeEnvio.ControlDireccionesEnvi
 
 @Component
 public class controladorCarritoPrincipal {
-    
+
     private final vistaCarritoPrincipal vistaCarritoPrincipal;
     private final servicioCarritoCompra servicioCarritoCompra;
     private final ControlDireccionesEnvio controlDirecciones;
-    
+
     @Autowired
-    public controladorCarritoPrincipal(vistaCarritoPrincipal vistaCarritoPrincipal, servicioCarritoCompra servicioCarritoCompra, ControlDireccionesEnvio controlDirecciones){
+    public controladorCarritoPrincipal(vistaCarritoPrincipal vistaCarritoPrincipal,
+            servicioCarritoCompra servicioCarritoCompra, ControlDireccionesEnvio controlDirecciones) {
         this.vistaCarritoPrincipal = new vistaCarritoPrincipal();
-        this.servicioCarritoCompra=servicioCarritoCompra;
+        this.servicioCarritoCompra = servicioCarritoCompra;
         this.controlDirecciones = controlDirecciones;
     }
 
     @PostConstruct
-    private void inicializarControlador(){
+    private void inicializarControlador() {
         vistaCarritoPrincipal.setControlador(this);
     }
 
     public void iniciaVentanaCarrito() {
         carritoCompra car = servicioCarritoCompra.recuperaProductoEnCarrito();
-        if(car != null){
+        if (car != null) {
             vistaCarritoPrincipal.muestraCarrito(car);
-        }else{
+        } else {
             vistaCarritoPrincipal.mostrarMensaje("Error, el cliente no tiene carrito activo");
         }
     }
 
-    public void EliminarProd(Producto prod){
+    public void EliminarProd(Producto prod) {
         servicioCarritoCompra.EliminarProdCarrito(prod);
     }
 
-    public void irDireccionEnvio(){
-        //recuperamos el objeto Usuario
+    public void irDireccionEnvio() {
+        // recuperamos el objeto Usuario
         Cliente client = servicioCarritoCompra.recuperaClienToDireccion();
         controlDirecciones.iniciaVentana(client);
     }

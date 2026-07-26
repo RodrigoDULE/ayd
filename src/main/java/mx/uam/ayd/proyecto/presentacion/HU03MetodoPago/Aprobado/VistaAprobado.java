@@ -1,4 +1,4 @@
-package mx.uam.ayd.proyecto.presentacion.HU03MetodoPago;
+package mx.uam.ayd.proyecto.presentacion.HU03MetodoPago.Aprobado;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -63,7 +63,7 @@ public class VistaAprobado {
             return;
         }
         inicializarUI();
-        mostrarDatos(LocalDate.now(), 100);
+        mostrarDatos(LocalDate.now(), controlador.getMonto());
         stage.setScene(scenePrincipal);
         stage.show();
     }

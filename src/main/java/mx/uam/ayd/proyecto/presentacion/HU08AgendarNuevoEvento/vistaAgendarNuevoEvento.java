@@ -150,6 +150,14 @@ public class vistaAgendarNuevoEvento {
             return false;
         }
 
+        LocalTime horaInicio = LocalTime.parse(txtHoraInicio.getText());
+        LocalTime horaFin = LocalTime.parse(txtHoraFin.getText());
+
+        if (!horaFin.isAfter(horaInicio)) {
+            mostrarMensaje("La hora de finalización debe ser posterior a la de inicio");
+            return false;
+        }
+
         if (cmbAcuerdo.getValue() == null) {
             mostrarMensaje("Debe seleccionar un acuerdo");
             return false;
@@ -199,7 +207,7 @@ public class vistaAgendarNuevoEvento {
                 limpiarCampos();
                 stage.close();
             } else {
-                mostrarMensaje("El horario seleccionado ya está ocupado. Elija otra fecha u horario.");
+                mostrarMensaje("Evento no cumple con condiciones.");
             }
         }
     }

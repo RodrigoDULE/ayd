@@ -13,7 +13,7 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio.DatosDireccion;
 
 // 1. IMPORTAMOS EL CONTROLADOR DE LA HU-03
-import mx.uam.ayd.proyecto.presentacion.HU03MetodoPago.ControlMetodoPago;
+import mx.uam.ayd.proyecto.presentacion.HU03MetodoPago.MetodoPago.ControlMetodoPago;
 
 /**
  * Controlador de HU-05 (Direcciones de envío). Orquesta los cuatro
@@ -25,9 +25,9 @@ public class ControlDireccionesEnvio {
 
     private final VistaDireccionesEnvio vistaDireccionesEnvio;
     private final ServicioDireccionesEnvio servicioDireccionesEnvio;
-    
+
     // 2. DECLARAMOS EL CONTROLADOR DE PAGO
-    private final ControlMetodoPago controlMetodoPago; 
+    private final ControlMetodoPago controlMetodoPago;
 
     /** El Cliente para el que se está gestionando direcciones en esta sesión. */
     private Cliente clienteActivo;
@@ -36,7 +36,7 @@ public class ControlDireccionesEnvio {
     @Autowired
     public ControlDireccionesEnvio(VistaDireccionesEnvio vistaDireccionesEnvio,
             ServicioDireccionesEnvio servicioDireccionesEnvio,
-            ControlMetodoPago controlMetodoPago) { 
+            ControlMetodoPago controlMetodoPago) {
         this.vistaDireccionesEnvio = vistaDireccionesEnvio;
         this.servicioDireccionesEnvio = servicioDireccionesEnvio;
         this.controlMetodoPago = controlMetodoPago;
@@ -90,14 +90,16 @@ public class ControlDireccionesEnvio {
     }
 
     // ====================================================================
-    //PUENTE HACIA LA HU-03 (MÉTODO DE PAGO)
+    // PUENTE HACIA LA HU-03 (MÉTODO DE PAGO)
     // ====================================================================
     public void continuarAlPago(DireccionEnvio direccionSeleccionada) {
         // Como el método de tu compañero aún no recibe parámetros,
         // simplemente disparamos el inicio de su ventana.
         controlMetodoPago.iniciaVentanaMetodoPago();
-        
-        // (Opcional) Si quieres que tu ventana de direcciones se cierre al abrir la de pago,
-        // tendrías que crear un método en tu vistaDireccionesEnvio.cerrar() y llamarlo aquí.
+
+        // (Opcional) Si quieres que tu ventana de direcciones se cierre al abrir la de
+        // pago,
+        // tendrías que crear un método en tu vistaDireccionesEnvio.cerrar() y llamarlo
+        // aquí.
     }
 }

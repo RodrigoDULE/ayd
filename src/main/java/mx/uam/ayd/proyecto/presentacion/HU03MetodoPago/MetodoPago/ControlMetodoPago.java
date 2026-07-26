@@ -1,11 +1,11 @@
-package mx.uam.ayd.proyecto.presentacion.HU03MetodoPago;
+package mx.uam.ayd.proyecto.presentacion.HU03MetodoPago.MetodoPago;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import mx.uam.ayd.proyecto.negocio.servicioCarritoCompra;
-import mx.uam.ayd.proyecto.presentacion.HU03MetodoPago.ControlAprobado;
-
 import jakarta.annotation.PostConstruct;
+
+import mx.uam.ayd.proyecto.presentacion.HU03MetodoPago.Aprobado.ControlAprobado;
 
 @Component
 public class ControlMetodoPago {

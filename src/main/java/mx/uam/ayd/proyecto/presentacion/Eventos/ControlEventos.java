@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import mx.uam.ayd.proyecto.presentacion.HU08AgendarNuevoEvento.controlAgendarNuevoEvento;
 import mx.uam.ayd.proyecto.presentacion.HU09CalendarioDeEventos.ControladorCalendarioEventos;
-import mx.uam.ayd.proyecto.presentacion.HU09CalendarioDeEventos.VistaCalendarioEventos;
 import mx.uam.ayd.proyecto.negocio.ServicioEvento;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Evento;
 
@@ -17,15 +16,15 @@ public class ControlEventos {
     private VistaEventos vista;
     private controlAgendarNuevoEvento controlAgendarNuevoEvento;
     private ServicioEvento servicioEvento;
-
-    @Autowired
     private ControladorCalendarioEventos controlCalendario;
 
+    @Autowired
     public ControlEventos(VistaEventos vista, controlAgendarNuevoEvento controlAgendarNuevoEvento,
-            ServicioEvento servicioEvento) {
+            ServicioEvento servicioEvento, ControladorCalendarioEventos controlCalendario) {
         this.vista = vista;
         this.controlAgendarNuevoEvento = controlAgendarNuevoEvento;
         this.servicioEvento = servicioEvento;
+        this.controlCalendario = controlCalendario;
     }
 
     @PostConstruct

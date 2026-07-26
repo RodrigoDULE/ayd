@@ -1,4 +1,4 @@
-package mx.uam.ayd.proyecto.presentacion.HU03MetodoPago;
+package mx.uam.ayd.proyecto.presentacion.HU03MetodoPago.MetodoPago;
 
 import org.springframework.stereotype.Component;
 
@@ -79,9 +79,6 @@ public class VistaMetodoPago {
             } else {
                 mostrarMensaje("Error al realizar el pago");
             }
-
-        } else {
-            mostrarMensaje("Error al realizar el pago");
         }
     }
 

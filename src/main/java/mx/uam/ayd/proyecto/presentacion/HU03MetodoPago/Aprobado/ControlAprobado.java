@@ -1,6 +1,7 @@
-package mx.uam.ayd.proyecto.presentacion.HU03MetodoPago;
+package mx.uam.ayd.proyecto.presentacion.HU03MetodoPago.Aprobado;
 
 import jakarta.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,10 @@ public class ControlAprobado {
 
     public void muestra() {
         vistaAprobado.muestra();
+    }
+
+    public double getMonto() {
+        return 500;
     }
 
 }
