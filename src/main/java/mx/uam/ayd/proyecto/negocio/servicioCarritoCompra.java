@@ -202,7 +202,7 @@ public class servicioCarritoCompra {
             }
         }
 
-        //si no existe relacion se retorna null
+        // si no existe relacion se retorna null
         if (relacionEncontrada == null) {
             return false;
         }
@@ -210,7 +210,7 @@ public class servicioCarritoCompra {
         // 3. Eliminar la relación de la tabla intermedia
         repoInter.delete(relacionEncontrada);
 
-        //Quitamos el producto de la tabla
+        // Quitamos el producto de la tabla
         if (car.removerProducto(prod, cantidadxUnidad)) {
 
             repoCarrito.save(car);
@@ -220,9 +220,12 @@ public class servicioCarritoCompra {
         return false;
     }
 
-    public Cliente recuperaClienToDireccion(){
+    public Cliente recuperaClienToDireccion() {
         Cliente dueño = repoCliente.findByIdCliente(gestionCliente.getInstance().getIdActivo());
         return dueño;
     }
 
+    public boolean simulacionConexionApi() {
+        return true;
+    }
 }
