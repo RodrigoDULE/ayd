@@ -7,6 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+
 import java.util.List;
 
 @Entity
@@ -42,8 +44,8 @@ public class PublicacionMarketing {
 
 
     //cardinalidad con producto
-    @OneToMany 
-    private List <Producto> produtos_publi;
+    @OneToOne 
+    private Producto produtos_publi;
 
 
 
