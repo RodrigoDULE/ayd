@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class FormularioMarketing {
@@ -53,6 +54,9 @@ public class FormularioMarketing {
         }
     }
 
+    
+    
+    
     // Identificador autogenerado por la base de datos (clave primaria)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +65,8 @@ public class FormularioMarketing {
     // Tipo de contenido elegido (una sola opción, tipo radio button)
     private TipoContenido tipoContenido;
 
+    
+    
     // Plataformas de destino seleccionadas por el usuario (checkboxes),
     // ej: ["Instagram Post", "Instagram Reels"]
     private List<String> plataformasDestino = new ArrayList<>();
@@ -79,6 +85,11 @@ public class FormularioMarketing {
     //Constructor Vacío
     public FormularioMarketing() {
     }
+
+    //cardinlidad con publicacion
+
+    @OneToOne
+    private PublicacionMarketing publicacion;
 
     //recibe los datos ya empaquetados en un DatosFormulario y la lista de archivos ya convertidos 
     // a ArchivoReferencia. 

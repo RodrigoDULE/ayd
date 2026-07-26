@@ -46,10 +46,18 @@ public class PublicacionMarketing {
     //cardinalidad con producto
     @OneToOne 
     private Producto produtos_publi;
+//con formulario
+    @OneToOne
+    private FormularioMarketing formulario;
+
+
 
 
 
     //getters y setters
+    
+  
+    
     public long getIdPublicacion(){
         return idPublicacion;
     }
