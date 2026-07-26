@@ -23,6 +23,7 @@ public class ControladorCalendarioEventos {
    
     public void iniciaVentanaCalendario(){
         vistaCalendarioEventos.muestraCalendario();
+        seleccionarFecha(LocalDate.now());
     }
     
 
@@ -36,6 +37,13 @@ public class ControladorCalendarioEventos {
     private void inicializarControlador(){
         vistaCalendarioEventos.setControlador(this);
     }
+
+    public void seleccionarFecha(LocalDate fecha){
+        List<Evento> eventos = servicioCalendario.recuperaEventoporFecha(fecha);
+        vistaCalendarioEventos.mostrarEventos(eventos);
+
+    }
+
     
     
 }

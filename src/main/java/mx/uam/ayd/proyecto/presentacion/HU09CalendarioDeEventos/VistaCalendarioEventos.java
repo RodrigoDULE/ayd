@@ -2,7 +2,12 @@ package mx.uam.ayd.proyecto.presentacion.HU09CalendarioDeEventos;
 
 //importar paqueterias de listas
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 
 //librerias para escuchador
 import javafx.event.EventHandler;
@@ -60,7 +65,10 @@ public class VistaCalendarioEventos {
     private Stage stage;
     private boolean inicializado = false;
     private ControladorCalendarioEventos controlcalendario;
-
+    
+    private YearMonth mesActual;
+    //mesActual = mesActual.plusMonths(1);
+    //mesActual = mesActual.minusMonths(1);
   
     // constructor vacio
     public VistaCalendarioEventos() {
@@ -94,6 +102,8 @@ public class VistaCalendarioEventos {
             Scene scene = new Scene(loader.load());
             scene.getStylesheets().add(getClass().getResource("/css/estilos-mezicuil.css").toExternalForm());//Estilo css
             stage.setScene(scene);
+            btnPrev.setOnAction(e -> mesAnterior());
+            btnNext.setOnAction(e -> mesSiguiente());
 
             inicializado = true;
         } catch (Exception e) {
@@ -102,11 +112,87 @@ public class VistaCalendarioEventos {
 
     }
 
-    public void muestraCalendario(){
 
 
-        
+    public void mesAnterior() {
+        mesActual = mesActual.minusMonths(1); // Resta 1 mes a la fecha guardada
+        dibujaCalendario();                   // Vuelve a pintar los botones
+        actualizarTituloMes();                // Cambia el texto del Label (ej. "MAYO 2026")
     }
+
+    public void mesSiguiente() {
+        mesActual = mesActual.plusMonths(1);  // Suma 1 mes
+        dibujaCalendario();
+        actualizarTituloMes();
+    }
+
+    public void actualizarTituloMes() {
+        // Formatea "2026-06" a "JUNIO 2026"
+        String nombreMes = mesActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase();
+        lblMes.setText(nombreMes + " " + mesActual.getYear());
+    }
+    
+
+    public void dibujaCalendario(){
+        LocalDate primerDia = mesActual.atDay(1);
+        
+        int diasMes= mesActual.lengthOfMonth();
+        int fila=0;
+        int columnaInicial= primerDia.getDayOfWeek().getValue();;
+        
+        if(columnaInicial==7){
+
+            columnaInicial=0;
+        }
+        int columna = columnaInicial;
+        calendarGrid.getChildren().clear();;
+
+        for(int dia=1; dia <= diasMes; dia++){
+            
+            Button boton = new Button(Integer.toString(dia));
+            calendarGrid.add(boton, columna, fila);
+            //mesActual.atDay(dia);
+            
+            if(columna==7){
+                fila++;
+                columna=0;
+            }
+            LocalDate fecha = mesActual.atDay(dia);
+            columna++;
+            boton.setOnAction(event -> controlcalendario.seleccionarFecha(fecha));
+        }
+
+
+    }
+
+    public void muestraCalendario(){
+        mesActual= YearMonth.now();
+        dibujaCalendario();
+
+
+
+
+
+    }
+    
+    public void mostrarEventos(List <Evento> eventos){
+        panelEventos.getChildren().clear();
+        for(Evento evento: eventos){
+            VBox tarjeta = new VBox();
+            Label nombre = new Label(evento.getNombreEvento());
+            Label lugar = new Label(evento.getLugar());
+            Label horaIn = new Label(evento.getHoraIn().toString());
+            Label horaFin = new Label(evento.getHoraFin().toString());
+            Label Comision = new Label(String.valueOf(evento.getComision()));
+            //Label Empleado = new Label(evento.);
+            Button editar = new Button("Editar");
+            tarjeta.getChildren().addAll(nombre, lugar, horaIn, horaFin, Comision, Empleado);
+            panelEventos.getChildren().add(tarjeta);
+        }
+
+    }
+
+
     
 }
 

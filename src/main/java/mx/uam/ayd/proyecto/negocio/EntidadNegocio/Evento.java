@@ -175,4 +175,9 @@ public class Evento {
     public void setNotasAdicionales(String notasAdicionales) {
         this.notasAdicionales = notasAdicionales;
     }
+
+    public List<Empleado> getEmpleados() {
+    
+        return empleados;
+    }
 }
