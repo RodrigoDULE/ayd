@@ -2,6 +2,8 @@ package mx.uam.ayd.proyecto.presentacion.HU03MetodoPago;
 
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.Year;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -86,26 +88,50 @@ public class VistaMetodoPago {
     }
 
     private boolean validaDatosTarjeta() {
+
         // Número de tarjeta: exactamente 16 dígitos
         if (!numeroTarjeta.getText().matches("\\d{16}")) {
             mostrarMensaje("El número de tarjeta debe tener 16 dígitos");
             return false;
         }
 
-        // Nombre: no vacío y sin números
+        // Nombre de la tarjeta
         if (nombreTarjeta.getText().isBlank()) {
             mostrarMensaje("El nombre no puede estar vacío");
             return false;
         }
 
+        // El nombre no debe contener números
         if (nombreTarjeta.getText().matches(".*\\d.*")) {
             mostrarMensaje("El nombre no puede contener números");
             return false;
         }
 
         // Fecha de expiración: formato MM/AA
-        if (!fechaExpiracion.getText().matches("\\d{2}/\\d{2}")) {
+        if (!fechaExpiracion.getText().matches("(0[1-9]|1[0-2])/\\d{2}")) {
             mostrarMensaje("La fecha de expiración debe tener el formato MM/AA");
+            return false;
+        }
+
+        // Obtener mes y año ingresados
+        String[] partes = fechaExpiracion.getText().split("/");
+        int mesIngresado = Integer.parseInt(partes[0]);
+        int anioIngresado = Integer.parseInt(partes[1]);
+
+        // Obtener mes y año actuales
+        LocalDate hoy = LocalDate.now();
+        int mesActual = hoy.getMonthValue();
+        int anioActual = hoy.getYear() % 100;
+
+        // Si el año es anterior, la tarjeta está vencida
+        if (anioIngresado < anioActual) {
+            mostrarMensaje("La fecha de expiración debe ser mayor a la actual");
+            return false;
+        }
+
+        // Si es el mismo año pero el mes ya pasó, también está vencida
+        if (anioIngresado == anioActual && mesIngresado < mesActual) {
+            mostrarMensaje("La fecha de expiración debe ser mayor a la actual");
             return false;
         }
 
@@ -114,8 +140,8 @@ public class VistaMetodoPago {
             mostrarMensaje("El CVV debe tener 3 dígitos");
             return false;
         }
+
         mostrarMensaje("Datos de tarjeta válidos");
-        // Todos los datos son válidos
         return true;
     }
 
