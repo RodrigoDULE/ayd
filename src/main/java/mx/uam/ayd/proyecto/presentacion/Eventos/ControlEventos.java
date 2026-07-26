@@ -18,10 +18,9 @@ public class ControlEventos {
     private controlAgendarNuevoEvento controlAgendarNuevoEvento;
     private ServicioEvento servicioEvento;
 
-    
-    
     @Autowired
     private ControladorCalendarioEventos controlCalendario;
+
     public ControlEventos(VistaEventos vista, controlAgendarNuevoEvento controlAgendarNuevoEvento,
             ServicioEvento servicioEvento) {
         this.vista = vista;
@@ -48,8 +47,8 @@ public class ControlEventos {
     public void abrirCalendario() {
         // Lógica para abrir la vista del calendario
         System.out.println("Abrir Calendario");
-       // VistaCalendarioEventos.muestraCalendario();
-       controlCalendario.inicia();
+        // VistaCalendarioEventos.muestraCalendario();
+        controlCalendario.inicia();
     }
 
 }

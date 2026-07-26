@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<StackPane styleClass="root-oscuro" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuapp.controller.ConfirmacionPagoController">
+<StackPane styleClass="root-oscuro" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
 
     <VBox alignment="CENTER" maxWidth="480.0" spacing="25.0" styleClass="contenedor-principal">
         <padding>
@@ -23,8 +23,7 @@
         <!-- Titulo -->
         <VBox alignment="CENTER" spacing="8.0">
             <Label styleClass="titulo" text="¡Pago Confirmado!" />
-            <Label styleClass="subtitulo" text="Su transacción ha sido procesada con éxito. Un" />
-            <Label styleClass="subtitulo" text="recibo ha sido enviado a su correo electrónico." />
+            <Label styleClass="subtitulo" text="Su transacción ha sido procesada con éxito." />
         </VBox>
 
         <!-- Detalles -->

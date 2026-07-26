@@ -3,7 +3,6 @@ package mx.uam.ayd.proyecto.presentacion.HU03MetodoPago;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.Year;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,16 +73,15 @@ public class VistaMetodoPago {
     @FXML
     public void realizarPago() {
         if (validaDatosTarjeta()) {
-            String tarjeta = numeroTarjeta.getText();
-            String nombre = nombreTarjeta.getText();
-            String fecha = fechaExpiracion.getText();
-            String codigo = cvv.getText();
-            System.out.println("Número de tarjeta: " + tarjeta);
-            System.out.println("Nombre en la tarjeta: " + nombre);
-            System.out.println("Fecha de expiración: " + fecha);
-            System.out.println("CVV: " + codigo);
+            if (controlador.simulacionConexionApi()) {
+                controlador.iniciaVentanaAprobado();
+                stage.close();
+            } else {
+                mostrarMensaje("Error al realizar el pago");
+            }
+
         } else {
-            System.out.println("Error al realizar el pago");
+            mostrarMensaje("Error al realizar el pago");
         }
     }
 
@@ -140,8 +138,6 @@ public class VistaMetodoPago {
             mostrarMensaje("El CVV debe tener 3 dígitos");
             return false;
         }
-
-        mostrarMensaje("Datos de tarjeta válidos");
         return true;
     }
 
