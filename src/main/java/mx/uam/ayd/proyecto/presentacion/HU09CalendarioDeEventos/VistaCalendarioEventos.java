@@ -115,13 +115,13 @@ public class VistaCalendarioEventos {
 
 
     public void mesAnterior() {
-        mesActual = mesActual.minusMonths(1); // Resta 1 mes a la fecha guardada
-        dibujaCalendario();                   // Vuelve a pintar los botones
-        actualizarTituloMes();                // Cambia el texto del Label (ej. "MAYO 2026")
+        mesActual = mesActual.minusMonths(1); // resta 1 mes a la fecha guardada
+        dibujaCalendario();                   // vuelve a pintar los botones
+        actualizarTituloMes();                // cambia el texto del ñabel 
     }
 
     public void mesSiguiente() {
-        mesActual = mesActual.plusMonths(1);  // Suma 1 mes
+        mesActual = mesActual.plusMonths(1);  // suma 1 mes
         dibujaCalendario();
         actualizarTituloMes();
     }
@@ -165,14 +165,18 @@ public class VistaCalendarioEventos {
 
     }
 
-    public void muestraCalendario(){
-        mesActual= YearMonth.now();
+    public void muestraCalendario() {
+        inicializarUI(); 
+        mesActual = YearMonth.now();
+    
+
         dibujaCalendario();
+    
 
-
-
-
-
+        actualizarTituloMes();
+        if (stage != null) {
+            stage.show();
+        }
     }
     
     public void mostrarEventos(List <Evento> eventos){

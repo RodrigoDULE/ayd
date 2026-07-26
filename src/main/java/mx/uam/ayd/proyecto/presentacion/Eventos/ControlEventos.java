@@ -6,6 +6,8 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import mx.uam.ayd.proyecto.presentacion.HU08AgendarNuevoEvento.controlAgendarNuevoEvento;
+import mx.uam.ayd.proyecto.presentacion.HU09CalendarioDeEventos.ControladorCalendarioEventos;
+import mx.uam.ayd.proyecto.presentacion.HU09CalendarioDeEventos.VistaCalendarioEventos;
 import mx.uam.ayd.proyecto.negocio.ServicioEvento;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Evento;
 
@@ -16,7 +18,10 @@ public class ControlEventos {
     private controlAgendarNuevoEvento controlAgendarNuevoEvento;
     private ServicioEvento servicioEvento;
 
+    
+    
     @Autowired
+    private ControladorCalendarioEventos controlCalendario;
     public ControlEventos(VistaEventos vista, controlAgendarNuevoEvento controlAgendarNuevoEvento,
             ServicioEvento servicioEvento) {
         this.vista = vista;
@@ -43,6 +48,8 @@ public class ControlEventos {
     public void abrirCalendario() {
         // Lógica para abrir la vista del calendario
         System.out.println("Abrir Calendario");
+       // VistaCalendarioEventos.muestraCalendario();
+       controlCalendario.inicia();
     }
 
 }

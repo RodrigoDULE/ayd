@@ -21,6 +21,11 @@ public class ControladorCalendarioEventos {
 
     //private YearMonth mesActual;
    
+    public void inicia() {
+        vistaCalendarioEventos.setControlador(this);   
+        vistaCalendarioEventos.muestraCalendario(); 
+    }
+    
     public void iniciaVentanaCalendario(){
         vistaCalendarioEventos.muestraCalendario();
         seleccionarFecha(LocalDate.now());
@@ -43,7 +48,10 @@ public class ControladorCalendarioEventos {
         vistaCalendarioEventos.mostrarEventos(eventos);
 
     }
+    public void editarEvento(Evento e){
 
+
+    }
     
     
 }
