@@ -13,32 +13,64 @@ import java.time.LocalTime;
 import java.time.Duration;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Servicio de negocio para gestionar operaciones relacionadas con eventos.
+ *
+ * <p>Encapsula reglas de negocio de disponibilidad, cálculo de notificación y
+ * persistencia de eventos mediante el repositorio.</p>
+ */
 @Service
 public class ServicioEvento {
-    // repo para tener acceso a la base de datos
+    /**
+     * Repositorio de eventos para acceso a persistencia.
+     */
     private final RepositorioEvento repoEvento;
 
-    // Constructor para inyectar dependencias
+    /**
+     * Construye el servicio con su dependencia de repositorio.
+     *
+     * @param repoEvento repositorio de eventos
+     */
     public ServicioEvento(RepositorioEvento repoEvento) {
         this.repoEvento = repoEvento;
     }
 
-    // Metodo para obtener todos los eventos
+    /**
+     * Obtiene todos los eventos almacenados.
+     *
+     * @return lista con todos los eventos registrados
+     */
     public List<Evento> obtenerEventos() {
-        // creamos un arreglo para guardar los eventos
         List<Evento> listaEventos = new ArrayList<Evento>();
 
-        // Recorremos la lista de eventos
         for (Evento evento : repoEvento.findAll()) {
             listaEventos.add(evento);
         }
 
-        // Retornamos la lista de eventos
         return listaEventos;
     }
 
-        @Transactional
-        public void agregarEvento(String nombre, String tipo, LocalDate fecha,
+    /**
+     * Registra un evento nuevo en la base de datos.
+     *
+     * <p>Convierte horas desde texto, crea la entidad de evento, asigna sus
+     * atributos y la persiste junto con empleados relacionados.</p>
+     *
+     * @param nombre nombre del evento
+     * @param tipo tipo de evento
+     * @param fecha fecha en la que se realizará el evento
+     * @param horaInicio hora de inicio en formato {@code HH:mm}
+     * @param horaFin hora de finalización en formato {@code HH:mm}
+     * @param acuerdo acuerdo económico del evento
+     * @param lugar lugar del evento
+     * @param notas notas adicionales
+     * @param noAsistentes número de asistentes esperados
+     * @param comision comisión asociada al evento
+     * @param notificacion fecha de notificación previa al evento
+     * @param empleados empleados asignados al evento
+     */
+    @Transactional
+    public void agregarEvento(String nombre, String tipo, LocalDate fecha,
             String horaInicio, String horaFin, String acuerdo,
             String lugar, String notas, int noAsistentes, int comision, LocalDate notificacion,
             List<Empleado> empleados) {
@@ -46,8 +78,6 @@ public class ServicioEvento {
         LocalTime horaIn = LocalTime.parse(horaInicio);
         LocalTime horaFin_ = LocalTime.parse(horaFin);
 
-        // Crear el evento usando setters (campos no capturados en FXML quedan en
-        // default)
         Evento evento = new Evento();
         evento.setNombreEvento(nombre);
         evento.setTipoEvento(tipo);
@@ -65,39 +95,45 @@ public class ServicioEvento {
         repoEvento.save(evento);
     }
 
-    // Regla de negocio
+    /**
+     * Verifica si un horario propuesto está disponible para agendar un evento.
+     *
+     * <p>Reglas aplicadas:</p>
+     * <p>1) La duración mínima del evento debe ser de 2 horas.</p>
+     * <p>2) No debe existir solapamiento con otros eventos del mismo día.</p>
+     * <p>3) Debe existir al menos 6 horas de separación con cualquier evento del
+     * mismo día.</p>
+     *
+     * @param fecha fecha propuesta para el evento
+     * @param horaInicio hora de inicio propuesta
+     * @param horaFin hora de finalización propuesta
+     * @return {@code true} si cumple todas las reglas; en caso contrario,
+     *         {@code false}
+     */
     public boolean verificarDisponibilidad(LocalDate fecha, LocalTime horaInicio, LocalTime horaFin) {
-        // Regla de negocio: El evento debe durar al menos 2 horas
         Duration duracion = Duration.between(horaInicio, horaFin);
         if (duracion.toMinutes() < 120) {
             return false;
         }
 
-        // Regla de negocio: El evento debe tener al menos 6 horas de diferencia con
-        // otro evento
         for (Evento evento : repoEvento.findAll()) {
             if (!fecha.equals(evento.getFechaE())) {
-                continue; // distinto día, no compite
+                continue;
             }
 
-            // 1. Choque directo (solapamiento)
             boolean seSolapan = horaInicio.isBefore(evento.getHoraFin()) &&
                     horaFin.isAfter(evento.getHoraIn());
             if (seSolapan) {
                 return false;
             }
 
-            // 2. Diferencia mínima de 6 horas
             Duration diferencia;
             if (horaInicio.isAfter(evento.getHoraFin()) || horaInicio.equals(evento.getHoraFin())) {
-                // tu evento empieza después del existente
                 diferencia = Duration.between(evento.getHoraFin(), horaInicio);
             } else {
-                // tu evento termina antes de que empiece el existente
                 diferencia = Duration.between(horaFin, evento.getHoraIn());
             }
 
-            // Checamos que no haya menos de 6 horas de diferencia entre eventos
             if (diferencia.toHours() < 6) {
                 return false;
             }
@@ -106,7 +142,12 @@ public class ServicioEvento {
         return true;
     }
 
-    // Regla de negocio
+    /**
+     * Calcula la fecha de notificación una semana antes de la fecha del evento.
+     *
+     * @param fecha fecha del evento
+     * @return fecha correspondiente a una semana antes
+     */
     public LocalDate calcularUnaSemanaAntes(LocalDate fecha) {
         return fecha.minusWeeks(1);
     }

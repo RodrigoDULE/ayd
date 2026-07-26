@@ -19,6 +19,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Vista JavaFX para agendar un nuevo evento.
+ *
+ * <p>Gestiona la captura de datos en la interfaz, valida campos y delega en el
+ * controlador la lógica de negocio para registrar eventos.</p>
+ */
 @Component
 public class vistaAgendarNuevoEvento {
 
@@ -48,6 +54,11 @@ public class vistaAgendarNuevoEvento {
     @FXML
     private ListView<String> lvEmpleados;
 
+    /**
+     * Inicializa los componentes visuales de la ventana.
+     *
+     * <p>Carga los catálogos estáticos para tipo de evento y tipo de acuerdo.</p>
+     */
     public void initialize() {
 
         cmbTipoEvento.getItems().addAll(
@@ -58,27 +69,39 @@ public class vistaAgendarNuevoEvento {
         cmbAcuerdo.getItems().addAll(
                 "Gratis",
                 "Pago");
-
-        // Los empleados se cargan desde la BD al abrir la ventana (ver
-        // cargarEmpleados())
     }
 
-    // Carga los nombres de empleados en el ComboBox desde la base de datos
+    /**
+     * Carga los nombres de empleados en el {@code ComboBox} desde la base de
+     * datos.
+     */
     public void cargarEmpleados() {
         List<String> nombres = controlAgendarNuevoEvento.obtenerNombresEmpleados();
         cmbEmpleado.getItems().clear();
         cmbEmpleado.getItems().addAll(nombres);
     }
 
-    // constructor sin parametos
+    /**
+     * Constructor por defecto de la vista.
+     */
     public vistaAgendarNuevoEvento() {
     }
 
+    /**
+     * Inyecta el controlador asociado a este caso de uso.
+     *
+     * @param controlador controlador de agendar nuevo evento
+     */
     public void setControladorAgendarNuevoEvento(controlAgendarNuevoEvento controlador) {
         this.controlAgendarNuevoEvento = controlador;
     }
 
-    // método inicializar UI
+    /**
+     * Inicializa la interfaz gráfica de la ventana principal.
+     *
+     * <p>Si la llamada ocurre fuera del hilo de JavaFX, se reprograma su
+     * ejecución en el hilo correcto.</p>
+     */
     private void inicializarUI() {
         // Si la UI ya está inicializada, no hacer nada
         if (initialized) {
@@ -104,7 +127,12 @@ public class vistaAgendarNuevoEvento {
         }
     }
 
-    // Muestra la ventana principal
+    /**
+     * Muestra la ventana principal para agendar eventos.
+     *
+     * <p>Garantiza ejecución en el hilo de JavaFX, inicializa la UI cuando es
+     * necesario y recarga la lista de empleados.</p>
+     */
     public void muestra() {
         // Si no estamos en el hilo de JavaFX, pedir que lo haga
         if (!Platform.isFxApplicationThread()) {
@@ -121,6 +149,12 @@ public class vistaAgendarNuevoEvento {
         stage.show();
     }
 
+    /**
+     * Verifica que todos los campos requeridos tengan valores válidos.
+     *
+     * @return {@code true} si la captura es válida; en caso contrario,
+     *         {@code false}
+     */
     public boolean verificarCampos() {
         if (txtNombreEvento.getText().isEmpty()) {
             mostrarMensaje("Debe ingresar un nombre para el evento");
@@ -174,6 +208,11 @@ public class vistaAgendarNuevoEvento {
         return true;
     }
 
+    /**
+     * Agrega el empleado seleccionado a la lista de participantes del evento.
+     *
+     * <p>Evita duplicados y notifica cuando un empleado ya fue agregado.</p>
+     */
     @FXML
     public void agregarEmpleado() {
         String empleado = cmbEmpleado.getValue();
@@ -187,12 +226,20 @@ public class vistaAgendarNuevoEvento {
         }
     }
 
+    /**
+     * Cancela la captura del evento actual, limpia el formulario y cierra la
+     * ventana.
+     */
     @FXML
     public void cancelarEvento() {
         limpiarCampos();
         stage.close();
     }
 
+    /**
+     * Guarda el evento cuando los campos son válidos y existe disponibilidad en
+     * el horario seleccionado.
+     */
     @FXML
     public void guardarEvento() {
         if (verificarCampos()) {
@@ -213,6 +260,11 @@ public class vistaAgendarNuevoEvento {
         }
     }
 
+    /**
+     * Muestra un mensaje informativo en un cuadro de diálogo.
+     *
+     * @param mensaje texto a mostrar al usuario
+     */
     private void mostrarMensaje(String mensaje) {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(() -> this.mostrarMensaje(mensaje));
@@ -226,6 +278,9 @@ public class vistaAgendarNuevoEvento {
         alert.showAndWait();
     }
 
+    /**
+     * Limpia los campos del formulario para dejar la vista en su estado inicial.
+     */
     private void limpiarCampos() {
         txtNombreEvento.clear();
         dpFecha.setValue(null);
