@@ -184,9 +184,25 @@ public class VistaCalendarioEventos {
             Label horaIn = new Label(evento.getHoraIn().toString());
             Label horaFin = new Label(evento.getHoraFin().toString());
             Label Comision = new Label(String.valueOf(evento.getComision()));
-            //Label Empleado = new Label(evento.);
+
+
+            List<Empleado> listaEmpleados = evento.getEmpleados();
+            String nombres = "";
+            if (listaEmpleados != null && !listaEmpleados.isEmpty()) {
+                for (Empleado emp : listaEmpleados) {
+                    nombres += emp.getNombreEmpleado() + ", ";
+                }
+                // Quita la última coma y espacio sobrante
+                nombres = nombres.substring(0, nombres.length() - 2);
+            } else {
+                nombres = "Sin empleados asignados";
+            }
+
+            Label lblEmpleados = new Label("Empleados: " + nombres);
+
+
             Button editar = new Button("Editar");
-            tarjeta.getChildren().addAll(nombre, lugar, horaIn, horaFin, Comision, Empleado);
+            tarjeta.getChildren().addAll(nombre, lugar, horaIn, horaFin, Comision, lblEmpleados);
             panelEventos.getChildren().add(tarjeta);
         }
 
