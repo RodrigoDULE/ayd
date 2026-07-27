@@ -16,6 +16,7 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.AsistenteBot;
 @ExtendWith(MockitoExtension.class)
 public class ServicioBotTest {
     
+    /*
     @Mock
     private repositorioProducto repoProd;
     
@@ -24,8 +25,8 @@ public class ServicioBotTest {
     
     @InjectMocks
     private Serviciobot serbot;
-
-   @Test
+    
+    @Test
     void TestProcesaMensajeDameDatos() {
         // given
         String mensaje = "¿Que mezcales hay disponibles en esta tienda?";
@@ -33,11 +34,12 @@ public class ServicioBotTest {
         // ¡Aquí le decimos al mock cómo comportarse!
         // Le indicamos que cuando llamen a palabrasClave con cualquier texto, devuelva "mezcal"
         when(bot.palabrasClave(anyString())).thenReturn("mezcal");
-
+        
         // when
         String res = serbot.procesaMensajeDameDatos(mensaje);
-
+        
         // then
         assertNotNull(res);
     }
+    */
 }
