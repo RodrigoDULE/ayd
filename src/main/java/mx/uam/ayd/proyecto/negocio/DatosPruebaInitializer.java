@@ -45,7 +45,7 @@ public class DatosPruebaInitializer implements CommandLineRunner {
             ordenAbuelos.setFechaCreacion(LocalDate.now());
             
             DetalleOrden detalle1 = new DetalleOrden();
-            detalle1.setCantidad(500); 
+            detalle1.setCantidad(500);
             detalle1.setInsumo(mezcalEspadin);
             detalle1.setSubTotalLote(500 * mezcalEspadin.getPrecio());
             
@@ -68,9 +68,9 @@ public class DatosPruebaInitializer implements CommandLineRunner {
             ordenEtiquetas.setFechaCreacion(LocalDate.now());
             
             DetalleOrden detalle3 = new DetalleOrden();
-            detalle3.setCantidad(1000); 
+            detalle3.setCantidad(100); 
             detalle3.setInsumo(etiquetasFinas);
-            detalle3.setSubTotalLote(1000 * etiquetasFinas.getPrecio()); 
+            detalle3.setSubTotalLote(100 * etiquetasFinas.getPrecio()); 
 
             ordenEtiquetas.agregarDetalle(detalle3);
             ordenEtiquetas.setTotalOrdenCompra(detalle3.getSubTotalLote()); 

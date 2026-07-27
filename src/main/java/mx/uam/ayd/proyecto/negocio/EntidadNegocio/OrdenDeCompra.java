@@ -79,6 +79,9 @@ public class OrdenDeCompra {
     public void setFechaCreacion(LocalDate fechaCreacion){this.fechaCreacion = fechaCreacion;}
     public void setFactura(String factura){this.factura = factura;}
 
+    // este sólo lo usaré para el Test
+    public void setId(Long id) {this.id = id;}
+
     public void agregarDetalle(DetalleOrden detalle) {
         this.detalles.add(detalle);
         detalle.setOrdenDeCompra(this); // Sincroniza la relación bidireccional
