@@ -47,7 +47,7 @@ public class servicioCalendario {
     public List<LocalDate> calcularRepeticionSemanas(LocalDate fechaE, LocalDate notificacion, int numsemanas){
         List<LocalDate> notssemanas = new ArrayList<>();
         notssemanas.add(notificacion);
-        int j=0;
+        int j=numsemanas;
         if (numsemanas > 0){
             while(fechaE.isAfter(notificacion.plusWeeks(j))==true){
 
@@ -72,7 +72,7 @@ public class servicioCalendario {
     public List<LocalDate> calcularRepeticionDias(LocalDate fechaE, LocalDate notificacion, int numdias){
         List <LocalDate> notsdias = new ArrayList<>();
         notsdias.add(notificacion);
-        int i= 0;
+        int i= numdias;
 
         //if valida que los dias no sean negativos ni 0
         if(numdias>0){
