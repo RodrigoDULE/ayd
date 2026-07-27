@@ -86,14 +86,6 @@ public class ControlFormularioMarketing {
      */
     public void seleccionarVariacion(VariacionContenido variacionElegida) {
         
-        // Acción temporal para que puedas probar que los botones de la vista funcionan
-        //vistaFormularioMarketing.mostrarMensaje("Elegiste: " + variacionElegida.getNombre());
-        
-        // TODO: Paso 5. Cuando construyas la otra HU, borra el 'mostrarMensaje' de arriba
-        // y descomenta estas dos líneas para hacer el cambio de pantalla:
-        
-        // vistaFormularioMarketing.cerrarVentana();
-        // controlNuevaHU.iniciaVentana(variacionElegida);
 
 
         vistaFormularioMarketing.cerrarVentana();
