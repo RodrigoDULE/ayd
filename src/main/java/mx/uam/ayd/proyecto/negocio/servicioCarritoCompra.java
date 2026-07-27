@@ -174,11 +174,15 @@ public class servicioCarritoCompra {
         // recuperamos el carrito
         carritoCompra car = clienteActivo.getCarritoCompra();
         if (car != null) {
+            /*
             if (car.getTotalCalculado() > 300) {
                 car.setenvioGratis(true);
             } else {
                 car.setenvioGratis(false);
-            }
+        }
+        */
+       car.validarEnvioGratis();
+       System.out.println("El envio gratis es: " + car.getenvioGratis());
             return car;
         }
         return null;

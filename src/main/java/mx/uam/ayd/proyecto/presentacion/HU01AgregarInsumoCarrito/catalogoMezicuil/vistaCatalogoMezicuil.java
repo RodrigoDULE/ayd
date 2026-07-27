@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -21,7 +22,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import mx.uam.ayd.proyecto.conffigPD.gestionCliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
+
 /**
  * vistaCatalogoMezicuil
  */
@@ -31,7 +34,6 @@ public class vistaCatalogoMezicuil {
     private Stage stage;
     private boolean inicializado = false;
     private controladorCatalogoMezicuil controlCatalgo;
-    
 
     @FXML
     private TextField buscaProducto;
@@ -106,7 +108,7 @@ public class vistaCatalogoMezicuil {
 
             // Aqui agregamos los productos en el contenedor
             contenedorProductos.getChildren().add(tarjeta);
-            
+
             // Le agregamos un escuchador a las tarjetas
             tarjeta.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -115,7 +117,26 @@ public class vistaCatalogoMezicuil {
                 }
             });
         }
-            
+
+        //Añadimos el boton del bot
+        if (gestionCliente.getInstance().getIdActivo() == 6) {
+            Button bot = new Button("Bot");
+            //agregamos una tarjeta de bot
+            VBox tarjeta = new VBox();
+            tarjeta.getStyleClass().add("product-card");
+            Label nombre = new Label("AsistenteBot");
+            nombre.getStyleClass().add("product-name");
+            tarjeta.getChildren().addAll(nombre, bot);
+            contenedorProductos.getChildren().add(tarjeta);
+
+            bot.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent evento) {
+                  controlCatalgo.EnviarBot();
+                }
+            });
+        }
+
         // boxTodo.setSelected(true);
         stage.show();
     }
@@ -131,13 +152,16 @@ public class vistaCatalogoMezicuil {
         RadioButton botonPresionado = (RadioButton) componenteOrigen;
 
         if (controlCatalgo != null) {
-            if ("Todo".equals(botonPresionado.getText())) {
-                System.out.println("Todo presionado");
-                controlCatalgo.validarCriterio("Todo");
-            } else {
-                System.out.println("Boton seleccionado" + botonPresionado.getText());
-                controlCatalgo.validarCriterio(botonPresionado.getText());
-            }
+            /*
+             * if ("Todo".equals(botonPresionado.getText())) {
+             * System.out.println("Todo presionado");
+             * controlCatalgo.validarCriterio("Todo");
+             * } else {
+             * System.out.println("Boton seleccionado" + botonPresionado.getText());
+             * controlCatalgo.validarCriterio(botonPresionado.getText());
+             * }
+             */
+            controlCatalgo.validarCriterio(botonPresionado.getText());
         } else {
             System.out.println("Error al inicalizar controlador");
         }
@@ -147,38 +171,39 @@ public class vistaCatalogoMezicuil {
     @FXML
     // Aqui le ponemos ActionEvent para ver que elemento dispara el evento
     private void handlebuscarCriterioBarra() {
-        if(buscaProducto.getText().isEmpty()){
+        // verificacion de campo no
+        if (buscaProducto.getText().isEmpty()) {
             mostrarMensaje("Ingresa el nombre de un producto");
             return;
         }
 
-        if(controlCatalgo != null){
+        if (controlCatalgo != null) {
             controlCatalgo.validarCriterio(buscaProducto.getText());
         }
     }
 
-    
-    //metodo para que ponamos acceder a las caracteristicas del producto seleccionado
-    private void handleProductoSeleccionado(Producto p){
+    // metodo para que ponamos acceder a las caracteristicas del producto
+    // seleccionado
+    private void handleProductoSeleccionado(Producto p) {
         System.out.println("dentro de handle");
         controlCatalgo.detallesProductoSeleccionado(p);
     }
 
-    //visitar carrito desde la pantalla principal de la tienda
-    @FXML 
-    private void handleIrCarrito(){
-        if(controlCatalgo != null){
+    // visitar carrito desde la pantalla principal de la tienda
+    @FXML
+    private void handleIrCarrito() {
+        if (controlCatalgo != null) {
             controlCatalgo.irCarrito();
         }
     }
-    
-    //Metodo para mostrar mensajes flotantes
-    public void mostrarMensaje(String mensaje){
+
+    // Metodo para mostrar mensajes flotantes
+    public void mostrarMensaje(String mensaje) {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(() -> this.mostrarMensaje(mensaje));
             return;
         }
-        
+
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Información");
         alert.setHeaderText(null);

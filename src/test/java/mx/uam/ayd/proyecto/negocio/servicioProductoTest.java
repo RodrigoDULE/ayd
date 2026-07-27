@@ -24,6 +24,7 @@ public class servicioProductoTest {
     @InjectMocks
     private servicioProducto servProd;
 
+    //Criterio de aceptacion: Regresa todos los productos que existen dentro del repositorio
     @Test
     void TestObtenerProductosDisponibles(){
         //given 
@@ -42,6 +43,7 @@ public class servicioProductoTest {
        assertEquals(2, productos.size());
     }
     
+    //Criterio de Aceptacion 1: Seleccion de algun filtro que regresa una lusta de productos
     @Test
     void TestobtenerProductosporCriterio(){
         //given, le tengo que agregar productos Mezcla
@@ -61,6 +63,7 @@ public class servicioProductoTest {
         assertEquals(2, crit.size());
     }
     
+    //Criterio de Acpetacion 2: Busqueda personalizada que regresa una lista de productos o solo una lista vacia
     @Test
     void TestObtenerProBusquedaPersonalizada(){
         //caso 1: retorna una lista vacia

@@ -5,7 +5,7 @@ public class gestionCliente {
     // 1. Única instancia de la clase
     private static gestionCliente instance;
 
-    // 2. Atributo de instancia (aquí YA NO lleva static)
+    // 2. Atributo de instancia
     private long idActivo;
 
     // 3. Constructor privado

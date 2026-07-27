@@ -66,4 +66,18 @@ public class carritoCompraTest {
         //then
         assertFalse(test, "No se deberia remover nada dentro del carrito");
     }
+
+    @Test
+    @DisplayName("Deberia regresar un true, ya que la cantidad comprada es mayor a 320 pesos")
+    void envioGratisTest(){
+        //given
+        carritoPrueba.setTotalCalculado(350);
+        carritoPrueba.validarEnvioGratis();
+
+        //when
+        boolean gratis = carritoPrueba.getenvioGratis();
+
+        //then
+        assertTrue(gratis);
+    }
 }

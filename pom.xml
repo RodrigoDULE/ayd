@@ -22,6 +22,13 @@
 
 	<dependencies>
 	
+	<!-- Agregamos las dependencias que gemini necesita para correr -->
+	<dependency>
+    <groupId>com.google.genai</groupId>
+    <artifactId>google-genai</artifactId>
+    <version>1.63.0</version>
+  </dependency>
+  
 		<!--  JPA -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -45,7 +45,16 @@ public class carritoCompra {
     public void setCantidadTotalCompra(int cantidadTotalCompra) {this.cantidadTotalCompra += cantidadTotalCompra; }//para que se vayan sumando a los demas producto que agregamos}
     public void setTotalCalculado(float totalCalculado) {this.totalCalculado += totalCalculado;}
     // public void setProducto(Producto producto) {this.producto.add(producto);}//solo agrega un producto a la vez    }
-    public void setenvioGratis(boolean envio){this.envioGratis = envio;}
+  
+  
+  
+    public void validarEnvioGratis(){/*this.envioGratis = envio;*/
+        if(totalCalculado < 320){
+            this.envioGratis = false;
+        }else{
+            this.envioGratis = true;
+        }
+    }
     
     //agregamos producto al carrito de tal manera que no este repetido
     public boolean setProducto(Producto prod){
@@ -59,6 +68,10 @@ public class carritoCompra {
 
     public boolean removerProducto(Producto prod, int cantidad){
         if(producto.contains(prod)){
+            //Añadimos los articulos a los disponibles dentro del stock
+            prod.setcantidadStock(prod.getcantidadStock() + cantidad);
+
+            //removemos el producto del carrito y recalculamos el total a pagar
             producto.remove(prod);
             setTotalCalculado(-prod.getPrecio()*cantidad);
             return true;

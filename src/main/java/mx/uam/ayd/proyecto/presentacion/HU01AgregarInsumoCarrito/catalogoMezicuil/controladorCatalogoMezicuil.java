@@ -11,6 +11,7 @@ import mx.uam.ayd.proyecto.negocio.servicioProducto;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Producto;
 import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.DetallesProductoAgregarCarrito.controladorDetallesProductoAgregarCarrito;
 import mx.uam.ayd.proyecto.presentacion.HU01AgregarInsumoCarrito.DetallesProductoAgregarCarrito.vistaDetallesProductoAgregarCarrito;
+import mx.uam.ayd.proyecto.presentacion.SerBot.ControladorBot;
 
 /**
  * controladorCatalogoMezicuil
@@ -24,12 +25,15 @@ public class controladorCatalogoMezicuil {
     private final vistaDetallesProductoAgregarCarrito vistaDetallesProducto;
     private final controladorDetallesProductoAgregarCarrito controlDetalles;
 
+    private final ControladorBot ctrlBot;
+
     @Autowired
-    public controladorCatalogoMezicuil(servicioProducto servicioProducto, vistaCatalogoMezicuil vistaCatalogo, vistaDetallesProductoAgregarCarrito vistaDetallesProducto, controladorDetallesProductoAgregarCarrito controlDetalles){
+    public controladorCatalogoMezicuil(servicioProducto servicioProducto, vistaCatalogoMezicuil vistaCatalogo, vistaDetallesProductoAgregarCarrito vistaDetallesProducto, controladorDetallesProductoAgregarCarrito controlDetalles, ControladorBot ctrl){
         this.controlDetalles = controlDetalles;
         this.vistaDetallesProducto = vistaDetallesProducto;
         this.servicioProducto = servicioProducto;
         this.vistaCatalogo = vistaCatalogo;
+        this.ctrlBot = ctrl;
     } 
 
 
@@ -80,5 +84,9 @@ public class controladorCatalogoMezicuil {
 
     public void irCarrito(){
         controlDetalles.visitaCarritoCompra();
+    }
+
+    public void EnviarBot(){
+        ctrlBot.muestra();
     }
 }

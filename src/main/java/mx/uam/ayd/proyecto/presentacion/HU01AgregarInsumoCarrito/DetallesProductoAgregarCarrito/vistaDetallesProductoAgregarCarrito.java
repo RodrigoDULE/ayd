@@ -111,7 +111,7 @@ public class vistaDetallesProductoAgregarCarrito {
         precioDetalles.setText("$" + actual.getPrecio() + " MXN");
         descripcionProdDetalles.getChildren().add(new Text(actual.getDescripcion()));
         piezasDetalles.setText("Hay " + actual.getcantidadStock() + " disponibles dentro de stock. \nUsuario con id: " + gestionCliente.getInstance().getIdActivo());
-
+        System.out.println("El numero de piezas disponibles dentro de stock es: " + actual.getcantidadStock());
         // Cargamos la ruta de la imagen
         ImageView imagen = new ImageView(new Image(getClass().getResourceAsStream(actual.getRutaImagen())));
         imagen.setFitWidth(300);
