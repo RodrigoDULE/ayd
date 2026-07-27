@@ -188,6 +188,16 @@ public class VistaCalendarioEventos {
             Label horaIn = new Label(evento.getHoraIn().toString());
             Label horaFin = new Label(evento.getHoraFin().toString());
             Label Comision = new Label(String.valueOf(evento.getComision()));
+            Button editar = new Button("Editar");
+
+            editar.setOnAction(e -> {
+                if (controlcalendario != null) {
+                    controlcalendario.editarNotificacionEvento(evento);
+                }else{
+
+                    System.err.println("❌ ERROR: 'controlcalendario' es NULL en la Vista");
+                }
+            });
 
 
             List<Empleado> listaEmpleados = evento.getEmpleados();
@@ -205,8 +215,8 @@ public class VistaCalendarioEventos {
             Label lblEmpleados = new Label("Empleados: " + nombres);
 
 
-            Button editar = new Button("Editar");
-            tarjeta.getChildren().addAll(nombre, lugar, horaIn, horaFin, Comision, lblEmpleados);
+            
+            tarjeta.getChildren().addAll(nombre, lugar, horaIn, horaFin, Comision, lblEmpleados, editar);
             panelEventos.getChildren().add(tarjeta);
         }
 

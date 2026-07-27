@@ -41,6 +41,7 @@ public class servicioCalendario {
         return repoEvento.findByNotificacion(notificacion);
     }
 
+    
     //calcular repeticion de notificiaciones (semanas)
     
     public List<LocalDate> calcularRepeticionSemanas(LocalDate fechaE, LocalDate notificacion, int numsemanas){
@@ -91,8 +92,9 @@ public class servicioCalendario {
 
 
     //administrar notificaciones de eventos
-    public Evento administrarNotificaciones(Evento evento, int numdias, int numsemanas){
+    public Evento administrarNotificaciones(Evento evento, int numdias, int numsemanas,LocalDate nuevaNotificacion){
         
+        evento.setNotificacion(nuevaNotificacion);
         
         LocalDate fechaE = evento.getFechaE();
         LocalDate notificacion = evento.getNotificacion();
