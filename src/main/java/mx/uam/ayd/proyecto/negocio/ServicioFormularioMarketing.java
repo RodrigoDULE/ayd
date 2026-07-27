@@ -11,11 +11,7 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.ArchivoReferencia;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing.DatosFormulario;
 
-/**
- * Servicio de negocio de HU-04 encargado de registrar el Formulario
- * de Marketing: arma las entidades a partir de los datos capturados
- * en la vista y los guarda a través del repositorio.
- */
+
 @Service
 public class ServicioFormularioMarketing {
 
@@ -28,22 +24,12 @@ public class ServicioFormularioMarketing {
     /**
      * Registra el formulario: crea los ArchivoReferencia y el
      * FormularioMarketing con los datos recibidos, y los guarda.
-     *
-     * Es el método que llama ControlFormularioMarketing — coincide
-     * con registrarFormulario(datosFormulario, archivo) del diagrama
-     * de secuencia (aquí "archivo" es una lista de archivos).
-     *
-     * NOTA: el tipo de "archivos" (aquí java.io.File) es un supuesto
-     * mío, porque todavía no construimos la vista. Ajústalo cuando
-     * definamos con qué componente se cargan los archivos ahí.
      */
     public FormularioMarketing registrarFormulario(DatosFormulario datos, List<File> archivos) {
 
         List<ArchivoReferencia> instanciasArchivos = crearArchivosReferencia(archivos);
 
         FormularioMarketing formulario = new FormularioMarketing(datos, instanciasArchivos);
-
-        formulario.setNombre("Contenido " + System.currentTimeMillis());
 
         return repositorioFormularioMarketing.save(formulario);
     }

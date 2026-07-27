@@ -2,6 +2,8 @@ package mx.uam.ayd.proyecto.negocio;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -29,16 +31,15 @@ public class ServicioCompraTest {
     void testGuardarCompra() {
         // given
         float monto = 150.5f;
-        String direccion = "Calle Falsa 123";
         LocalDate fecha = LocalDate.of(2026, 7, 27);
 
-        // Simulamos que el repositorio asigna id al guardar
-        when(repoCompra.save(org.mockito.ArgumentMatchers.any(Compra.class)))
-                .thenAnswer(invocation -> {
-                    Compra c = invocation.getArgument(0);
-                    c.setIdCompra(42L);
-                    return c;
-                });
+        Compra compraGuardada = new Compra();
+        compraGuardada.setIdCompra(42L);
+        compraGuardada.setMonto(monto);
+        compraGuardada.setFecha(fecha);
+
+        when(repoCompra.save(any(Compra.class)))
+                .thenReturn(compraGuardada);
 
         // when
         Compra result = servicioCompra.guardarCompra(monto, fecha);
@@ -48,6 +49,7 @@ public class ServicioCompraTest {
         assertEquals(42L, result.getIdCompra());
         assertEquals(monto, result.getMonto());
         assertEquals(fecha, result.getFecha());
+
     }
 
     @Test
