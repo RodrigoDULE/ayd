@@ -13,8 +13,10 @@ import mx.uam.ayd.proyecto.negocio.servicioEmpleado;
 /**
  * Controlador del caso de uso para agendar un nuevo evento.
  *
- * <p>Coordina la interacción entre la vista y los servicios de negocio para
- * validar disponibilidad, construir datos del evento y registrarlo.</p>
+ * <p>
+ * Coordina la interacción entre la vista y los servicios de negocio para
+ * validar disponibilidad, construir datos del evento y registrarlo.
+ * </p>
  */
 @Component
 public class controlAgendarNuevoEvento {
@@ -27,8 +29,8 @@ public class controlAgendarNuevoEvento {
      * Crea el controlador con sus dependencias de vista y servicios.
      *
      * @param vistaAgendarNuevoEvento vista de agendar nuevo evento
-     * @param servicioEvento servicio de eventos
-     * @param servicioEmpleado servicio de empleados
+     * @param servicioEvento          servicio de eventos
+     * @param servicioEmpleado        servicio de empleados
      */
     @Autowired
     public controlAgendarNuevoEvento(vistaAgendarNuevoEvento vistaAgendarNuevoEvento,
@@ -46,7 +48,7 @@ public class controlAgendarNuevoEvento {
     }
 
     /**
-     * Inicializa el enlace entre la vista 
+     * Inicializa el enlace entre la vista
      */
     @PostConstruct
     public void inicializar() {
@@ -86,16 +88,16 @@ public class controlAgendarNuevoEvento {
      * Registra un nuevo evento y notifica a la vista para refrescar la lista si
      * existe callback configurado.
      *
-     * @param nombre nombre del evento
-     * @param tipo tipo de evento
-     * @param fecha fecha del evento
-     * @param horaInicio hora de inicio en formato {@code HH:mm}
-     * @param horaFin hora de finalización en formato {@code HH:mm}
-     * @param acuerdo tipo de acuerdo del evento
-     * @param lugar ubicación del evento
-     * @param notas notas adicionales del evento
-     * @param noAsistentes número de asistentes estimados
-     * @param comision comisión calculada para el evento
+     * @param nombre           nombre del evento
+     * @param tipo             tipo de evento
+     * @param fecha            fecha del evento
+     * @param horaInicio       hora de inicio en formato {@code HH:mm}
+     * @param horaFin          hora de finalización en formato {@code HH:mm}
+     * @param acuerdo          tipo de acuerdo del evento
+     * @param lugar            ubicación del evento
+     * @param notas            notas adicionales del evento
+     * @param noAsistentes     número de asistentes estimados
+     * @param comision         comisión calculada para el evento
      * @param nombresEmpleados nombres de los empleados asignados
      */
     public void agregarEvento(String nombre, String tipo, LocalDate fecha,
@@ -118,7 +120,8 @@ public class controlAgendarNuevoEvento {
                 notificacion,
                 empleados);
 
-        // Notifica a la vista para refrescar la lista de eventos si se ha configurado un callback
+        // Notifica a la vista para refrescar la lista de eventos si se ha configurado
+        // un callback
         if (refrescarEventosCallback != null) {
             refrescarEventosCallback.run();
         }
@@ -128,9 +131,9 @@ public class controlAgendarNuevoEvento {
      * Verifica la disponibilidad de horario para la fecha y rango de horas
      * indicado.
      *
-     * @param fecha fecha a consultar
+     * @param fecha      fecha a consultar
      * @param horaInicio hora de inicio propuesta
-     * @param horaFin hora de finalización propuesta
+     * @param horaFin    hora de finalización propuesta
      * @return {@code true} si el horario está disponible; en caso contrario,
      *         {@code false}
      */
