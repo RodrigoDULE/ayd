@@ -175,8 +175,7 @@ public class Evento {
         this.notasAdicionales = notasAdicionales;
     }
 
-    public List<Empleado> getEmpleados() {
-    
+    public List<Empleado> getEmpleados() {  
         return empleados;
     }
 }
