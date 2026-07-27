@@ -99,7 +99,7 @@ public class vistaPrincipal {
             IngresarTienda.setDisable(true);
             AgregarEvento.setDisable(true);
             RevisionPedidos.setVisible(false);
-            ingresarFormularioMarketing.setDisable(true);
+            ingresarFormularioMarketing.setVisible(false);
             txtOrdenId.setVisible(false);
 
             ingresarUsuario.setText("");
@@ -116,7 +116,7 @@ public class vistaPrincipal {
             IngresarTienda.setDisable(false);
             AgregarEvento.setDisable(false);
             RevisionPedidos.setVisible(true);
-            ingresarFormularioMarketing.setDisable(false);
+            ingresarFormularioMarketing.setVisible(true);
             ingresarUsuario.setDisable(false);
             txtOrdenId.setVisible(true);
             textoPrincipal.setText("Bienvenido, " + NombreUsuario);

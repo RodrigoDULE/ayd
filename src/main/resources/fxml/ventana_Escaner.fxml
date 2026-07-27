@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="674.0" spacing="15.0" style="-fx-background-color: #0e426f;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -54,7 +53,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#finalizarIngreso" prefHeight="37.0" prefWidth="144.0" style="-fx-background-color: #2d6b44;" text="Actualizar Almacen" textFill="WHITE">
+                  <Button fx:id="btnConfirmarIngreso" mnemonicParsing="false" onAction="#finalizarIngreso" prefHeight="37.0" prefWidth="144.0" style="-fx-background-color: #2d6b44;" text="Actualizar Almacen" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>

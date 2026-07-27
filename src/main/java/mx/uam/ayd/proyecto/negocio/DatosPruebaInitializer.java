@@ -29,7 +29,7 @@ public class DatosPruebaInitializer implements CommandLineRunner {
         if (repositorioOrden.count() == 0) {
             System.out.println(">>> [DEBUG] Inicializando datos de prueba para las Órdenes de Compra...");
 
-            // 1. Creamos los Insumos con SKUs reales
+            
             Insumo mezcalEspadin = new Insumo("Mezcal Espadin Joven a Granel", 180.00, "Destilería Los Abuelos S.A. de C.V.", "Litros", "MEZ-ESP-01");
             Insumo botellasVidrio = new Insumo("Botellas de Vidrio 750ml Tipo B", 15.50, "Destilería Los Abuelos S.A.", "Unidades", "BVS-750-01");
             Insumo etiquetasFinas = new Insumo("Etiquetas Finas de México", 3.15, "Etiquetas Finas S.A.", "Unidades", "ETQ-FIN-001");
@@ -38,7 +38,7 @@ public class DatosPruebaInitializer implements CommandLineRunner {
             repositorioInsumo.save(botellasVidrio);
             repositorioInsumo.save(etiquetasFinas);
 
-            // --- ORDEN 1: Pendiente de Revisión ---
+            // orden 1
             OrdenDeCompra ordenAbuelos = new OrdenDeCompra();
             ordenAbuelos.setEstadoOrden(EstadoOrden.REVISION_PENDIENTE);
             ordenAbuelos.setFactura("PO-2026-089"); 
@@ -61,7 +61,7 @@ public class DatosPruebaInitializer implements CommandLineRunner {
             ordenAbuelos.setTotalOrdenCompra(totalOrden1); 
             repositorioOrden.save(ordenAbuelos);
 
-            // --- ORDEN 2: Pendiente de Revisión ---
+            // orden 2
             OrdenDeCompra ordenEtiquetas = new OrdenDeCompra();
             ordenEtiquetas.setEstadoOrden(EstadoOrden.REVISION_PENDIENTE);
             ordenEtiquetas.setFactura("PO-2026-044");
@@ -76,14 +76,14 @@ public class DatosPruebaInitializer implements CommandLineRunner {
             ordenEtiquetas.setTotalOrdenCompra(detalle3.getSubTotalLote()); 
             repositorioOrden.save(ordenEtiquetas);
 
-            // --- ORDEN 3: ENVIADA (Especial para probar Recepción de Mercancía HU-07) ---
+            // orden 3 renviada ya
             OrdenDeCompra ordenRecepcion = new OrdenDeCompra();
-            ordenRecepcion.setEstadoOrden(EstadoOrden.ENVIADA); // Estado correcto para recibir
+            ordenRecepcion.setEstadoOrden(EstadoOrden.ENVIADA); // esta ya se puede recibir
             ordenRecepcion.setFactura("PO-2023-102");
             ordenRecepcion.setFechaCreacion(LocalDate.now().minusDays(5)); // Se creó hace 5 días
             ordenRecepcion.setFechaEnvio(LocalDate.now().minusDays(2));    // Se envió hace 2 días
             
-            // Cantidades pequeñas para no estar 2 horas escaneando en las pruebas
+            
             DetalleOrden detalle4 = new DetalleOrden();
             detalle4.setCantidad(3); // Solo escanearemos 3 botellas
             detalle4.setInsumo(botellasVidrio);
