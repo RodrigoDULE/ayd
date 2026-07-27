@@ -7,10 +7,6 @@ import org.springframework.stereotype.Service;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing.TipoContenido;
 
-/**
- * Servicio de negocio de HU-04 encargado de "generar" el contenido de marketing
- * a partir de un FormularioMarketing ya guardado.
- */
 @Service
 public class ServicioGeneracionContenido {
 

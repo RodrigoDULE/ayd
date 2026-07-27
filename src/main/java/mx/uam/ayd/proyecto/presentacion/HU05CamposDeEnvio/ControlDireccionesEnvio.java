@@ -93,13 +93,9 @@ public class ControlDireccionesEnvio {
     // PUENTE HACIA LA HU-03 (MÉTODO DE PAGO)
     // ====================================================================
     public void continuarAlPago(DireccionEnvio direccionSeleccionada) {
-        // Como el método de tu compañero aún no recibe parámetros,
-        // simplemente disparamos el inicio de su ventana.
+    
         controlMetodoPago.iniciaVentanaMetodoPago(direccionSeleccionada);
 
-        // (Opcional) Si quieres que tu ventana de direcciones se cierre al abrir la de
-        // pago,
-        // tendrías que crear un método en tu vistaDireccionesEnvio.cerrar() y llamarlo
-        // aquí.
+
     }
 }
