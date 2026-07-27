@@ -2,9 +2,6 @@ package mx.uam.ayd.proyecto.negocio;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -40,6 +37,26 @@ public class servicioEmpleadoTest {
 
         // then
         assertEquals(0, nombres.size());
+    }
+
+    @Test
+    void testObtenerNombreEmpleadosConDatos() {
+        // Given
+        List<String> listaNombres = new ArrayList<>();
+        listaNombres.add("Juan");
+        listaNombres.add("Maria");
+        listaNombres.add("Pedro");
+
+        when(repoEmpleado.findAllNombres()).thenReturn(listaNombres);
+
+        // When
+        List<String> nombres = servicioEmpleado.obtenerNombreEmpleados();
+
+        // Then
+        assertEquals(3, nombres.size());
+        assertEquals("Juan", nombres.get(0));
+        assertEquals("Maria", nombres.get(1));
+        assertEquals("Pedro", nombres.get(2));
     }
 
     @Test

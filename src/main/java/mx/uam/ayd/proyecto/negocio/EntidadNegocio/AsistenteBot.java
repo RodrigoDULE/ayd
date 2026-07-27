@@ -78,7 +78,7 @@ public class AsistenteBot {
     // 1. Inicializar el cliente (Automáticamente toma la variable de entorno
     // GEMINI_API_KEY)
     // 1. Inicializar el cliente pasando la API Key explícitamente
-    String miApiKey = "AQ.Ab8RN6JpIaeJEibxIgk3RiAyb9QIDVz76cBO0VuXpa0lV2a6pQ";
+    String miApiKey = "AQUI_VA_MI_LLAVE";
     Client client = Client.builder().apiKey(miApiKey).build();
 
     // 2. Definir las instrucciones del sistema (System Instruction)
