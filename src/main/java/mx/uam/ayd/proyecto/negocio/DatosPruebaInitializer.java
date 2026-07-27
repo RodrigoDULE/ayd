@@ -27,7 +27,7 @@ public class DatosPruebaInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         
         if (repositorioOrden.count() == 0) {
-            System.out.println(">>> [DEBUG] Inicializando datos de prueba para las Órdenes de Compra...");
+            System.out.println(" Inicializando datos de prueba para las Órdenes de Compra");
 
             
             Insumo mezcalEspadin = new Insumo("Mezcal Espadin Joven a Granel", 180.00, "Destilería Los Abuelos S.A. de C.V.", "Litros", "MEZ-ESP-01");
@@ -80,12 +80,12 @@ public class DatosPruebaInitializer implements CommandLineRunner {
             OrdenDeCompra ordenRecepcion = new OrdenDeCompra();
             ordenRecepcion.setEstadoOrden(EstadoOrden.ENVIADA); // esta ya se puede recibir
             ordenRecepcion.setFactura("PO-2023-102");
-            ordenRecepcion.setFechaCreacion(LocalDate.now().minusDays(5)); // Se creó hace 5 días
-            ordenRecepcion.setFechaEnvio(LocalDate.now().minusDays(2));    // Se envió hace 2 días
+            ordenRecepcion.setFechaCreacion(LocalDate.now().minusDays(5)); // se creó hace 5 días
+            ordenRecepcion.setFechaEnvio(LocalDate.now().minusDays(2));    // enviada hace hace 2 días
             
             
             DetalleOrden detalle4 = new DetalleOrden();
-            detalle4.setCantidad(3); // Solo escanearemos 3 botellas
+            detalle4.setCantidad(3); // escanearemos solo 3 botellas
             detalle4.setInsumo(botellasVidrio);
             detalle4.setSubTotalLote(3 * botellasVidrio.getPrecio()); 
 

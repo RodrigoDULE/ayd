@@ -77,7 +77,7 @@ public class VistaEscaner {
             boolean exito = controlador.procesarEscaneo(codigo, ordenActual);
             
             if (exito) {
-                tablaProductos.refresh(); // Actualiza los números en pantalla visualmente
+                tablaProductos.refresh(); // actualizamos los números en pantalla (las cantidades escaneadas)
                 
                 // Si la orden ya está completa, desbloqueamos el botón verde
                 if(controlador.verificarOrdenCompleta(ordenActual)) {
@@ -85,7 +85,7 @@ public class VistaEscaner {
                     txtEscaner.setDisable(true); // Bloqueamos el escáner para evitar errores
                 }
             } else {
-                System.out.println("Alerta: Producto no corresponde o ya está completo.");
+                System.out.println("Producto no correspondiente o ya está completo.");
             }
         }
         
@@ -118,7 +118,7 @@ public class VistaEscaner {
             if (detalle.getCantidadEscaneada() == detalle.getCantidad()) {
                 return new javafx.beans.property.SimpleStringProperty("Validado");
             } else {
-                return new javafx.beans.property.SimpleStringProperty("Escaneando...");
+                return new javafx.beans.property.SimpleStringProperty("Escaneando");
             }
         });
 

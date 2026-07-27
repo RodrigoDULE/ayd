@@ -18,14 +18,14 @@ public class ServicioOrdenDeCompra {
 
     
     // Bucamos recuperar las órdenes creadas que el usuario debe revisar al entrar a la pantalla
-    // Por defalut nos va a mostrar las ordentende que estén pendientes por revisar
+    // por defalut nos va a mostrar las ordentende que estén pendientes por revisar
 
     public List<OrdenDeCompra> obtenerOrdenesPendientes() {
         return repositorioOrden.findByEstado(EstadoOrden.REVISION_PENDIENTE);
     }
 
     
-    // De ellas, recuperamos una orden específica para ver sus detalles
+    // De ellas, recuperamos una orden específica para ver sus detalles.
     // La orden que queremos autorizar en ese momento.
    
     public OrdenDeCompra obtenerDetallesDeOrden(Long idOrden) 
@@ -34,7 +34,7 @@ public class ServicioOrdenDeCompra {
     }
 
     
-    // Autorizamos la orden, cambiamos su estado y se calcula la fecha de entrega.
+    // Autorizamos la orden, cambiamos su estado y calculamos la fecha de entrega.
 
     public OrdenDeCompra autorizarOrden(Long idOrden) 
     {
@@ -47,7 +47,7 @@ public class ServicioOrdenDeCompra {
             orden.setEstadoOrden(EstadoOrden.AUTORIZADA);
             orden.setFechaEnvio(LocalDate.now()); 
             
-            // definimos que la fecha estimada de recepción sea en 5 días, por ejemplo
+            // definimos que la fecha estimada de recepción sea en 5 días por ejemplo
             orden.setFechaRecepcion(LocalDate.now().plusDays(5)); 
 
             // Guardamos los cambios en la base de datos
@@ -63,16 +63,13 @@ public class ServicioOrdenDeCompra {
     {
         OrdenDeCompra orden = obtenerDetallesDeOrden(idOrden);
 
-        // Verificamos que exista y que haya estado en camino/autorizada
+        // Verificamos que exista y que haya estado autorizada
         if (orden != null && orden.getEstadoOrden() == EstadoOrden.AUTORIZADA) {
             
             // Cambiamos el estado para indicar que ya llegó al almacén
-            orden.setEstadoOrden(EstadoOrden.RECIBIDA); // (O el estado que manejes)
-            
-            // Aquí en un futuro podrías mandar a llamar a un ServicioInventario
-            // para sumar los insumos al stock real de la empresa.
+            orden.setEstadoOrden(EstadoOrden.RECIBIDA); 
 
-            return repositorioOrden.save(orden); 
+            return repositorioOrden.save(orden);
         }
         return null; 
     }
