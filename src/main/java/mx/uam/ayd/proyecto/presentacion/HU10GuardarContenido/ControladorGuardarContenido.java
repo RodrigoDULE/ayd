@@ -37,12 +37,14 @@ public class ControladorGuardarContenido {
     /**
      * Muestra la ventana con todos los contenidos guardados.
      */
-    public void iniciaVentanaGuardarContenido(VariacionContenido variacionElegida) {
+    public void iniciaVentanaGuardarContenido(
+        FormularioMarketing formulario,
+        VariacionContenido variacion){
 
         vistaGuardar.muestra();
 
-        vistaGuardar.mostrarContenido(variacionElegida);
-    }
+       vistaGuardar.mostrarContenido(formulario);
+}
 
     /**
      * Guarda un formulario.

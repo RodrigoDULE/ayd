@@ -23,7 +23,7 @@ public class VistaGuardarContenido {
 
 
     @FXML
-    private ListView<Object> listaContenidos;
+    private ListView<FormularioMarketing> listaContenidos;
 
 
     private ControladorGuardarContenido controlador;
@@ -65,13 +65,13 @@ public class VistaGuardarContenido {
 
 
 
-    public void mostrarContenido(VariacionContenido variacionElegida){
+    public void mostrarContenido(FormularioMarketing formulario){
 
-        listaContenidos.getItems().clear();
+    listaContenidos.getItems().clear();
 
-        listaContenidos.getItems().add(variacionElegida);
+    listaContenidos.getItems().add(formulario);
 
-    }
+}
 
 
 

@@ -127,6 +127,12 @@ public class FormularioMarketing {
         }
     }
 
+    
+    @Override
+public String toString(){
+    return nombre;
+}
+    
     // --- Getters y setters ---
     public Long getId() {
         return id;
