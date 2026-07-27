@@ -1,5 +1,6 @@
 package mx.uam.ayd.proyecto.negocio;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -147,4 +148,40 @@ public class servicioCarritoCompraTest {
 
         assertTrue(res);
     }
+
+    @Test
+    void testRecuperaTotalCalculadoPorCliente() {
+        // given
+        long idCliente = 1L;
+
+        Cliente clienteFalso = new Cliente();
+        carritoCompra carrito = new carritoCompra();
+        carrito.setTotalCalculado(500.0f);
+        clienteFalso.setcarritoCompra(carrito);
+
+        when(repoCliente.findByIdCliente(idCliente)).thenReturn(clienteFalso);
+
+        // when
+        double resultado = servicioCarritoCompra.recuperaTotalCalculadoPorCliente(idCliente);
+
+        // then
+        assertEquals(500.0, resultado, 0.0001);
+    }
+
+    @Test
+    void testRecuperaTotalCalculadoPorClienteSinCarrito() {
+        // given
+        long idCliente = 1L;
+
+        Cliente clienteFalso = new Cliente();
+
+        when(repoCliente.findByIdCliente(idCliente)).thenReturn(clienteFalso);
+
+        // when
+        double resultado = servicioCarritoCompra.recuperaTotalCalculadoPorCliente(idCliente);
+
+        // then
+        assertEquals(0.0, resultado, 0.0001);
+    }
 }
+
