@@ -27,12 +27,12 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio.DatosDireccion;
 
-/**
- * Vista de HU-05 (Direcciones de envío).
- */
+
+// Administra dos escenas (selección de dirección y formulario de nueva dirección) dentro del mismo Stage.
 @Component
 public class VistaDireccionesEnvio {
 
+    // Lista inmutable de estados para llenar el ComboBox del formulario.
     private static final List<String> ESTADOS = Arrays.asList(
             "Aguascalientes", "Baja California", "Baja California Sur", "Campeche",
             "Chiapas", "Chihuahua", "Ciudad de México", "Coahuila", "Colima",
@@ -48,43 +48,31 @@ public class VistaDireccionesEnvio {
     private Scene sceneSeleccionar;
     private Scene sceneFormulario;
 
-    // Estado local para rastrear la dirección activa seleccionada por el usuario
+    // Estado local para rastrear la dirección activa seleccionada por el usuario.
     private DireccionEnvio direccionSeleccionada = null;
 
     // ===== Campos del FXML "Seleccionar Dirección" =====
-
     @FXML
     private FlowPane contenedorDirecciones;
-
     @FXML
     private Button botonContinuarPago;
-
     @FXML
     private Button botonRegresar;
-
     // ===== Campos del FXML "Formulario Dirección" =====
-
     @FXML
     private Label etiquetaError;
-
     @FXML
     private TextField campoNombreCompleto;
-
     @FXML
     private TextField campoCalle;
-
     @FXML
     private TextField campoNumero;
-
     @FXML
     private TextField campoColonia;
-
     @FXML
     private TextField campoCiudad;
-
     @FXML
     private ComboBox<String> comboEstado;
-
     @FXML
     private TextField campoCodigoPostal;
 
@@ -95,6 +83,7 @@ public class VistaDireccionesEnvio {
         this.control = control;
     }
 
+    // Inicializa la interfaz gráfica cargando los archivos FXML.
     private void inicializarUI() {
         if (initialized) {
             return;
@@ -109,11 +98,13 @@ public class VistaDireccionesEnvio {
             stage = new Stage();
             stage.setTitle("Direcciones de envío");
 
+            // Carga de la escena principal (Lista de direcciones)
             FXMLLoader loaderSeleccionar = new FXMLLoader(
                     getClass().getResource("/fxml/ventana_SeleccionarDireccion.fxml"));
             loaderSeleccionar.setController(this);
             sceneSeleccionar = new Scene(loaderSeleccionar.load());
 
+            // Carga de la escena secundaria (Formulario de registro)
             FXMLLoader loaderFormulario = new FXMLLoader(
                     getClass().getResource("/fxml/ventana_FormularioDireccion.fxml"));
             loaderFormulario.setController(this);
@@ -127,6 +118,7 @@ public class VistaDireccionesEnvio {
         }
     }
 
+    // Renderiza la lista de direcciones asociadas al cliente en la interfaz.
     public void muestraDirecciones(List<DireccionEnvio> direcciones, Cliente cliente) {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(() -> this.muestraDirecciones(direcciones, cliente));
@@ -135,23 +127,26 @@ public class VistaDireccionesEnvio {
 
         inicializarUI();
 
-        // 1. Asignamos la dirección predeterminada actual si existe
+        // Asignamos la dirección predeterminada actual si el cliente tiene una.
         this.direccionSeleccionada = cliente.getDireccionPredeterminada();
 
         contenedorDirecciones.getChildren().clear();
 
+        // Genera dinámicamente las tarjetas UI para cada dirección recuperada.
         for (DireccionEnvio direccion : direcciones) {
             boolean esPredeterminada = cliente.getDireccionPredeterminada() != null
                     && cliente.getDireccionPredeterminada().getIdDireccion() == direccion.getIdDireccion();
             contenedorDirecciones.getChildren().add(construirTarjetaDireccion(direccion, esPredeterminada));
         }
+        
+        // Agrega siempre al final la tarjeta para registrar una nueva dirección.
         contenedorDirecciones.getChildren().add(construirTarjetaNuevaDireccion());
 
         boolean hayDirecciones = !direcciones.isEmpty();
         botonContinuarPago.setVisible(hayDirecciones);
         botonContinuarPago.setManaged(hayDirecciones);
 
-        // 2. El botón de pago estará deshabilitado a menos que ya exista una dirección seleccionada/predeterminada
+        // Bloquea el flujo hacia el pago si no hay una dirección explícitamente seleccionada.
         botonContinuarPago.setDisable(this.direccionSeleccionada == null);
 
         botonRegresar.setVisible(!hayDirecciones);
@@ -161,9 +156,12 @@ public class VistaDireccionesEnvio {
         stage.show();
     }
 
+    // Construye el componente visual (Tarjeta) para mostrar los datos de una dirección.
     private VBox construirTarjetaDireccion(DireccionEnvio direccion, boolean esPredeterminada) {
         VBox tarjeta = new VBox(4);
         tarjeta.setPrefWidth(180);
+        
+        // Resaltado visual si la dirección es la predeterminada
         tarjeta.setStyle("-fx-border-color: " + (esPredeterminada ? "black" : "#dddddd")
                 + "; -fx-border-width: " + (esPredeterminada ? "2" : "1") + "; -fx-padding: 12;");
 
@@ -186,12 +184,13 @@ public class VistaDireccionesEnvio {
         Button botonSeleccionar = new Button(esPredeterminada ? "Seleccionada" : "Seleccionar");
         botonSeleccionar.setDisable(esPredeterminada);
         botonSeleccionar.setMaxWidth(Double.MAX_VALUE);
+        
         if (esPredeterminada) {
             botonSeleccionar.setStyle("-fx-background-color: black; -fx-text-fill: white;");
         }
         
+        // Acción al elegir esta tarjeta como dirección de envío
         botonSeleccionar.setOnAction(evento -> {
-            // 3. Guardamos cuál fue seleccionada y habilitamos de inmediato el botón de continuar
             this.direccionSeleccionada = direccion;
             botonContinuarPago.setDisable(false);
 
@@ -213,6 +212,7 @@ public class VistaDireccionesEnvio {
         return tarjeta;
     }
 
+    // Construye el componente visual especial para agregar una nueva dirección.
     private VBox construirTarjetaNuevaDireccion() {
         VBox tarjeta = new VBox(4);
         tarjeta.setPrefWidth(180);
@@ -241,6 +241,7 @@ public class VistaDireccionesEnvio {
         return tarjeta;
     }
 
+    // Transiciona la interfaz hacia la escena del formulario.
     public void mostrarFormulario() {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(this::mostrarFormulario);
@@ -251,6 +252,7 @@ public class VistaDireccionesEnvio {
         stage.setScene(sceneFormulario);
     }
 
+    // Restablece los campos de texto para asegurar que el formulario inicie en blanco.
     private void limpiarFormulario() {
         campoNombreCompleto.clear();
         campoCalle.clear();
@@ -262,6 +264,7 @@ public class VistaDireccionesEnvio {
         ocultarError();
     }
 
+    // Captura los datos del formulario, los empaca 
     @FXML
     private void handleGuardar() {
         if (!validarCamposObligatorios()) {
@@ -287,17 +290,16 @@ public class VistaDireccionesEnvio {
         stage.setScene(sceneSeleccionar);
     }
 
-
-    ///para cntinuar con la siguiente Hu
+    // Gestiona la transición hacia el módulo de pago (HU-03).
     @FXML
     private void handleContinuarPago() {
-        // 4. Validación de seguridad en el handler
+        // Validación de seguridad por si el botón fue habilitado erróneamente.
         if (direccionSeleccionada == null) {
             mostrarMensaje("Por favor selecciona una dirección antes de continuar.");
             return;
         }
         
-        // Llamamos al controlador para que abra la ventana de la HU-03
+        // Delega al controlador la apertura de la ventana de pago.
         if (control != null) {
             control.continuarAlPago(direccionSeleccionada);
         }
@@ -308,6 +310,7 @@ public class VistaDireccionesEnvio {
         stage.close();
     }
 
+    // Verifica que ningún campo crítico del formulario esté vacío.
     private boolean validarCamposObligatorios() {
         if (campoNombreCompleto.getText().trim().isEmpty()
                 || campoCalle.getText().trim().isEmpty()
@@ -333,6 +336,7 @@ public class VistaDireccionesEnvio {
         etiquetaError.setManaged(false);
     }
 
+    // Muestra ventanas emergentes de información al usuario.
     public void mostrarMensaje(String mensaje) {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(() -> this.mostrarMensaje(mensaje));

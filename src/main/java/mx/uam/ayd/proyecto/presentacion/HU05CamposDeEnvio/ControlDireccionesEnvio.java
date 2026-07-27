@@ -12,27 +12,22 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio.DatosDireccion;
 
-// 1. IMPORTAMOS EL CONTROLADOR DE LA HU-03
+// Importamos el controlador de la HU-03 (Método de Pago) para la integración de módulos.
 import mx.uam.ayd.proyecto.presentacion.HU03MetodoPago.MetodoPago.ControlMetodoPago;
 
-/**
- * Controlador de HU-05 (Direcciones de envío). Orquesta los cuatro
- * flujos del diagrama de secuencia: listar, registrar, marcar
- * predeterminada, eliminar.
- */
+
+// Orquesta los flujos de negocio: listar, registrar, marcar como predeterminada y eliminar.
+// Actúa como intermediario estricto entre la VistaDireccionesEnvio y el ServicioDireccionesEnvio.
 @Component
 public class ControlDireccionesEnvio {
 
     private final VistaDireccionesEnvio vistaDireccionesEnvio;
     private final ServicioDireccionesEnvio servicioDireccionesEnvio;
-
-    // 2. DECLARAMOS EL CONTROLADOR DE PAGO
     private final ControlMetodoPago controlMetodoPago;
 
-    /** El Cliente para el que se está gestionando direcciones en esta sesión. */
     private Cliente clienteActivo;
 
-    // 3. LO INYECTAMOS EN EL CONSTRUCTOR
+    // Spring Boot se encarga de instanciar y proveer la vista, el servicio local y el controlador externo.
     @Autowired
     public ControlDireccionesEnvio(VistaDireccionesEnvio vistaDireccionesEnvio,
             ServicioDireccionesEnvio servicioDireccionesEnvio,
@@ -42,26 +37,26 @@ public class ControlDireccionesEnvio {
         this.controlMetodoPago = controlMetodoPago;
     }
 
+    // Garantiza que la vista conozca a su controlador inmediatamente después de la inyección de dependencias.
     @PostConstruct
     private void inicializarControlador() {
         vistaDireccionesEnvio.setControlador(this);
     }
 
-    /**
-     * Abre la ventana de direcciones para el cliente dado
-     */
+    // Recibe el contexto del cliente actual y detona la actualización de la interfaz.
     public void iniciaVentana(Cliente cliente) {
         this.clienteActivo = cliente;
         actualizarListaDirecciones();
     }
 
-    /** procesarRegistroDireccion(datosFormulario) del diagrama. */
+    // Recibe los datos empaquetados desde la vista, delega el guardado al servicio
+    // y refresca la interfaz para que el usuario vea su nueva dirección inmediatamente.
     public void procesarRegistroDireccion(DatosDireccion datos) {
         servicioDireccionesEnvio.registrarDireccion(datos, clienteActivo);
         actualizarListaDirecciones();
     }
 
-    /** establecerPredeterminada(idDireccion, idUsuario) del diagrama. */
+    // Actualiza el estado de una dirección en la base de datos a través del servicio.
     public void establecerPredeterminada(long idDireccion) {
         boolean exito = servicioDireccionesEnvio.marcarComoPredeterminada(idDireccion, clienteActivo);
         if (!exito) {
@@ -71,7 +66,8 @@ public class ControlDireccionesEnvio {
         actualizarListaDirecciones();
     }
 
-    /** solicitarEliminarDirección(idDireccion) del diagrama. */
+    // Solicita la eliminación de una dirección.
+    // Si falla, notifica a la vista.
     public void solicitarEliminarDireccion(long idDireccion) {
         boolean exito = servicioDireccionesEnvio.eliminarDireccion(idDireccion);
         if (!exito) {
@@ -81,21 +77,17 @@ public class ControlDireccionesEnvio {
         actualizarListaDirecciones();
     }
 
-    /**
-     * Vuelve a pedir la lista actualizada y se la manda a la vista.
-     */
+    // Método auxiliar que sincroniza el estado de la base de datos con la interfaz de usuario.
+    // Recupera la lista actualizada del servicio y se la inyecta a la vista.
     private void actualizarListaDirecciones() {
         List<DireccionEnvio> direcciones = servicioDireccionesEnvio.obtenerListaDirecciones(clienteActivo);
         vistaDireccionesEnvio.muestraDirecciones(direcciones, clienteActivo);
     }
 
-    // ====================================================================
-    // PUENTE HACIA LA HU-03 (MÉTODO DE PAGO)
-    // ====================================================================
+
+    // Transición de módulo. Al confirmar la dirección de envío,
+    // cede el control de la aplicación al controlador de pagos, pasándole el contexto necesario.
     public void continuarAlPago(DireccionEnvio direccionSeleccionada) {
-    
         controlMetodoPago.iniciaVentanaMetodoPago(direccionSeleccionada);
-
-
     }
 }

@@ -7,14 +7,11 @@ import org.springframework.data.repository.CrudRepository;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Cliente;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio;
 
-/**
- * Repositorio de la capa datos para HU-05 (Direcciones de envío).
- *
- * findByClienteAndActivaTrue solo trae las direcciones que siguen activas,
- * porque una dirección eliminada (baja lógica) no debe aparecer en
- * la lista aunque siga guardada en la base de datos.
- */
+// Capa de Acceso a Datos (Repository) para la HU-05 (Direcciones de envío).
+// Centraliza las operaciones de persistencia aislando el código SQL del resto de la aplicación.
 public interface RepositorioDirecciones extends CrudRepository<DireccionEnvio, Long> {
 
+    // 1. Busca las direcciones que pertenezcan exactamente al cliente solicitado (findByCliente).
+    // 2. Filtra para traer ÚNICAMENTE aquellas cuya bandera "activa" sea verdadera (AndActivaTrue).
     public List<DireccionEnvio> findByClienteAndActivaTrue(Cliente cliente);
 }
