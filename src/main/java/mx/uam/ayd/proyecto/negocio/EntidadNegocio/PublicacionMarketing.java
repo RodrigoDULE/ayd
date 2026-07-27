@@ -47,8 +47,8 @@ public class PublicacionMarketing {
     @OneToOne 
     private Producto produtos_publi;
 //con formulario
-    @OneToOne
-    private FormularioMarketing formulario;
+    @OneToOne(mappedBy = "publicacion")
+    private FormularioMarketing formularioMarketing;
 
 
 
@@ -88,5 +88,14 @@ public class PublicacionMarketing {
 
     public void setIdPublicacion(long idPublicacion){
         this.idPublicacion=idPublicacion;
+    }
+
+
+    public FormularioMarketing getFormularioMarketing() {
+    return formularioMarketing;
+}
+
+    public void setFormularioMarketing(FormularioMarketing formularioMarketing) {
+        this.formularioMarketing = formularioMarketing;
     }
 }

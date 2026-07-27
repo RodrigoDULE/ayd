@@ -4,8 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,7 +30,9 @@ public class FormularioMarketing {
     // Agrupa los datos capturados en el formulario (todo excepto los archivos, que se manejan aparte).
     public static class DatosFormulario {
 
+        @Enumerated(EnumType.STRING)
         private TipoContenido tipoContenido;
+        @ElementCollection
         private List<String> plataformasDestino;
         private Integer cantidadVariaciones;
         private LocalDate fechaEstimadaPublicacion;
@@ -72,6 +80,7 @@ public class FormularioMarketing {
     
     // Plataformas de destino seleccionadas por el usuario (checkboxes),
     // ej: ["Instagram Post", "Instagram Reels"]
+    @ElementCollection
     private List<String> plataformasDestino = new ArrayList<>();
 
     // Cuántas variaciones de contenido quiere generar el usuario
@@ -85,15 +94,18 @@ public class FormularioMarketing {
     @OneToMany(mappedBy = "formularioMarketing", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ArchivoReferencia> archivos = new ArrayList<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idPublicacion")
+    private PublicacionMarketing publicacion;
+    
+
     //Constructor Vacío
     public FormularioMarketing() {
     }
 
     //cardinlidad con publicacion
 
-    @OneToOne
-    private PublicacionMarketing publicacion;
-
+    
     //recibe los datos ya empaquetados en un DatosFormulario y la lista de archivos ya convertidos 
     // a ArchivoReferencia. 
     public FormularioMarketing(DatosFormulario datos, List<ArchivoReferencia> archivos) {
@@ -162,5 +174,14 @@ public class FormularioMarketing {
 
     public List<ArchivoReferencia> getArchivos() {
         return archivos;
+    }
+
+
+    public PublicacionMarketing getPublicacion() {
+        return publicacion;
+    }
+
+    public void setPublicacion(PublicacionMarketing publicacion) {
+        this.publicacion = publicacion;
     }
 }
