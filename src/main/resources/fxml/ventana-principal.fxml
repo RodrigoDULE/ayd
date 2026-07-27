@@ -48,7 +48,7 @@
             <Font name="Serif Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="ingresarFormularioMarketing" layoutX="48.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleAbrirMarketing" prefHeight="34.0" prefWidth="212.0" style="-fx-background-color: #949494;" text="Formulario de Marketing">
+      <Button fx:id="ingresarFormularioMarketing" layoutX="48.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleAbrirMarketing" prefHeight="34.0" prefWidth="212.0" style="-fx-background-color: #d9f4ff;" text="Formulario de Marketing">
          <font>
             <Font name="Serif Bold" size="14.0" />
          </font>
@@ -59,7 +59,7 @@
                </color></InnerShadow>
          </effect>
       </Button>
-      <Button fx:id="RevisionPedidos" layoutX="47.0" layoutY="275.0" mnemonicParsing="false" onAction="#iniciarRevisionOrdenes" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: #949494;" text="Revision de Pedidos">
+      <Button fx:id="RevisionPedidos" layoutX="47.0" layoutY="275.0" mnemonicParsing="false" onAction="#iniciarRevisionOrdenes" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: #d9f4ff;" text="Revision de Pedidos">
          <font>
             <Font name="Serif Bold" size="14.0" />
          </font>
@@ -75,8 +75,8 @@
             <Font name="Serif Bold" size="13.0" />
          </font>
       </Text>
-      <TextField fx:id="txtOrdenId" layoutX="241.0" layoutY="337.0" onAction="#iniciarRecepcionCarga" prefHeight="30.0" prefWidth="79.0" />
-      <Text fill="WHITE" layoutX="50.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce el id de la orden">
+      <TextField fx:id="txtOrdenId" layoutX="252.0" layoutY="335.0" onAction="#iniciarRecepcionCarga" prefHeight="30.0" prefWidth="43.0" />
+      <Text fx:id="TexoRecepcion" fill="WHITE" layoutX="50.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce el id de la orden">
          <font>
             <Font name="Serif Bold" size="13.0" />
          </font>

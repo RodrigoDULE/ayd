@@ -44,6 +44,10 @@ public class vistaPrincipal {
     @FXML 
     private TextField txtOrdenId;
 
+    //@FXML
+    //private Text TextoRecepcion;
+   
+
     public vistaPrincipal() {
     }
 
@@ -101,6 +105,7 @@ public class vistaPrincipal {
             RevisionPedidos.setVisible(false);
             ingresarFormularioMarketing.setVisible(false);
             txtOrdenId.setVisible(false);
+            //TextoRecepcion.setVisible(false);
 
             ingresarUsuario.setText("");
             stage.show();
@@ -116,6 +121,7 @@ public class vistaPrincipal {
             IngresarTienda.setDisable(false);
             AgregarEvento.setDisable(false);
             RevisionPedidos.setVisible(true);
+            //TextoRecepcion.setVisible(true);
             ingresarFormularioMarketing.setVisible(true);
             ingresarUsuario.setDisable(false);
             txtOrdenId.setVisible(true);

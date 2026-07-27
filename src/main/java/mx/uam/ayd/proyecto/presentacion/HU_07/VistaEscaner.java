@@ -89,7 +89,7 @@ public class VistaEscaner {
             }
         }
         
-        // Limpiamos el campo y pedimos foco para el siguiente "bip"
+        // Limpiamos el campo para poder hacer otro escaneo
         txtEscaner.clear();
         txtEscaner.requestFocus();
     }
