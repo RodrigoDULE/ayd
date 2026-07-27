@@ -99,9 +99,10 @@ public class ControlFormularioMarketing {
 
         vistaFormularioMarketing.cerrarVentana();
 
-    controlGuardarContenido.iniciaVentanaGuardarContenido(
-variacionElegida
-    );
+        controlGuardarContenido.iniciaVentanaGuardarContenido(
+        formularioActual,
+        variacionElegida
+        );
 
     }
 }

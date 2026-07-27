@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="mx.uam.ayd.proyecto.presentacion.HU10GuardarContenido.VistaGuardarContenido">
+
+<BorderPane xmlns:fx="http://javafx.com/fxml">
 
     <top>
         <Label text="Contenidos Guardados"
