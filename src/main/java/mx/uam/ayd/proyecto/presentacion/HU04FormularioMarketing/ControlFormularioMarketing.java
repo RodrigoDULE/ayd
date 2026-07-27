@@ -14,6 +14,7 @@ import mx.uam.ayd.proyecto.negocio.ServicioGeneracionContenido;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing.DatosFormulario;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing.TipoContenido;
+import mx.uam.ayd.proyecto.presentacion.HU10GuardarContenido.ControladorGuardarContenido;
 import mx.uam.ayd.proyecto.negocio.ServicioGeneracionContenido.VariacionContenido;
 
 
@@ -24,19 +25,25 @@ public class ControlFormularioMarketing {
     private final VistaFormularioMarketing vistaFormularioMarketing;
     private final ServicioFormularioMarketing servicioFormularioMarketing;
     private final ServicioGeneracionContenido servicioGeneracionContenido;
+
+    private FormularioMarketing formularioActual;
+
+    private final ControladorGuardarContenido controlGuardarContenido;
     
     // TODO: Paso 2. Declara la variable del nuevo controlador.
 
     @Autowired
     public ControlFormularioMarketing(VistaFormularioMarketing vistaFormularioMarketing,
             ServicioFormularioMarketing servicioFormularioMarketing,
-            ServicioGeneracionContenido servicioGeneracionContenido
+            ServicioGeneracionContenido servicioGeneracionContenido,
+            ControladorGuardarContenido controladorGuardarContenido
             /* TODO: Paso 3. Agrega el controlador al constructor */
             /* , ControlNuevaHU controlNuevaHU */) {
         
         this.vistaFormularioMarketing = vistaFormularioMarketing;
         this.servicioFormularioMarketing = servicioFormularioMarketing;
         this.servicioGeneracionContenido = servicioGeneracionContenido;
+        this.controlGuardarContenido= controladorGuardarContenido;
         
         // TODO: Paso 4. Inicializa la variable.
         // this.controlNuevaHU = controlNuevaHU;
@@ -64,6 +71,8 @@ public class ControlFormularioMarketing {
 
         FormularioMarketing formularioGuardado = servicioFormularioMarketing.registrarFormulario(datos, archivos);
 
+            formularioActual = formularioGuardado;
+
         vistaFormularioMarketing.habilitarBotonGenerar();
 
         List<VariacionContenido> listaVariaciones = servicioGeneracionContenido.generarVariaciones(formularioGuardado);
@@ -79,12 +88,20 @@ public class ControlFormularioMarketing {
     public void seleccionarVariacion(VariacionContenido variacionElegida) {
         
         // Acción temporal para que puedas probar que los botones de la vista funcionan
-        vistaFormularioMarketing.mostrarMensaje("Elegiste: " + variacionElegida.getNombre());
+        //vistaFormularioMarketing.mostrarMensaje("Elegiste: " + variacionElegida.getNombre());
         
         // TODO: Paso 5. Cuando construyas la otra HU, borra el 'mostrarMensaje' de arriba
         // y descomenta estas dos líneas para hacer el cambio de pantalla:
         
         // vistaFormularioMarketing.cerrarVentana();
         // controlNuevaHU.iniciaVentana(variacionElegida);
+
+
+        vistaFormularioMarketing.cerrarVentana();
+
+    controlGuardarContenido.iniciaVentanaGuardarContenido(
+variacionElegida
+    );
+
     }
 }
