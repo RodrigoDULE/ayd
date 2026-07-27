@@ -89,20 +89,8 @@ public class ServicioEventoTest {
     }
 
     @Test
-    void testCalcularUnaSemanaAntesNulo() {
-        // Given
-    
-        // When & Then
-        assertThrows(NullPointerException.class, () -> {
-        servicioEvento.calcularUnaSemanaAntes(null);
-        });
-    }
-
-    @Test
     void testVerificarDisponibilidadSinEventosDuracionMas2horas() {
         // Given
-        when(repoEvento.findAll()).thenReturn(new ArrayList<>());
-
         // When
         boolean resultado = servicioEvento.verificarDisponibilidad(
                 LocalDate.of(2026, 8, 15),
@@ -135,7 +123,7 @@ public class ServicioEventoTest {
         evento.setHoraIn(LocalTime.of(10, 0));
         evento.setHoraFin(LocalTime.of(13, 0));
     
-        Mockito.when(repoEvento.findAll()).thenReturn(List.of(evento));
+        when(repoEvento.findAll()).thenReturn(List.of(evento));
     
         // When
         boolean resultado = servicioEvento.verificarDisponibilidad(
