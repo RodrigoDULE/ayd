@@ -67,11 +67,12 @@ public class VistaGuardarContenido {
 
     public void mostrarContenido(FormularioMarketing formulario){
 
-    listaContenidos.getItems().clear();
+        System.out.println(formulario.getNombre());
+        listaContenidos.getItems().clear();
 
-    listaContenidos.getItems().add(formulario);
+        listaContenidos.getItems().add(formulario);
 
-}
+    }
 
 
 

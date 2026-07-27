@@ -43,6 +43,8 @@ public class ServicioFormularioMarketing {
 
         FormularioMarketing formulario = new FormularioMarketing(datos, instanciasArchivos);
 
+        formulario.setNombre("Contenido " + System.currentTimeMillis());
+
         return repositorioFormularioMarketing.save(formulario);
     }
 

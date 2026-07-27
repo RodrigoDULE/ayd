@@ -66,8 +66,7 @@ public class ControlFormularioMarketing {
     public void procesarGeneracion(TipoContenido tipoContenido, List<String> plataformasDestino,
             Integer cantidadVariaciones, LocalDate fechaEstimadaPublicacion, List<File> archivos) {
 
-        DatosFormulario datos = new DatosFormulario(tipoContenido, plataformasDestino,
-                cantidadVariaciones, fechaEstimadaPublicacion);
+        DatosFormulario datos = new DatosFormulario(tipoContenido, plataformasDestino,cantidadVariaciones, fechaEstimadaPublicacion);
 
         FormularioMarketing formularioGuardado = servicioFormularioMarketing.registrarFormulario(datos, archivos);
 

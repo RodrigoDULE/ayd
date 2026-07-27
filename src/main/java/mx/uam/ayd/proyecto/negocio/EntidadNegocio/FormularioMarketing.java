@@ -36,6 +36,7 @@ public class FormularioMarketing {
         private List<String> plataformasDestino;
         private Integer cantidadVariaciones;
         private LocalDate fechaEstimadaPublicacion;
+         
 
         public DatosFormulario(TipoContenido tipoContenido, List<String> plataformasDestino,
                 Integer cantidadVariaciones, LocalDate fechaEstimadaPublicacion) {
@@ -60,6 +61,8 @@ public class FormularioMarketing {
         public LocalDate getFechaEstimadaPublicacion() {
             return fechaEstimadaPublicacion;
         }
+
+        
     }
 
     
