@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -27,7 +26,6 @@ import java.util.ArrayList;
 
 import mx.uam.ayd.proyecto.datos.RepositorioEvento;
 import mx.uam.ayd.proyecto.datos.RepositorioEmpleado;
-import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Empleado;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.Evento;
 
 
@@ -67,7 +65,6 @@ public class servicioCalendarioTest {
    //consultado con ia
    @Test
     void testRecuperaEventoporFecha() {
-        // CASO 1: Retorna lista con eventos cuando existen registros para esa fecha
     
         // G    iven (Preparación)
         LocalDate fechaBusqueda = LocalDate.of(2026, 8, 30);
@@ -172,9 +169,9 @@ public class servicioCalendarioTest {
         assertNotNull(resultado);
         assertFalse(resultado.isEmpty());
         assertTrue(resultado.contains(fechaNotificacion));
-        assertTrue(resultado.contains(fechaNotificacion.plusWeeks(1)));
+        assertTrue(resultado.contains(fechaNotificacion.plusWeeks(1)));//para cumplir la prueba
 
-        // CASO 2: Excepción cuando numsemanas <= 0
+        // excepción cuando numsemanas <= 0
         assertThrows(IllegalArgumentException.class, () -> {
         servicioCalendario.calcularRepeticionSemanas(fechaEvento, fechaNotificacion, 0);
         });

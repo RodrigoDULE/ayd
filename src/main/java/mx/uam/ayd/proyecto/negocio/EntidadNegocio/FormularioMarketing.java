@@ -62,6 +62,9 @@ public class FormularioMarketing {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Nombre del formulario o campaña
+    private String nombre;
+
     // Tipo de contenido elegido (una sola opción, tipo radio button)
     private TipoContenido tipoContenido;
 
@@ -115,6 +118,14 @@ public class FormularioMarketing {
     // --- Getters y setters ---
     public Long getId() {
         return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public TipoContenido getTipoContenido() {
