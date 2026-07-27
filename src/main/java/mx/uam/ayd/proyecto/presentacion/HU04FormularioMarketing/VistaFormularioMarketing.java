@@ -320,7 +320,7 @@ public class VistaFormularioMarketing {
                 botonesElegir[i].setManaged(true);
                 botonesElegir[i].setOnAction(evento -> {
                     if (control != null) {
-                        control.seleccionarVariacion(variacion); // CORREGIDO AQUÍ
+                        control.seleccionarVariacion(variacion); 
                     }
                 });
 

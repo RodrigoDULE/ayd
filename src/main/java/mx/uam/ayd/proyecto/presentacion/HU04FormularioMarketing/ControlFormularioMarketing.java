@@ -16,15 +16,8 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing.DatosFormu
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing.TipoContenido;
 import mx.uam.ayd.proyecto.negocio.ServicioGeneracionContenido.VariacionContenido;
 
-// TODO: Paso 1. Cuando crees la siguiente HU, importa su controlador aquí.
-// import mx.uam.ayd.proyecto.presentacion.HUNueva.ControlNuevaHU;
 
-/**
- * Controlador de HU-04 (Formulario de Marketing). Orquesta el flujo
- * completo descrito en el diagrama de secuencia: registrar el
- * formulario, habilitar de nuevo el botón, generar las variaciones
- * (simuladas) y mandarlas a mostrar en la vista.
- */
+
 @Component
 public class ControlFormularioMarketing {
 
@@ -33,7 +26,6 @@ public class ControlFormularioMarketing {
     private final ServicioGeneracionContenido servicioGeneracionContenido;
     
     // TODO: Paso 2. Declara la variable del nuevo controlador.
-    // private final ControlNuevaHU controlNuevaHU;
 
     @Autowired
     public ControlFormularioMarketing(VistaFormularioMarketing vistaFormularioMarketing,
