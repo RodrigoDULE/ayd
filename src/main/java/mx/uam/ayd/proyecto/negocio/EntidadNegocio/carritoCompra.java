@@ -10,6 +10,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.CascadeType;
 
 @Entity
 public class carritoCompra {
@@ -21,6 +24,10 @@ public class carritoCompra {
     private int cantidadTotalCompra;//Unidades compradas
     private float totalCalculado;//precio total a pagar
     private boolean envioGratis = false;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idCompra")
+    private Compra compra;
 
     public carritoCompra() {}
 
@@ -40,10 +47,12 @@ public class carritoCompra {
     public float getTotalCalculado() {return totalCalculado;}
     public List<Producto> getProductoenCarrito(){return producto;}
     public boolean getenvioGratis(){return envioGratis;}
+    public Compra getCompra(){return compra;}
     //Creamos setters
     public void setIdCarrito(long idCarrito) {this.idCarrito = idCarrito;}
     public void setCantidadTotalCompra(int cantidadTotalCompra) {this.cantidadTotalCompra += cantidadTotalCompra; }//para que se vayan sumando a los demas producto que agregamos}
     public void setTotalCalculado(float totalCalculado) {this.totalCalculado += totalCalculado;}
+    public void setCompra(Compra compra) {this.compra = compra;}
     // public void setProducto(Producto producto) {this.producto.add(producto);}//solo agrega un producto a la vez    }
   
   

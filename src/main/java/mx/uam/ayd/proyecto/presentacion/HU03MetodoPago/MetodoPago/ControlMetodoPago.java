@@ -3,6 +3,7 @@ package mx.uam.ayd.proyecto.presentacion.HU03MetodoPago.MetodoPago;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import mx.uam.ayd.proyecto.negocio.servicioCarritoCompra;
+import mx.uam.ayd.proyecto.negocio.ServicioCompra;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.DireccionEnvio;
 import jakarta.annotation.PostConstruct;
 
@@ -17,8 +18,10 @@ import mx.uam.ayd.proyecto.presentacion.HU03MetodoPago.Aprobado.ControlAprobado;
 public class ControlMetodoPago {
     private final VistaMetodoPago vistaMetodoPago;
     private final servicioCarritoCompra servicioCarritoCompra;
+    private final ServicioCompra servicioCompra;
     private ControlAprobado controlAprobado;
     private double montoTotal;
+    private DireccionEnvio direccionSeleccionada;
 
     /**
      * Crea un nuevo controlador de metodo de pago con sus dependencias
@@ -31,10 +34,11 @@ public class ControlMetodoPago {
      */
     @Autowired
     public ControlMetodoPago(VistaMetodoPago vistaMetodoPago, servicioCarritoCompra servicioCarritoCompra,
-            ControlAprobado controlAprobado) {
+            ControlAprobado controlAprobado, ServicioCompra servicioCompra) {
         this.vistaMetodoPago = vistaMetodoPago;
         this.servicioCarritoCompra = servicioCarritoCompra;
         this.controlAprobado = controlAprobado;
+        this.servicioCompra = servicioCompra;
     }
 
     /**
@@ -52,6 +56,7 @@ public class ControlMetodoPago {
      * @param direccionSeleccionada direccion elegida por el usuario para el envio.
      */
     public void iniciaVentanaMetodoPago(DireccionEnvio direccionSeleccionada) {
+        this.direccionSeleccionada = direccionSeleccionada;
         if (direccionSeleccionada != null && direccionSeleccionada.getCliente() != null) {
             long idCliente = direccionSeleccionada.getCliente().getidCliente();
             montoTotal = servicioCarritoCompra.recuperaTotalCalculadoPorCliente(idCliente);
@@ -66,6 +71,14 @@ public class ControlMetodoPago {
      */
     public void iniciaVentanaAprobado() {
         controlAprobado.muestra(montoTotal);
+    }
+
+    /**
+     * Crea y persiste una nueva {@link mx.uam.ayd.proyecto.negocio.EntidadNegocio.Compra}
+     * utilizando el monto calculado en este controlador y la fecha actual.
+     */
+    public void crearCompra() {
+        servicioCompra.guardarCompra((float) montoTotal, java.time.LocalDate.now());
     }
 
     /**

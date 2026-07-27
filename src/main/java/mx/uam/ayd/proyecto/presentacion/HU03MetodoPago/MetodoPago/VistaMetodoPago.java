@@ -91,13 +91,14 @@ public class VistaMetodoPago {
     }
 
     /**
-     * Ejecuta la validacion de datos y, si es exitosa, avanza al flujo de pago
-     * aprobado.
+     * Ejecuta la validacion de datos y, si es exitosa, crea la compra y
+     * avanza al flujo de pagoaprobado.
      */
     @FXML
     public void realizarPago() {
         if (validaDatosTarjeta()) {
             if (controlador.simulacionConexionApi()) {
+                controlador.crearCompra();
                 controlador.iniciaVentanaAprobado();
                 stage.close();
             } else {
