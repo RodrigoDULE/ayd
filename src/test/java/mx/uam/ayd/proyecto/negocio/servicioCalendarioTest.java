@@ -82,32 +82,32 @@ public class servicioCalendarioTest {
         // When (Ejecución)
         List<Evento> resultado = servicioCalendario.recuperaEventoporFecha(fechaBusqueda);
 
-        // Then (Verificación)
+         
         assertNotNull(resultado, "La lista no debería ser nula");
-        assertFalse(resultado.isEmpty(), "La lista no debería estar vacía");
+        assertFalse(resultado.isEmpty(), "La lista no debería estar vacía");//pasar prueba
         assertEquals(1, resultado.size(), "Debería haber 1 evento en la lista");
         assertEquals(fechaBusqueda, resultado.get(0).getFechaE());
 
 
-        // CASO 2: Retorna lista vacía si no hay eventos en esa fecha
+        // caso 2: retorna lista vacía si no hay eventos en esa fecha
     
-        // Given
+        // given
         LocalDate fechaSinEventos = LocalDate.of(2026, 12, 31);
         when(repoEvento.findByFechaE(fechaSinEventos)).thenReturn(new ArrayList<>());
 
-        // When
+        // when
         List<Evento> resultadoVacio = servicioCalendario.recuperaEventoporFecha(fechaSinEventos);
 
-        // Then
+        // then
         assertNotNull(resultadoVacio);
         assertTrue(resultadoVacio.isEmpty(), "La lista debería estar vacía");
     }
    
    @Test
     void testRecuperaPorNotificacion() {
-        // Caso 1: Recupera exitosamente un evento por fecha de notificación
+        // caso 1: recupera exitosamente un evento por fecha de notificación
     
-        // Given (Preparación)
+        // given 
         LocalDate fechaNotif = LocalDate.of(2026, 8, 15);
         Evento eventoEsperado = new Evento();
         eventoEsperado.setIdEvento(10L);
@@ -115,24 +115,24 @@ public class servicioCalendarioTest {
 
         when(repoEvento.findByNotificacion(fechaNotif)).thenReturn(eventoEsperado);
 
-        // When (Ejecución)
+        // when (Ejecución)
         Evento resultado = servicioCalendario.recuperaPorNotificacion(fechaNotif);
 
-        // Then (Verificación)
+        // then (Verificación)
         assertNotNull(resultado, "El evento no debería ser nulo");
         assertEquals(fechaNotif, resultado.getNotificacion());
 
 
-        // Caso 2: Retorna null cuando no existe evento con esa fecha de notificación
+        // caso 2: Retorna null cuando no existe evento con esa fecha de notificación
     
-        // Given
+       
         LocalDate fechaSinNotif = LocalDate.of(2026, 1, 1);
         when(repoEvento.findByNotificacion(fechaSinNotif)).thenReturn(null);
 
-        // When
+        // when
         Evento resultadoNull = servicioCalendario.recuperaPorNotificacion(fechaSinNotif);
 
-        // Then
+        // rhen
         assertNull(resultadoNull, "Debería retornar null al no encontrar registros");
     }
 
@@ -212,7 +212,7 @@ public class servicioCalendarioTest {
         eventoPrueba.setFechaE(fechaEvento);
 
         // 2. ACT & ASSERT
-        // Verificamos que lance la excepción
+        // verificamos que lance la excepción
         assertThrows(IllegalArgumentException.class, () -> {
         servicioCalendario.administrarNotificaciones(eventoPrueba, 5, 0, notificacionInvalida);
         });
