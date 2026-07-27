@@ -26,10 +26,7 @@ public class ArchivoReferencia {
     @ManyToOne
     private FormularioMarketing formularioMarketing;
 
-    /**
-     * Constructor vacío. JPA lo necesita internamente para poder
-     * reconstruir el objeto cuando lo lee de la base de datos.
-     */
+    //Constructor vacío
     public ArchivoReferencia() {
     }
 

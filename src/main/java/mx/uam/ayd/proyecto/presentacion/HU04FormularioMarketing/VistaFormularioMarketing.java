@@ -32,13 +32,15 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing.TipoContenido;
 import mx.uam.ayd.proyecto.negocio.ServicioGeneracionContenido.VariacionContenido;
 
+// Gestiona la interfaz gráfica, validación de campos del formulario  
+// y la renderización dinámica de las variaciones generadas.
 @Component
 public class VistaFormularioMarketing {
 
-    /** Formato de fecha usado en el campo de texto (ej. 05/09/27). */
+    // Formato estándar requerido para la fecha de publicación
     private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yy");
 
-    /** Cuántas tarjetas de variación caben en la pantalla de resultados (diseño fijo, no dinámico). */
+    // Límite visual de tarjetas de variación en la pantalla de resultados
     private static final int MAXIMO_VARIACIONES = 3;
 
     private ControlFormularioMarketing control;
@@ -48,8 +50,7 @@ public class VistaFormularioMarketing {
     private Scene sceneResultados;
     private List<File> archivosSeleccionados = new ArrayList<>();
 
-    // ===== Campos del FXML "Principal" =====
-
+    // Elementos del formulario de captura (Pantalla Principal)
     @FXML private RadioButton radioSoloTexto;
     @FXML private RadioButton radioImagenEstatica;
     @FXML private CheckBox checkInstagramPost;
@@ -61,23 +62,19 @@ public class VistaFormularioMarketing {
     @FXML private TextField selectorFechaPublicacion;
     @FXML private Button botonIniciarGeneracion;
 
-    // ===== Campos del FXML "Resultados" =====
-
+    // Elementos de la pantalla de Resultados
     @FXML private Label etiquetaResumenTipoContenido;
     @FXML private Label etiquetaResumenPlataformas;
     @FXML private Label etiquetaResumenFecha;
-
     @FXML private Label contenidoVariacion1;
     @FXML private Label contenidoVariacion2;
     @FXML private Label contenidoVariacion3;
-
     @FXML private Label descripcionVariacion1;
     @FXML private Label descripcionVariacion2;
     @FXML private Label descripcionVariacion3;
-
     @FXML private Button botonGenerarDeNuevo;
 
-    // Botones dinámicos de elección
+    // Botones dinámicos para seleccionar la variación ganadora
     @FXML private Button botonElegirVariacion1;
     @FXML private Button botonElegirVariacion2;
     @FXML private Button botonElegirVariacion3;
@@ -89,6 +86,8 @@ public class VistaFormularioMarketing {
         this.control = control;
     }
 
+    // Carga los archivos FXML y prepara las escenas de JavaFX.
+    // Asegura que la inicialización ocurra en el hilo de la interfaz gráfica.
     private void inicializarUI() {
         if (initialized) {
             return;
@@ -119,7 +118,7 @@ public class VistaFormularioMarketing {
         }
     }
 
-    /** Abre la ventana mostrando la pantalla del formulario. */
+    // Abre la ventana principal mostrando el formulario vacío
     public void muestra() {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(this::muestra);
@@ -131,19 +130,20 @@ public class VistaFormularioMarketing {
         stage.show();
     }
     
-    /** Cierra la ventana actual (usado por el controlador al cambiar de HU) */
+    // Cierra la ventana (invocado por el controlador al cambiar de módulo)
     public void cerrarVentana() {
         if (stage != null) {
             stage.close();
         }
     }
 
+    // Abre el explorador de archivos del sistema operativo para adjuntar referencias
     @FXML
     private void handleSeleccionarArchivos() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Selecciona los archivos de referencia");
         fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("PDF, TXT, DOCX", "*.pdf", "*.txt", "*.docx"));
+                new FileChooser.ExtensionFilter("Documentos", "*.pdf", "*.txt", "*.docx"));
 
         List<File> seleccionados = fileChooser.showOpenMultipleDialog(stage);
         if (seleccionados != null) {
@@ -151,6 +151,7 @@ public class VistaFormularioMarketing {
         }
     }
 
+    // Desencadena la validación del formulario y envía los datos al controlador
     @FXML
     private void handleIniciarGeneracion() {
         if (!validarFormulario()) {
@@ -167,12 +168,13 @@ public class VistaFormularioMarketing {
         }
     }
 
+    // Regresa a la escena principal para permitir al usuario ajustar los datos
     @FXML
     private void handleGenerarDeNuevo() {
         stage.setScene(scenePrincipal);
     }
 
-    // Valida los campos obligatorios
+    // Verifica que todos los campos obligatorios cumplan con las reglas de negocio
     private boolean validarFormulario() {
         if (obtenerTipoContenido() == null) {
             mostrarMensaje("Selecciona un tipo de contenido.");
@@ -206,18 +208,10 @@ public class VistaFormularioMarketing {
 
     private List<String> obtenerPlataformasSeleccionadas() {
         List<String> plataformas = new ArrayList<>();
-        if (checkInstagramPost.isSelected()) {
-            plataformas.add("Instagram post");
-        }
-        if (checkFacebookPost.isSelected()) {
-            plataformas.add("Facebook post");
-        }
-        if (checkLinkedin.isSelected()) {
-            plataformas.add("Linkedin");
-        }
-        if (checkEmail.isSelected()) {
-            plataformas.add("Email");
-        }
+        if (checkInstagramPost.isSelected()) plataformas.add("Instagram post");
+        if (checkFacebookPost.isSelected()) plataformas.add("Facebook post");
+        if (checkLinkedin.isSelected()) plataformas.add("Linkedin");
+        if (checkEmail.isSelected()) plataformas.add("Email");
         return plataformas;
     }
 
@@ -229,7 +223,7 @@ public class VistaFormularioMarketing {
         }
     }
 
-    /** Convierte el texto del campo de fecha (dd/MM/yy) a LocalDate. */
+    // Pasa el texto introducido a un objeto LocalDate manejable por la lógica de negocio
     private LocalDate obtenerFechaPublicacion() {
         try {
             return LocalDate.parse(selectorFechaPublicacion.getText().trim(), FORMATO_FECHA);
@@ -238,7 +232,7 @@ public class VistaFormularioMarketing {
         }
     }
 
-    /** Habilita de nuevo el botón de generar. */
+    // Reactiva el botón principal tras finalizar un proceso
     public void habilitarBotonGenerar() {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(this::habilitarBotonGenerar);
@@ -247,15 +241,15 @@ public class VistaFormularioMarketing {
         botonIniciarGeneracion.setDisable(false);
     }
 
-    /**
-     * Muestra las variaciones generadas y habilita dinámicamente los botones "Elegir".
-     */
+    // Construye la vista de resultados dinámicamente según el tipo de contenido generado
+    // y asigna eventos a los botones de selección
     public void mostrarListaVariaciones(FormularioMarketing formulario, List<VariacionContenido> variaciones) {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(() -> this.mostrarListaVariaciones(formulario, variaciones));
             return;
         }
 
+        // Llenar el resumen del encabezado
         etiquetaResumenTipoContenido.setText(formulario.getTipoContenido().name());
         etiquetaResumenPlataformas.setText(String.join(", ", formulario.getPlataformasDestino()));
         etiquetaResumenFecha.setText(formulario.getFechaEstimadaPublicacion().toString());
@@ -264,7 +258,7 @@ public class VistaFormularioMarketing {
         Label[] cajasDescripcion = { descripcionVariacion1, descripcionVariacion2, descripcionVariacion3 };
         Button[] botonesElegir = { botonElegirVariacion1, botonElegirVariacion2, botonElegirVariacion3 };
 
-        // Preparar las rutas de imágenes y mezclarlas aleatoriamente
+        // Simulación de imágenes para las variaciones visuales
         List<String> rutasImagenes = Arrays.asList(
             "/Imagenes/ImagenContenido1.png",
             "/Imagenes/ImagenContenido2.png",
@@ -273,18 +267,18 @@ public class VistaFormularioMarketing {
         Collections.shuffle(rutasImagenes);
 
         for (int i = 0; i < cajasContenido.length; i++) {
-            // Limpiar el estado visual anterior del slot
+            // Reinicio visual de las tarjetas para evitar superposición de datos
             cajasContenido[i].setGraphic(null); 
             cajasContenido[i].setText("");
             cajasContenido[i].setStyle("");
-            botonesElegir[i].setOnAction(null); // Evita duplicar eventos si se genera de nuevo
+            botonesElegir[i].setOnAction(null);
 
             if (i < variaciones.size()) {
                 VariacionContenido variacion = variaciones.get(i);
 
                 if (formulario.getTipoContenido() == TipoContenido.IMAGEN_ESTATICA) {
                     
-                    // ================= CASO IMAGEN =================
+                    // Renderizado de imagen
                     try {
                         Image imagen = new Image(getClass().getResourceAsStream(rutasImagenes.get(i)));
                         ImageView imageView = new ImageView(imagen);
@@ -301,7 +295,7 @@ public class VistaFormularioMarketing {
 
                 } else {
                     
-                    // ================= CASO SOLO TEXTO =================
+                    // Renderizado de texto
                     cajasContenido[i].setWrapText(true); 
                     cajasContenido[i].setText(variacion.getNombre());
                     cajasContenido[i].setStyle(
@@ -315,7 +309,7 @@ public class VistaFormularioMarketing {
 
                 cajasDescripcion[i].setText(variacion.getDescripcion());
 
-                // Muestra el botón de este slot y lo conecta al controlador
+                // Configura el botón para enviar la variación seleccionada al controlador
                 botonesElegir[i].setVisible(true);
                 botonesElegir[i].setManaged(true);
                 botonesElegir[i].setOnAction(evento -> {
@@ -325,7 +319,7 @@ public class VistaFormularioMarketing {
                 });
 
             } else {
-                // Si el usuario pidió menos variaciones, limpia y oculta el slot restante
+                // Ocultar tarjetas no utilizadas si se solicitaron menos del máximo
                 cajasContenido[i].setText("");
                 cajasDescripcion[i].setText("");
                 botonesElegir[i].setVisible(false);
@@ -336,6 +330,7 @@ public class VistaFormularioMarketing {
         stage.setScene(sceneResultados);
     }
 
+    // Despliega una alerta emergente en la interfaz
     public void mostrarMensaje(String mensaje) {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(() -> this.mostrarMensaje(mensaje));

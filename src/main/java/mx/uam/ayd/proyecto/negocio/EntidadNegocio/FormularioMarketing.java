@@ -68,28 +68,20 @@ public class FormularioMarketing {
     
     
     
-    // Identificador autogenerado por la base de datos (clave primaria)
+    // (clave primaria)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Nombre del formulario o campaña
     private String nombre;
 
-    // Tipo de contenido elegido (una sola opción, tipo radio button)
-    private TipoContenido tipoContenido;
 
+    private TipoContenido tipoContenido;
     
-    
-    // Plataformas de destino seleccionadas por el usuario (checkboxes),
-    // ej: ["Instagram Post", "Instagram Reels"]
     @ElementCollection
     private List<String> plataformasDestino = new ArrayList<>();
 
-    // Cuántas variaciones de contenido quiere generar el usuario
     private Integer cantidadVariaciones;
-
-    // Fecha en la que el usuario planea publicar el contenido
     private LocalDate fechaEstimadaPublicacion;
 
     // Archivos de referencia que el usuario cargó como base para la
@@ -105,8 +97,6 @@ public class FormularioMarketing {
     //Constructor Vacío
     public FormularioMarketing() {
     }
-
-    //cardinlidad con publicacion
 
     
     //recibe los datos ya empaquetados en un DatosFormulario y la lista de archivos ya convertidos 

@@ -12,19 +12,19 @@ import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.FormularioMarketing.DatosFormulario;
 
 
+// Actúa como intermediario entre la capa de presentación (Controlador) y el acceso a datos.
 @Service
 public class ServicioFormularioMarketing {
 
     private final RepositorioFormularioMarketing repositorioFormularioMarketing;
 
+    // Constructor para inyección de dependencias del repositorio.
     public ServicioFormularioMarketing(RepositorioFormularioMarketing repositorioFormularioMarketing) {
         this.repositorioFormularioMarketing = repositorioFormularioMarketing;
     }
 
-    /**
-     * Registra el formulario: crea los ArchivoReferencia y el
-     * FormularioMarketing con los datos recibidos, y los guarda.
-     */
+    // Delega la extracción de metadatos de los archivos, ensambla la entidad 
+    // principal (FormularioMarketing) con los datos capturados y la persiste en la base de datos.
     public FormularioMarketing registrarFormulario(DatosFormulario datos, List<File> archivos) {
 
         List<ArchivoReferencia> instanciasArchivos = crearArchivosReferencia(archivos);
@@ -34,8 +34,8 @@ public class ServicioFormularioMarketing {
         return repositorioFormularioMarketing.save(formulario);
     }
 
-    //Convierte cada File cargado por el usuario en un ArchivoReferencia, 
-    // quedándose solo con su metadata (nombre, tipo, tamaño),
+    // Transforma cada archivo cargado por el usuario en una entidad referencial (ArchivoReferencia).
+    // Conserva únicamente (nombre, tipo, tamaño) 
     private List<ArchivoReferencia> crearArchivosReferencia(List<File> archivos) {
         List<ArchivoReferencia> resultado = new ArrayList<>();
         if (archivos == null) {
@@ -50,7 +50,7 @@ public class ServicioFormularioMarketing {
         return resultado;
     }
 
-    /** Obtiene la extensión del archivo (ej. "pdf") a partir de su nombre. */
+    // Extrae de forma segura la extensión de un archivo (ej. "pdf", "docx") basándose en su nombre.
     private String obtenerExtension(String nombreArchivo) {
         int idx = nombreArchivo.lastIndexOf('.');
         if (idx == -1 || idx == nombreArchivo.length() - 1) {

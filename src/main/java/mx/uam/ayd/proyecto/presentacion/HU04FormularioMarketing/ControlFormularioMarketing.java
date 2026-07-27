@@ -18,82 +18,71 @@ import mx.uam.ayd.proyecto.presentacion.HU10GuardarContenido.ControladorGuardarC
 import mx.uam.ayd.proyecto.negocio.ServicioGeneracionContenido.VariacionContenido;
 
 
-
+// Gestiona el registro mediante los servicios de negocio, solicita la generación de variaciones 
+// y realizar la transición hacia la HU-10 (Guardar Contenido).
 @Component
 public class ControlFormularioMarketing {
 
     private final VistaFormularioMarketing vistaFormularioMarketing;
     private final ServicioFormularioMarketing servicioFormularioMarketing;
     private final ServicioGeneracionContenido servicioGeneracionContenido;
+    private final ControladorGuardarContenido controlGuardarContenido;
 
+    // Almacena el estado del formulario actual para pasarlo como contexto a la siguiente HU.
     private FormularioMarketing formularioActual;
 
-    private final ControladorGuardarContenido controlGuardarContenido;
-    
-    // TODO: Paso 2. Declara la variable del nuevo controlador.
-
+    // Constructor del controlador.
+    // Utiliza inyección de dependencias de Spring (@Autowired) para inicializar 
+    // la vista, los servicios de negocio y el controlador de la siguiente HU.
     @Autowired
     public ControlFormularioMarketing(VistaFormularioMarketing vistaFormularioMarketing,
             ServicioFormularioMarketing servicioFormularioMarketing,
             ServicioGeneracionContenido servicioGeneracionContenido,
-            ControladorGuardarContenido controladorGuardarContenido
-            /* TODO: Paso 3. Agrega el controlador al constructor */
-            /* , ControlNuevaHU controlNuevaHU */) {
+            ControladorGuardarContenido controladorGuardarContenido) {
         
         this.vistaFormularioMarketing = vistaFormularioMarketing;
         this.servicioFormularioMarketing = servicioFormularioMarketing;
         this.servicioGeneracionContenido = servicioGeneracionContenido;
-        this.controlGuardarContenido= controladorGuardarContenido;
-        
-        // TODO: Paso 4. Inicializa la variable.
-        // this.controlNuevaHU = controlNuevaHU;
+        this.controlGuardarContenido = controladorGuardarContenido;
     }
 
+    // Establece el enlace bidireccional inyectando este controlador en su vista correspondiente.
     @PostConstruct
     private void inicializarControlador() {
         vistaFormularioMarketing.setControlador(this);
     }
 
-    /** Abre la ventana del Formulario de Marketing. */
+    // Despliega la ventana principal del Formulario de Marketing.
     public void iniciaVentanaFormularioMarketing() {
         vistaFormularioMarketing.muestra();
     }
 
-    /**
-     * procesarGeneracion(datosFormulario, archivo) del diagrama de
-     * secuencia.
-     */
+    // Registra la información en la base de datos, solicita la generación 
+    // de variaciones al servicio correspondiente y actualiza la vista con los resultados.
     public void procesarGeneracion(TipoContenido tipoContenido, List<String> plataformasDestino,
             Integer cantidadVariaciones, LocalDate fechaEstimadaPublicacion, List<File> archivos) {
 
-        DatosFormulario datos = new DatosFormulario(tipoContenido, plataformasDestino,cantidadVariaciones, fechaEstimadaPublicacion);
+        DatosFormulario datos = new DatosFormulario(tipoContenido, plataformasDestino, cantidadVariaciones, fechaEstimadaPublicacion);
 
+        // Se registra el formulario y se guarda la referencia actual
         FormularioMarketing formularioGuardado = servicioFormularioMarketing.registrarFormulario(datos, archivos);
+        formularioActual = formularioGuardado;
 
-            formularioActual = formularioGuardado;
-
+        // Se actualiza el estado de la vista
         vistaFormularioMarketing.habilitarBotonGenerar();
 
+        // Se generan y muestran las variaciones de contenido
         List<VariacionContenido> listaVariaciones = servicioGeneracionContenido.generarVariaciones(formularioGuardado);
-
         vistaFormularioMarketing.mostrarListaVariaciones(formularioGuardado, listaVariaciones);
     }
-
-    /**
-     * Se ejecuta cuando el usuario da clic en "Elegir" sobre una
-     * variación específica (imagen o texto). Pasa la referencia exacta 
-     * a la siguiente historia de usuario.
-     */
+    // Cierra la pantalla actual de marketing y transfiere el flujo a la HU-10,
     public void seleccionarVariacion(VariacionContenido variacionElegida) {
         
-
-
         vistaFormularioMarketing.cerrarVentana();
 
         controlGuardarContenido.iniciaVentanaGuardarContenido(
-        formularioActual,
-        variacionElegida
+            formularioActual,
+            variacionElegida
         );
-
     }
 }
