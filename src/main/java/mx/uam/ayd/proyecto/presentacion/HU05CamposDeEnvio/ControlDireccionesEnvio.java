@@ -95,7 +95,7 @@ public class ControlDireccionesEnvio {
     public void continuarAlPago(DireccionEnvio direccionSeleccionada) {
         // Como el método de tu compañero aún no recibe parámetros,
         // simplemente disparamos el inicio de su ventana.
-        controlMetodoPago.iniciaVentanaMetodoPago();
+        controlMetodoPago.iniciaVentanaMetodoPago(direccionSeleccionada);
 
         // (Opcional) Si quieres que tu ventana de direcciones se cierre al abrir la de
         // pago,

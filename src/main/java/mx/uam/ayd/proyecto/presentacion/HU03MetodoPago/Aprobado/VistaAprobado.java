@@ -12,6 +12,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 @Component
+/**
+ * Vista JavaFX encargada de mostrar la confirmacion del pago aprobado.
+ * Administra la carga del FXML, la inicializacion de la ventana y la
+ * presentacion de los datos de la transaccion.
+ */
 public class VistaAprobado {
 
     private boolean initialized = false;
@@ -27,13 +32,26 @@ public class VistaAprobado {
     @FXML
     private Label lblMonto;
 
+    /**
+     * Crea una nueva instancia de la vista de aprobacion.
+     */
     public VistaAprobado() {
     }
 
+    /**
+     * Asigna el controlador asociado a esta vista.
+     *
+     * @param controlador controlador que provee los datos de la pantalla.
+     */
     public void setControlador(ControlAprobado controlador) {
         this.controlador = controlador;
     }
 
+    /**
+     * Inicializa la interfaz grafica una sola vez y prepara la escena principal.
+     * Si la llamada ocurre fuera del hilo de JavaFX, reprograma la ejecucion en
+     * el hilo correcto.
+     */
     private void inicializarUI() {
         if (initialized) {
             return;
@@ -57,6 +75,10 @@ public class VistaAprobado {
         }
     }
 
+    /**
+     * Muestra la ventana de aprobacion con la fecha actual y el monto recibido
+     * desde el controlador.
+     */
     public void muestra() {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(this::muestra);
@@ -68,6 +90,13 @@ public class VistaAprobado {
         stage.show();
     }
 
+    /**
+     * Rellena los campos visuales con la fecha, el metodo de pago y el monto de
+     * la transaccion.
+     *
+     * @param fecha fecha de la transaccion.
+     * @param monto monto total aprobado.
+     */
     public void mostrarDatos(LocalDate fecha, double monto) {
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -77,6 +106,9 @@ public class VistaAprobado {
         lblMonto.setText(String.format("$%,.2f", monto));
     }
 
+    /**
+     * Cierra la ventana de aprobacion y regresa al flujo anterior.
+     */
     @FXML
     private void handleVolverInicio() {
         stage.close();

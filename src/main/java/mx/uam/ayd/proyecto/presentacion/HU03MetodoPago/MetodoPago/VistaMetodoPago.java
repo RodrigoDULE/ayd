@@ -12,6 +12,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Vista JavaFX encargada de capturar los datos del metodo de pago.
+ * Gestiona la carga del FXML, la apertura de la ventana y la validacion de la
+ * informacion ingresada por el usuario.
+ */
 @Component
 public class VistaMetodoPago {
 
@@ -30,13 +35,25 @@ public class VistaMetodoPago {
     @FXML
     private TextField cvv;
 
+    /**
+     * Crea una nueva instancia de la vista de metodo de pago.
+     */
     public VistaMetodoPago() {
     }
 
+    /**
+     * Asigna el controlador que coordina el flujo de pago.
+     *
+     * @param control controlador asociado a esta vista.
+     */
     public void setControlador(ControlMetodoPago control) {
         this.controlador = control;
     }
 
+    /**
+     * Inicializa la ventana de JavaFX una sola vez y carga el archivo FXML de la
+     * pantalla de pago.
+     */
     private void inicializarUI() {
         if (initialized) {
             return;
@@ -60,6 +77,9 @@ public class VistaMetodoPago {
         }
     }
 
+    /**
+     * Muestra la ventana de metodo de pago en pantalla.
+     */
     public void muestra() {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(this::muestra);
@@ -70,6 +90,10 @@ public class VistaMetodoPago {
         stage.show();
     }
 
+    /**
+     * Ejecuta la validacion de datos y, si es exitosa, avanza al flujo de pago
+     * aprobado.
+     */
     @FXML
     public void realizarPago() {
         if (validaDatosTarjeta()) {
@@ -82,6 +106,11 @@ public class VistaMetodoPago {
         }
     }
 
+    /**
+     * Valida los datos ingresados por el usuario en el formulario de pago.
+     *
+     * @return true si todos los campos cumplen el formato esperado.
+     */
     private boolean validaDatosTarjeta() {
 
         // Número de tarjeta: exactamente 16 dígitos
@@ -138,6 +167,11 @@ public class VistaMetodoPago {
         return true;
     }
 
+    /**
+     * Muestra un mensaje informativo en un cuadro de dialogo.
+     *
+     * @param mensaje texto que se presentara al usuario.
+     */
     private void mostrarMensaje(String mensaje) {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(() -> this.mostrarMensaje(mensaje));

@@ -228,6 +228,28 @@ public class servicioCarritoCompra {
         Cliente dueño = repoCliente.findByIdCliente(gestionCliente.getInstance().getIdActivo());
         return dueño;
     }
+    
+    public carritoCompra recuperaCarritoPorCliente(long idCliente) {
+        Cliente cliente = repoCliente.findByIdCliente(idCliente);
+        if (cliente == null) {
+            return null;
+        }
+        return cliente.getCarritoCompra();
+    }
+    
+    /**
+     * Recupera el total calculado del carrito asociado al cliente indicado.
+     *
+     * @param idCliente identificador del cliente cuyo carrito se desea consultar.
+     * @return total calculado del carrito, o 0.0 si el cliente no tiene carrito.
+     */
+    public double recuperaTotalCalculadoPorCliente(long idCliente) {
+        carritoCompra carrito = recuperaCarritoPorCliente(idCliente);
+        if (carrito == null) {
+            return 0.0;
+        }
+        return carrito.getTotalCalculado();
+    }
 
     public boolean simulacionConexionApi() {
         return true;
