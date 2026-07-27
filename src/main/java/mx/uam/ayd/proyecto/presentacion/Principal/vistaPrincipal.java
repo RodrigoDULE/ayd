@@ -41,6 +41,9 @@ public class vistaPrincipal {
     @FXML
     private Text textoPrincipal;
 
+    @FXML 
+    private TextField txtOrdenId;
+
     public vistaPrincipal() {
     }
 
@@ -95,8 +98,9 @@ public class vistaPrincipal {
             // Deshabilitamos los botones al inicio del mundo
             IngresarTienda.setDisable(true);
             AgregarEvento.setDisable(true);
-            RevisionPedidos.setDisable(true);
+            RevisionPedidos.setVisible(false);
             ingresarFormularioMarketing.setDisable(true);
+            txtOrdenId.setVisible(false);
 
             ingresarUsuario.setText("");
             stage.show();
@@ -111,9 +115,10 @@ public class vistaPrincipal {
             // Deshabilitamos los botones al inicio del mundo
             IngresarTienda.setDisable(false);
             AgregarEvento.setDisable(false);
-            RevisionPedidos.setDisable(false);
+            RevisionPedidos.setVisible(true);
             ingresarFormularioMarketing.setDisable(false);
             ingresarUsuario.setDisable(false);
+            txtOrdenId.setVisible(true);
             textoPrincipal.setText("Bienvenido, " + NombreUsuario);
             System.out.println(NombreUsuario);
             stage.show();
@@ -182,11 +187,24 @@ public class vistaPrincipal {
         alert.showAndWait();
     }
 
-    // BOTON DE JEAN
+    // Boton para HU-6
     @FXML
     public void iniciarRevisionOrdenes() {
         if (control != null) {
             control.irAVentanaOrdenesCreadas();
+        }
+    }
+
+    // Boton para HU7
+    @FXML
+    public void iniciarRecepcionCarga()
+    {
+        String id = txtOrdenId.getText().trim();
+
+        if(!id.isEmpty())
+        {
+            control.iniciarRecepcion(id);
+            txtOrdenId.clear();
         }
     }
 

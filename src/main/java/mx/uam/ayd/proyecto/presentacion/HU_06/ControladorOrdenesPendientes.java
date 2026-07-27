@@ -10,7 +10,7 @@ import java.util.List;
 import mx.uam.ayd.proyecto.negocio.EntidadNegocio.OrdenDeCompra;
 import mx.uam.ayd.proyecto.negocio.ServicioOrdenDeCompra;
 
-//import java.util.List;
+
 
 @Component
 public class ControladorOrdenesPendientes{

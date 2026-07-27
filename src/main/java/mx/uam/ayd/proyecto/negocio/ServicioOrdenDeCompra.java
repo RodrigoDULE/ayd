@@ -57,4 +57,23 @@ public class ServicioOrdenDeCompra {
         // Si la orden no existe o ya estaba autorizada, retornamos null o lanzamos un error
         return null; 
     }
+
+
+    public OrdenDeCompra confirmarRecepcion(Long idOrden) 
+    {
+        OrdenDeCompra orden = obtenerDetallesDeOrden(idOrden);
+
+        // Verificamos que exista y que haya estado en camino/autorizada
+        if (orden != null && orden.getEstadoOrden() == EstadoOrden.AUTORIZADA) {
+            
+            // Cambiamos el estado para indicar que ya llegó al almacén
+            orden.setEstadoOrden(EstadoOrden.RECIBIDA); // (O el estado que manejes)
+            
+            // Aquí en un futuro podrías mandar a llamar a un ServicioInventario
+            // para sumar los insumos al stock real de la empresa.
+
+            return repositorioOrden.save(orden); 
+        }
+        return null; 
+    }
 }

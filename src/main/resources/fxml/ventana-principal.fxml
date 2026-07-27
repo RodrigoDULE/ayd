@@ -16,7 +16,7 @@
             <Font name="Serif Bold" size="26.0" />
          </font>
       </Text>
-      <Button fx:id="IngresarTienda" layoutX="59.0" layoutY="183.0" mnemonicParsing="false" onAction="#handleVisitarTiendaLinea" prefHeight="34.0" prefWidth="107.0" style="-fx-background-color: #d9f4ff;" text="TiendaLinea" textAlignment="CENTER">
+      <Button fx:id="IngresarTienda" layoutX="47.0" layoutY="183.0" mnemonicParsing="false" onAction="#handleVisitarTiendaLinea" prefHeight="34.0" prefWidth="107.0" style="-fx-background-color: #d9f4ff;" text="TiendaLinea" textAlignment="CENTER">
          <font>
             <Font name="Serif Bold" size="13.0" />
          </font>
@@ -47,7 +47,7 @@
             <Font name="Serif Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="ingresarFormularioMarketing" layoutX="59.0" layoutY="255.0" mnemonicParsing="false" onAction="#handleAbrirMarketing" prefHeight="34.0" prefWidth="212.0" style="-fx-background-color: #949494;" text="Formulario de Marketing">
+      <Button fx:id="ingresarFormularioMarketing" layoutX="48.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleAbrirMarketing" prefHeight="34.0" prefWidth="212.0" style="-fx-background-color: #949494;" text="Formulario de Marketing">
          <font>
             <Font name="Serif Bold" size="14.0" />
          </font>
@@ -55,7 +55,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="RevisionPedidos" layoutX="59.0" layoutY="309.0" mnemonicParsing="false" onAction="#iniciarRevisionOrdenes" prefHeight="34.0" prefWidth="179.0" style="-fx-background-color: #949494;" text="Revision de Pedidos">
+      <Button fx:id="RevisionPedidos" layoutX="47.0" layoutY="275.0" mnemonicParsing="false" onAction="#iniciarRevisionOrdenes" prefHeight="34.0" prefWidth="167.0" style="-fx-background-color: #949494;" text="Revision de Pedidos">
          <font>
             <Font name="Serif Bold" size="14.0" />
          </font>
@@ -63,5 +63,16 @@
             <InnerShadow />
          </effect>
       </Button>
+      <Text fill="#e3ebc8" layoutX="50.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iniciar Recepción de Carga">
+         <font>
+            <Font name="Serif Bold" size="13.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtOrdenId" layoutX="241.0" layoutY="337.0" onAction="#iniciarRecepcionCarga" prefHeight="30.0" prefWidth="79.0" />
+      <Text fill="WHITE" layoutX="50.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce el id de la orden">
+         <font>
+            <Font name="Serif Bold" size="13.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

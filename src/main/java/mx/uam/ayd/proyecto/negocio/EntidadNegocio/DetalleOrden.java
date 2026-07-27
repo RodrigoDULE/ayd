@@ -20,6 +20,9 @@ public class DetalleOrden {
     @JoinColumn(name = "orden_id")
     private OrdenDeCompra ordenDeCompra;
 
+    @Transient
+    private int cantidadEscaneada = 0;
+
     public DetalleOrden(){}
 
     public DetalleOrden(int cantidad, double subTotalLote, Insumo insumo, OrdenDeCompra ordenDeCompra)
@@ -39,6 +42,7 @@ public class DetalleOrden {
     public double getSubTotalLote(){return subTotalLote;}
     public Insumo getInsumo(){return insumo;}
     public OrdenDeCompra getOrdenDeCompra(){return ordenDeCompra;}
+    public int getCantidadEscaneada() { return cantidadEscaneada;}
 
 
     //setters
@@ -46,5 +50,6 @@ public class DetalleOrden {
     public void setSubTotalLote(double subTotalLote){this.subTotalLote = subTotalLote;}
     public void setInsumo(Insumo insumo){this.insumo = insumo;}
     public void setOrdenDeCompra(OrdenDeCompra ordenDeCompra){this.ordenDeCompra = ordenDeCompra;}
+    public void setCantidadEscaneada(int cantidadEscaneada) { this.cantidadEscaneada = cantidadEscaneada;}
 
 }
